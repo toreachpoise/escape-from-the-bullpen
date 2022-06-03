@@ -3,6 +3,7 @@ import pygame
 from pygame.locals import *
 import sys
 import random
+import time
 
 pygame.init()
 vec = pygame.math.Vector2 #2 for two dimensional
@@ -20,6 +21,11 @@ FramePerSec = pygame.time.Clock()
 
 displaysurface = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Game")
+font = pygame.font.SysFont("Verdana", 60)
+font_small = pygame.font.SysFont("Verdana", 20)
+game_over = font.render("Game Over", True, (0,0,0))
+
+##background = pygame.image.load("AnimatedStreet.png")
 
 #classes
 class Player(pygame.sprite.Sprite):
@@ -34,6 +40,7 @@ class Player(pygame.sprite.Sprite):
         self.vel = vec(0,0)
         self.acc = vec(0,0)
         self.jumping = False
+        self.score = 0
 
     def move(self):
         self.acc = vec(0,0.5)
@@ -72,6 +79,9 @@ class Player(pygame.sprite.Sprite):
         if self.vel.y > 0:
             if hits:
                 if self.pos.y < hits[0].rect.bottom:
+                    if hits[0].point == True: ##
+                        hits[0].point = False ##
+                        self.score += 1 ##
                     self.pos.y = hits[0].rect.top +1
                     self.vel.y = 0
                     self.jumping = False
@@ -83,9 +93,18 @@ class platform(pygame.sprite.Sprite):
         self.surf.fill((0,255,0))
         self.rect = self.surf.get_rect(center = (random.randint(0,WIDTH-10),
                                                  random.randint(0, HEIGHT-30)))
+        self.speed = random.randint(-1, 1) ###
+        self.moving = True ###
+        self.point = True
 
-    def move(self):
-        pass
+    def move(self): ### all of this is new lol
+        #pass
+        if self.moving == True:
+            self.rect.move_ip(self.speed, 0)
+            if self.speed > 0 and self.rect.left > WIDTH:
+                self.rect.right = 0
+            if self.speed < 0 and self.rect.right < 0:
+                self.rect.left = WIDTH
 
 #functions
 def check(platform, groupies): ## makes sure there's space between them
@@ -123,6 +142,8 @@ P1 = Player()
 PT1.surf = pygame.Surface((WIDTH, 20))
 PT1.surf.fill((255,0,0))
 PT1.rect = PT1.surf.get_rect(center = (WIDTH/2, HEIGHT - 10))
+PT1.moving = False ###
+PT1.point = False
 
 all_sprites = pygame.sprite.Group()
 all_sprites.add(PT1)
@@ -155,6 +176,17 @@ while True:
         #    if event.key == pygame.K_SPACE:
         #        P1.cancel.jump()
 
+    if P1.rect.top > HEIGHT:
+        for entity in all_sprites:
+            entity.kill()
+            time.sleep(1)
+            displaysurface.fill((255,0,0))
+            displaysurface.blit(game_over, (30,200))
+            pygame.display.update()
+            ## needs an actual game over text?
+            time.sleep(1)
+            pygame.quit()
+            sys.exit()
     if P1.rect.top <= HEIGHT / 3:
         P1.pos.y += abs(P1.vel.y)
         for plat in platforms:
@@ -163,6 +195,8 @@ while True:
                 plat.kill()
     plat_gen()
     displaysurface.fill((0,0,0))
+    score  = font_small.render(str(P1.score), True, (123,255,0))
+    displaysurface.blit(score, (WIDTH/2, 10))
 
     for entity in all_sprites:
         displaysurface.blit(entity.surf, entity.rect)
