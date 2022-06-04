@@ -93,14 +93,16 @@ class platform(pygame.sprite.Sprite):
         self.surf.fill((0,255,0))
         self.rect = self.surf.get_rect(center = (random.randint(0,WIDTH-10),
                                                  random.randint(0, HEIGHT-30)))
-        self.speed = random.randint(-1, 1) ###
-        self.moving = True ###
+        self.speed = random.randint(-1, 1)
+        self.moving = True
         self.point = True
 
-    def move(self): ### all of this is new lol
-        #pass
+    def move(self):
+        hits = self.rect.colliderect(P1.rect)
         if self.moving == True:
             self.rect.move_ip(self.speed, 0)
+            if hits:
+                P1.pos += (self.speed, 0)
             if self.speed > 0 and self.rect.left > WIDTH:
                 self.rect.right = 0
             if self.speed < 0 and self.rect.right < 0:
@@ -142,7 +144,7 @@ P1 = Player()
 PT1.surf = pygame.Surface((WIDTH, 20))
 PT1.surf.fill((255,0,0))
 PT1.rect = PT1.surf.get_rect(center = (WIDTH/2, HEIGHT - 10))
-PT1.moving = False ###
+PT1.moving = False
 PT1.point = False
 
 all_sprites = pygame.sprite.Group()
