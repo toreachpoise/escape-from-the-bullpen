@@ -16,7 +16,7 @@ HEIGHT = 350
 WIDTH = 700
 ACC = 0.3
 FRIC = -0.10
-FPS = 60
+FPS = 24
 FPS_CLOCK = pygame.time.Clock()
 COUNT = 0
 
@@ -25,6 +25,15 @@ displaysurface = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Game")
 
 ## animations (rn run and attacks are the same for left and right lol)
+idle_ani_R = [pygame.image.load("jack-r.png"), pygame.image.load("jack-r-jump-1.png"),
+            pygame.image.load("jack-r-jump-2.png"), pygame.image.load("jack-r-jump-1.png"),
+            pygame.image.load("jack-r.png"), pygame.image.load("jack-r-jump-1.png"),
+            pygame.image.load("jack-r-jump-2.png"), pygame.image.load("jack-r-jump-1.png")]
+idle_ani_L = [pygame.image.load("jack-l.png"), pygame.image.load("jack-l-jump-1.png"),
+            pygame.image.load("jack-l-jump-2.png"), pygame.image.load("jack-l-jump-1.png"),
+            pygame.image.load("jack-l.png"), pygame.image.load("jack-l-jump-1.png"),
+            pygame.image.load("jack-l-jump-2.png"), pygame.image.load("jack-l-jump-1.png")]
+
 run_ani_R = [pygame.image.load("run_1.png"), pygame.image.load("run_2.png"),
             pygame.image.load("run_3.png"), pygame.image.load("run_4.png"),
             pygame.image.load("run_5.png"), pygame.image.load("run_6.png"),
@@ -145,10 +154,16 @@ class Player(pygame.sprite.Sprite):
 
     def update(self):
           # Return to base frame if at end of movement sequence
-          if self.move_frame > 6:
+          if self.move_frame > 7:
                 self.move_frame = 0
                 return
-
+          ### idle animation setup
+          if self.running == False:
+              if self.direction == "RIGHT":
+                  self.image = idle_ani_R[self.move_frame]
+              else:
+                  self.image = idle_ani_L[self.move_frame]
+              self.move_frame += 1
           # Move the character to the next frame if conditions are met
           if self.jumping == False and self.running == True:
                 if self.vel.x > 0:
@@ -168,8 +183,8 @@ class Player(pygame.sprite.Sprite):
               self.move_frame += 1
 
           # Returns to base frame if standing still and incorrect frame is showing
-          if abs(self.vel.x) < 0.2 and self.move_frame != 0:
-                self.move_frame = 0
+    #      if abs(self.vel.x) < 0.2 and self.move_frame != 0:
+    #            self.move_frame = 0
                 #if self.direction == "RIGHT":
                 #      self.image = run_ani_R[self.move_frame]
                 #elif self.direction == "LEFT":
