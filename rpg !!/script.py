@@ -10,31 +10,49 @@ from tkinter import *
 
 pygame.init()  # Begin pygame
 
-# Declaring variables to be used through the program
+## variables
 vec = pygame.math.Vector2
 HEIGHT = 350
 WIDTH = 700
 ACC = 0.3
 FRIC = -0.10
-FPS = 24
+FPS = 60
 FPS_CLOCK = pygame.time.Clock()
 COUNT = 0
 
-# Create the display
+##display
 displaysurface = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Game")
 
-## animations
-run_ani_R = [pygame.image.load("jack-r.png"), pygame.image.load("jack-r-jump-1.png"),
+## animations (rn run and attacks are the same for left and right lol)
+run_ani_R = [pygame.image.load("run_1.png"), pygame.image.load("run_2.png"),
+            pygame.image.load("run_3.png"), pygame.image.load("run_4.png"),
+            pygame.image.load("run_5.png"), pygame.image.load("run_6.png"),
+            pygame.image.load("run_7.png"), pygame.image.load("run_8.png")]
+run_ani_L = [pygame.image.load("run_1.png"), pygame.image.load("run_2.png"),
+            pygame.image.load("run_3.png"), pygame.image.load("run_4.png"),
+            pygame.image.load("run_5.png"), pygame.image.load("run_6.png"),
+            pygame.image.load("run_7.png"), pygame.image.load("run_8.png")]
+
+jump_ani_R = [pygame.image.load("jack-r.png"), pygame.image.load("jack-r-jump-1.png"),
             pygame.image.load("jack-r-jump-2.png"), pygame.image.load("jack-r-jump-3.png"),
             pygame.image.load("jack-r-jump-4.png"), pygame.image.load("jack-r-jump-5.png"),
             pygame.image.load("jack-r-jump-4.png"), pygame.image.load("jack-r-jump-3.png"),
             pygame.image.load("jack-r-jump-2.png"), pygame.image.load("jack-r-jump-1.png")]
-run_ani_L = [pygame.image.load("jack-l.png"), pygame.image.load("jack-l-jump-1.png"),
+jump_ani_L = [pygame.image.load("jack-l.png"), pygame.image.load("jack-l-jump-1.png"),
             pygame.image.load("jack-l-jump-2.png"), pygame.image.load("jack-l-jump-3.png"),
             pygame.image.load("jack-l-jump-4.png"), pygame.image.load("jack-l-jump-5.png"),
             pygame.image.load("jack-l-jump-4.png"), pygame.image.load("jack-l-jump-3.png"),
             pygame.image.load("jack-l-jump-2.png"), pygame.image.load("jack-l-jump-1.png")]
+
+attack_ani_R = [pygame.image.load("atk_1.png"), pygame.image.load("atk_2.png"),
+            pygame.image.load("atk_3.png"), pygame.image.load("atk_4.png"),
+            pygame.image.load("atk_5.png"), pygame.image.load("atk_6.png"),
+            pygame.image.load("atk_7.png"), pygame.image.load("atk_8.png")]
+attack_ani_L = [pygame.image.load("atk_1.png"), pygame.image.load("atk_2.png"),
+            pygame.image.load("atk_3.png"), pygame.image.load("atk_4.png"),
+            pygame.image.load("atk_5.png"), pygame.image.load("atk_6.png"),
+            pygame.image.load("atk_7.png"), pygame.image.load("atk_8.png")]
 
 ## classes
 class Background(pygame.sprite.Sprite):
@@ -78,6 +96,8 @@ class Player(pygame.sprite.Sprite):
         self.jumping = False
         self.running = False
         self.move_frame = 0
+        self.attacking = False
+        self.attack_frame = 0
 
 
     def move(self):
@@ -125,12 +145,12 @@ class Player(pygame.sprite.Sprite):
 
     def update(self):
           # Return to base frame if at end of movement sequence
-          if self.move_frame > 7:
+          if self.move_frame > 6:
                 self.move_frame = 0
                 return
 
           # Move the character to the next frame if conditions are met
-          if self.running == True: ## self.jumping == False and
+          if self.jumping == False and self.running == True:
                 if self.vel.x > 0:
                       self.image = run_ani_R[self.move_frame]
                       self.direction = "RIGHT"
@@ -138,17 +158,45 @@ class Player(pygame.sprite.Sprite):
                       self.image = run_ani_L[self.move_frame]
                       self.direction = "LEFT"
                 self.move_frame += 1
+          if self.jumping == True: ###
+              if self.vel.x > 0:
+                  self.image = jump_ani_R[self.move_frame]
+                  self.direction = "RIGHT"
+              else:
+                  self.image = jump_ani_L[self.move_frame]
+                  self.direction = "LEFT"
+              self.move_frame += 1
 
           # Returns to base frame if standing still and incorrect frame is showing
           if abs(self.vel.x) < 0.2 and self.move_frame != 0:
                 self.move_frame = 0
-                if self.direction == "RIGHT":
-                      self.image = run_ani_R[self.move_frame]
-                elif self.direction == "LEFT":
-                      self.image = run_ani_L[self.move_frame]
+                #if self.direction == "RIGHT":
+                #      self.image = run_ani_R[self.move_frame]
+                #elif self.direction == "LEFT":
+                #      self.image = run_ani_L[self.move_frame]
 
     def attack(self):
-          pass
+      # If attack frame has reached end of sequence, return to base frame
+      if self.attack_frame > 7:
+            self.attack_frame = 0
+            self.attacking = False
+
+      # Check direction for correct animation to display
+      if self.direction == "RIGHT":
+             self.image = attack_ani_R[self.attack_frame]
+      elif self.direction == "LEFT":
+             self.correction()
+             self.image = attack_ani_L[self.attack_frame]
+
+      # Update the current attack frame
+      self.attack_frame += 1
+
+    def correction(self):
+      # Function is used to correct an error with character position on left attack frames
+      if self.attack_frame == 1:
+            self.pos.x -= 20
+      if self.attack_frame == 10:
+            self.pos.x += 20
 
     def jump(self):
         self.rect.x += 1
@@ -167,6 +215,7 @@ class Player(pygame.sprite.Sprite):
 class Enemy(pygame.sprite.Sprite):
       def __init__(self):
         super().__init__()
+
 
 
 ##sprites
@@ -196,11 +245,17 @@ while True:
 
         # Event handling for a range of different key presses
         if event.type == pygame.KEYDOWN:
-              if event.key == pygame.K_SPACE:
-                    player.jump()
+            if event.key == pygame.K_SPACE:
+                player.jump()
+            if event.key == pygame.K_RETURN:
+                if player.attacking == False:
+                    player.attack()
+                    player.attacking = True
 
     # Player related functions
     player.update()
+    if player.attacking == True:
+        player.attack()
     player.move()
 
     # Display and Background related functions
