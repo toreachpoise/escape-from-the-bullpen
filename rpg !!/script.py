@@ -106,81 +106,82 @@ class Player(pygame.sprite.Sprite):
         self.running = False
         self.move_frame = 0
         self.attacking = False
+        self.cooldown = False ###
         self.attack_frame = 0
 
 
     def move(self):
-          # Keep a constant acceleration of 0.5 in the downwards direction (gravity)
-          self.acc = vec(0,0.5)
+        # Keep a constant acceleration of 0.5 in the downwards direction (gravity)
+        self.acc = vec(0,0.5)
 
-          # Will set running to False if the player has slowed down to a certain extent
-          if abs(self.vel.x) > 0.3:
-                self.running = True
-          else:
-                self.running = False
+        # Will set running to False if the player has slowed down to a certain extent
+        if abs(self.vel.x) > 0.3:
+            self.running = True
+        else:
+            self.running = False
 
-          # Returns the current key presses
-          pressed_keys = pygame.key.get_pressed()
+        # Returns the current key presses
+        pressed_keys = pygame.key.get_pressed()
 
-          # Accelerates the player in the direction of the key press
-          if pressed_keys[K_LEFT]:
-                self.acc.x = -ACC
-          if pressed_keys[K_RIGHT]:
-                self.acc.x = ACC
+        # Accelerates the player in the direction of the key press
+        if pressed_keys[K_LEFT]:
+            self.acc.x = -ACC
+        if pressed_keys[K_RIGHT]:
+            self.acc.x = ACC
 
-          # Formulas to calculate velocity while accounting for friction
-          self.acc.x += self.vel.x * FRIC
-          self.vel += self.acc
-          self.pos += self.vel + 0.5 * self.acc  # Updates Position with new values
+        # Formulas to calculate velocity while accounting for friction
+        self.acc.x += self.vel.x * FRIC
+        self.vel += self.acc
+        self.pos += self.vel + 0.5 * self.acc  # Updates Position with new values
 
-          # This causes character warping from one point of the screen to the other
-          if self.pos.x > WIDTH:
-                self.pos.x = 0
-          if self.pos.x < 0:
-                self.pos.x = WIDTH
+        # This causes character warping from one point of the screen to the other
+        if self.pos.x > WIDTH:
+            self.pos.x = 0
+        if self.pos.x < 0:
+            self.pos.x = WIDTH
 
-          self.rect.midbottom = self.pos  # Update rect with new pos
+        self.rect.midbottom = self.pos  # Update rect with new pos
 
     def gravity_check(self):
-          hits = pygame.sprite.spritecollide(player ,ground_group, False)
-          if self.vel.y > 0:
-              if hits:
-                  lowest = hits[0]
-                  if self.pos.y < lowest.rect.bottom:
-                      self.pos.y = lowest.rect.top + 1
-                      self.vel.y = 0
-                      self.jumping = False
+        hits = pygame.sprite.spritecollide(player ,ground_group, False)
+        if self.vel.y > 0:
+            if hits:
+                lowest = hits[0]
+                if self.pos.y < lowest.rect.bottom:
+                    self.pos.y = lowest.rect.top + 1
+                    self.vel.y = 0
+                    self.jumping = False
 
 
     def update(self):
-          # Return to base frame if at end of movement sequence
-          if self.move_frame > 7:
-                self.move_frame = 0
-                return
-          ### idle animation setup
-          if self.running == False:
-              if self.direction == "RIGHT":
-                  self.image = idle_ani_R[self.move_frame]
-              else:
-                  self.image = idle_ani_L[self.move_frame]
-              self.move_frame += 1
-          # Move the character to the next frame if conditions are met
-          if self.jumping == False and self.running == True:
-                if self.vel.x > 0:
-                      self.image = run_ani_R[self.move_frame]
-                      self.direction = "RIGHT"
-                else:
-                      self.image = run_ani_L[self.move_frame]
-                      self.direction = "LEFT"
-                self.move_frame += 1
-          if self.jumping == True: ###
-              if self.vel.x > 0:
-                  self.image = jump_ani_R[self.move_frame]
-                  self.direction = "RIGHT"
-              else:
-                  self.image = jump_ani_L[self.move_frame]
-                  self.direction = "LEFT"
-              self.move_frame += 1
+        # Return to base frame if at end of movement sequence
+        if self.move_frame > 7:
+            self.move_frame = 0
+            return
+        # idle animation setup
+        if self.running == False:
+            if self.direction == "RIGHT":
+                self.image = idle_ani_R[self.move_frame]
+            else:
+                self.image = idle_ani_L[self.move_frame]
+            self.move_frame += 1
+        # Move the character to the next frame if conditions are met
+        if self.jumping == False and self.running == True:
+            if self.vel.x > 0:
+                self.image = run_ani_R[self.move_frame]
+                self.direction = "RIGHT"
+            else:
+                self.image = run_ani_L[self.move_frame]
+                self.direction = "LEFT"
+            self.move_frame += 1
+        if self.jumping == True:
+            if self.vel.x > 0:
+                self.image = jump_ani_R[self.move_frame]
+                self.direction = "RIGHT"
+            else:
+                self.image = jump_ani_L[self.move_frame]
+                self.direction = "LEFT"
+            self.move_frame += 1
 
           # Returns to base frame if standing still and incorrect frame is showing
     #      if abs(self.vel.x) < 0.2 and self.move_frame != 0:
@@ -198,10 +199,10 @@ class Player(pygame.sprite.Sprite):
 
       # Check direction for correct animation to display
       if self.direction == "RIGHT":
-             self.image = attack_ani_R[self.attack_frame]
+            self.image = attack_ani_R[self.attack_frame]
       elif self.direction == "LEFT":
-             self.correction()
-             self.image = attack_ani_L[self.attack_frame]
+            self.correction()
+            self.image = attack_ani_L[self.attack_frame]
 
       # Update the current attack frame
       self.attack_frame += 1
@@ -218,24 +219,63 @@ class Player(pygame.sprite.Sprite):
 
         # Check to see if payer is in contact with the ground
         hits = pygame.sprite.spritecollide(self, ground_group, False)
-
         self.rect.x -= 1
 
         # If touching the ground, and not currently jumping, cause the player to jump.
         if hits and not self.jumping:
-           self.jumping = True
-           self.vel.y = -12
+            self.jumping = True
+            self.vel.y = -12
 
+    def player_hit(self): ###
+        if self.cooldown == False:
+            self.cooldown = True
+            pygame.time.set_timer(hit_cooldown, 1000) #may be inaccurate b/c our framerate is different than the tutorial
+            print("hit")
+            pygame.display.update()
 
-class Enemy(pygame.sprite.Sprite):
-      def __init__(self):
+class Enemy(pygame.sprite.Sprite): ### all new baybey
+    def __init__(self):
         super().__init__()
+        self.image = pygame.image.load("Branch.png")
+        self.rect = self.image.get_rect()
+        self.pos = vec(0,0)
+        self.vel = vec(0,0)
+        self.direction = random.randint(0,1) #0 for right, 1 for left
+        self.vel.x = random.randint(2,6) / 2
 
+        if self.direction == 0:
+            self.pos.x = 0
+            self.pos.y = 235
+        if self.direction == 1:
+            self.pos.x = 700
+            self.pos.y = 235
 
+    def move(self):
+        if self.pos.x >= (WIDTH-15): #stops them going offscreen
+            self.direction = 1
+        elif self.pos.x <= 0:
+            self.direction = 0
+        if self.direction == 0: #directional movement
+            self.pos.x += self.vel.x
+        if self.direction == 1:
+            self.pos.x -= self.vel.x
+
+        self.rect.center = self.pos #changes rect for collisions
+
+    def render(self):
+        displaysurface.blit(self.image, (self.pos.x, self.pos.y))
+
+    def update(self):
+        hits = pygame.sprite.spritecollide(self, Playergroup, False)
+        if hits and player.attacking == True:
+            self.kill()
+        elif hits and player.attacking == False:
+            player.hit()
 
 ##sprites
 player = Player()
 Playergroup = pygame.sprite.Group()
+Playergroup.add(player) ###
 
 background = Background()
 
@@ -243,22 +283,20 @@ ground = Ground()
 ground_group = pygame.sprite.Group()
 ground_group.add(ground)
 
+enemy = Enemy()
+
+hit_cooldown = pygame.USEREVENT + 1 ###
+
 ##gameloop
 while True:
     player.gravity_check()
 
     for event in pygame.event.get():
-        # Will run when the close window button is clicked
         if event.type == QUIT:
             pygame.quit()
             sys.exit()
-
-        # For events that occur upon clicking the mouse (left click)
         if event.type == pygame.MOUSEBUTTONDOWN:
               pass
-
-
-        # Event handling for a range of different key presses
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
                 player.jump()
@@ -266,19 +304,25 @@ while True:
                 if player.attacking == False:
                     player.attack()
                     player.attacking = True
+        if event.type == hit_cooldown: ###
+            player.cooldown = False
+            pygame.time.set_timer(hit_cooldown, 0)
 
-    # Player related functions
+    # sprite related functions
     player.update()
     if player.attacking == True:
         player.attack()
     player.move()
+    enemy.update()
+    enemy.move()
 
     # Display and Background related functions
     background.render()
     ground.render()
 
-    # Rendering Player
+    # Rendering characters
     displaysurface.blit(player.image, player.rect)
+    enemy.render()
 
     pygame.display.update()
     FPS_CLOCK.tick(FPS)
