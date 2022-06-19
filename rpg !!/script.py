@@ -16,7 +16,7 @@ HEIGHT = 350
 WIDTH = 700
 ACC = 0.3
 FRIC = -0.10
-FPS = 24
+FPS = 12
 FPS_CLOCK = pygame.time.Clock()
 COUNT = 0
 
@@ -25,43 +25,68 @@ displaysurface = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Game")
 
 ## animations (rn run and attacks are the same for left and right lol)
-idle_ani_R = [pygame.image.load("jack-r.png"), pygame.image.load("jack-r-jump-1.png"),
-            pygame.image.load("jack-r-jump-2.png"), pygame.image.load("jack-r-jump-1.png"),
-            pygame.image.load("jack-r.png"), pygame.image.load("jack-r-jump-1.png"),
-            pygame.image.load("jack-r-jump-2.png"), pygame.image.load("jack-r-jump-1.png")]
-idle_ani_L = [pygame.image.load("jack-l.png"), pygame.image.load("jack-l-jump-1.png"),
-            pygame.image.load("jack-l-jump-2.png"), pygame.image.load("jack-l-jump-1.png"),
-            pygame.image.load("jack-l.png"), pygame.image.load("jack-l-jump-1.png"),
-            pygame.image.load("jack-l-jump-2.png"), pygame.image.load("jack-l-jump-1.png")]
+idle_ani_R = [pygame.image.load("jack idle 1.png"), pygame.image.load("jack idle 2.png"),
+            pygame.image.load("jack idle 3.png"), pygame.image.load("jack idle 4.png"),
+            pygame.image.load("jack idle 5.png"), pygame.image.load("jack idle 6.png"),
+            pygame.image.load("jack idle 7.png"), pygame.image.load("jack idle 8.png")]
+idle_ani_L = [pygame.image.load("jack idle L1.png"), pygame.image.load("jack idle L2.png"),
+            pygame.image.load("jack idle L3.png"), pygame.image.load("jack idle L4.png"),
+            pygame.image.load("jack idle L5.png"), pygame.image.load("jack idle L6.png"),
+            pygame.image.load("jack idle L7.png"), pygame.image.load("jack idle L8.png")]
 
-run_ani_R = [pygame.image.load("run_1.png"), pygame.image.load("run_2.png"),
-            pygame.image.load("run_3.png"), pygame.image.load("run_4.png"),
-            pygame.image.load("run_5.png"), pygame.image.load("run_6.png"),
-            pygame.image.load("run_7.png"), pygame.image.load("run_8.png")]
-run_ani_L = [pygame.image.load("run_1.png"), pygame.image.load("run_2.png"),
-            pygame.image.load("run_3.png"), pygame.image.load("run_4.png"),
-            pygame.image.load("run_5.png"), pygame.image.load("run_6.png"),
-            pygame.image.load("run_7.png"), pygame.image.load("run_8.png")]
+run_start_ani_R = [pygame.image.load("jack run start 1.png"), pygame.image.load("jack run start 2.png"),
+            pygame.image.load("jack run start 3.png"), pygame.image.load("jack run start 4.png"),
+            pygame.image.load("jack run start 5.png"), pygame.image.load("jack run start 6.png"),
+            pygame.image.load("jack run start 7.png"), pygame.image.load("jack run start 8.png")]
+run_start_ani_L = [pygame.image.load("jack run start L1.png"), pygame.image.load("jack run start L2.png"),
+            pygame.image.load("jack run start L3.png"), pygame.image.load("jack run start L4.png"),
+            pygame.image.load("jack run start L5.png"), pygame.image.load("jack run start L6.png"),
+            pygame.image.load("jack run start L7.png"), pygame.image.load("jack run start L8.png")]
 
-jump_ani_R = [pygame.image.load("jack-r.png"), pygame.image.load("jack-r-jump-1.png"),
-            pygame.image.load("jack-r-jump-2.png"), pygame.image.load("jack-r-jump-3.png"),
-            pygame.image.load("jack-r-jump-4.png"), pygame.image.load("jack-r-jump-5.png"),
-            pygame.image.load("jack-r-jump-4.png"), pygame.image.load("jack-r-jump-3.png"),
-            pygame.image.load("jack-r-jump-2.png"), pygame.image.load("jack-r-jump-1.png")]
-jump_ani_L = [pygame.image.load("jack-l.png"), pygame.image.load("jack-l-jump-1.png"),
-            pygame.image.load("jack-l-jump-2.png"), pygame.image.load("jack-l-jump-3.png"),
-            pygame.image.load("jack-l-jump-4.png"), pygame.image.load("jack-l-jump-5.png"),
-            pygame.image.load("jack-l-jump-4.png"), pygame.image.load("jack-l-jump-3.png"),
-            pygame.image.load("jack-l-jump-2.png"), pygame.image.load("jack-l-jump-1.png")]
+run_ani_R = [pygame.image.load("jack run 1.png"), pygame.image.load("jack run 2.png"),
+            pygame.image.load("jack run 3.png"), pygame.image.load("jack run 4.png"),
+            pygame.image.load("jack run 5.png"), pygame.image.load("jack run 6.png"),
+            pygame.image.load("jack run 7.png"), pygame.image.load("jack run 8.png")]
+run_ani_L = [pygame.image.load("jack run L1.png"), pygame.image.load("jack run L2.png"),
+            pygame.image.load("jack run L3.png"), pygame.image.load("jack run L4.png"),
+            pygame.image.load("jack run L5.png"), pygame.image.load("jack run L6.png"),
+            pygame.image.load("jack run L7.png"), pygame.image.load("jack run L8.png")]
 
-attack_ani_R = [pygame.image.load("atk_1.png"), pygame.image.load("atk_2.png"),
-            pygame.image.load("atk_3.png"), pygame.image.load("atk_4.png"),
-            pygame.image.load("atk_5.png"), pygame.image.load("atk_6.png"),
-            pygame.image.load("atk_7.png"), pygame.image.load("atk_8.png")]
-attack_ani_L = [pygame.image.load("atk_1.png"), pygame.image.load("atk_2.png"),
-            pygame.image.load("atk_3.png"), pygame.image.load("atk_4.png"),
-            pygame.image.load("atk_5.png"), pygame.image.load("atk_6.png"),
-            pygame.image.load("atk_7.png"), pygame.image.load("atk_8.png")]
+jump_ani_R = [pygame.image.load("jack jump 1.png"), pygame.image.load("jack jump 2.png"),
+            pygame.image.load("jack jump 3.png"), pygame.image.load("jack jump 4.png"),
+            pygame.image.load("jack jump 5.png"), pygame.image.load("jack jump 6.png"),
+            pygame.image.load("jack jump 7.png"), pygame.image.load("jack jump 8.png")]
+jump_ani_L = [pygame.image.load("jack jump L1.png"), pygame.image.load("jack jump L2.png"),
+            pygame.image.load("jack jump L3.png"), pygame.image.load("jack jump L4.png"),
+            pygame.image.load("jack jump L5.png"), pygame.image.load("jack jump L6.png"),
+            pygame.image.load("jack jump L7.png"), pygame.image.load("jack jump L8.png")]
+
+draw_ani_R = [pygame.image.load("jack draw 1.png"), pygame.image.load("jack draw 1.png"),
+            pygame.image.load("jack draw 2.png"), pygame.image.load("jack draw 2.png"),
+            pygame.image.load("jack draw 3.png"), pygame.image.load("jack draw 3.png"),
+            pygame.image.load("jack draw 4.png"), pygame.image.load("jack draw 4.png")]
+draw_ani_L = [pygame.image.load("jack draw L1.png"), pygame.image.load("jack draw L1.png"),
+            pygame.image.load("jack draw L2.png"), pygame.image.load("jack draw L2.png"),
+            pygame.image.load("jack draw L3.png"), pygame.image.load("jack draw L3.png"),
+            pygame.image.load("jack draw L4.png"), pygame.image.load("jack draw L4.png")]
+
+attack_ani_R = [pygame.image.load("jack attack 1.png"), pygame.image.load("jack attack 2.png"),
+            pygame.image.load("jack attack 3.png"), pygame.image.load("jack attack 4.png"),
+            pygame.image.load("jack attack 5.png"), pygame.image.load("jack attack 6.png"),
+            pygame.image.load("jack attack 7.png"), pygame.image.load("jack attack 8.png")]
+attack_ani_L = [pygame.image.load("jack attack L1.png"), pygame.image.load("jack attack L2.png"),
+            pygame.image.load("jack attack L3.png"), pygame.image.load("jack attack L4.png"),
+            pygame.image.load("jack attack L5.png"), pygame.image.load("jack attack L6.png"),
+            pygame.image.load("jack attack L7.png"), pygame.image.load("jack attack L8.png")]
+
+sheath_ani_R = [pygame.image.load("jack draw 5.png"), pygame.image.load("jack draw 5.png"),
+            pygame.image.load("jack draw 6.png"), pygame.image.load("jack draw 6.png"),
+            pygame.image.load("jack draw 7.png"), pygame.image.load("jack draw 7.png"),
+            pygame.image.load("jack draw 8.png"), pygame.image.load("jack draw 8.png")]
+sheath_ani_L = [pygame.image.load("jack draw L5.png"), pygame.image.load("jack draw L5.png"),
+            pygame.image.load("jack draw L6.png"), pygame.image.load("jack draw L6.png"),
+            pygame.image.load("jack draw L7.png"), pygame.image.load("jack draw L7.png"),
+            pygame.image.load("jack draw L8.png"), pygame.image.load("jack draw L8.png")]
 
 ## classes
 class Background(pygame.sprite.Sprite):
@@ -91,7 +116,7 @@ class Ground(pygame.sprite.Sprite):
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
-        self.image = pygame.image.load("jack-r.png")
+        self.image = pygame.image.load("jack idle 1.png")
         self.rect = self.image.get_rect()
 
         # Position and direction
@@ -313,8 +338,8 @@ while True:
     if player.attacking == True:
         player.attack()
     player.move()
-    enemy.update()
-    enemy.move()
+#    enemy.update()
+#    enemy.move()
 
     # Display and Background related functions
     background.render()
@@ -322,7 +347,7 @@ while True:
 
     # Rendering characters
     displaysurface.blit(player.image, player.rect)
-    enemy.render()
+#    enemy.render()
 
     pygame.display.update()
     FPS_CLOCK.tick(FPS)
