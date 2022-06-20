@@ -14,9 +14,9 @@ pygame.init()  # Begin pygame
 vec = pygame.math.Vector2
 HEIGHT = 350
 WIDTH = 700
-ACC = 0.3
+ACC = 0.3 ###
 FRIC = -0.10
-FPS = 12
+FPS = 24
 FPS_CLOCK = pygame.time.Clock()
 COUNT = 0
 
@@ -25,14 +25,14 @@ displaysurface = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Game")
 
 ## animations (rn run and attacks are the same for left and right lol)
-idle_ani_R = [pygame.image.load("jack idle 1.png"), pygame.image.load("jack idle 2.png"),
-            pygame.image.load("jack idle 3.png"), pygame.image.load("jack idle 4.png"),
-            pygame.image.load("jack idle 5.png"), pygame.image.load("jack idle 6.png"),
-            pygame.image.load("jack idle 7.png"), pygame.image.load("jack idle 8.png")]
-idle_ani_L = [pygame.image.load("jack idle L1.png"), pygame.image.load("jack idle L2.png"),
-            pygame.image.load("jack idle L3.png"), pygame.image.load("jack idle L4.png"),
-            pygame.image.load("jack idle L5.png"), pygame.image.load("jack idle L6.png"),
-            pygame.image.load("jack idle L7.png"), pygame.image.load("jack idle L8.png")]
+idle_ani_R = [pygame.image.load("jack idle 1.png"), pygame.image.load("jack idle 1.png"),
+            pygame.image.load("jack idle 2.png"), pygame.image.load("jack idle 2.png"),
+            pygame.image.load("jack idle 3.png"), pygame.image.load("jack idle 3.png"),
+            pygame.image.load("jack idle 4.png"), pygame.image.load("jack idle 4.png")]
+idle_ani_L = [pygame.image.load("jack idle L1.png"), pygame.image.load("jack idle L1.png"),
+            pygame.image.load("jack idle L2.png"), pygame.image.load("jack idle L2.png"),
+            pygame.image.load("jack idle L3.png"), pygame.image.load("jack idle L3.png"),
+            pygame.image.load("jack idle L4.png"), pygame.image.load("jack idle L4.png")]
 
 run_start_ani_R = [pygame.image.load("jack run start 1.png"), pygame.image.load("jack run start 2.png"),
             pygame.image.load("jack run start 3.png"), pygame.image.load("jack run start 4.png"),
@@ -88,6 +88,10 @@ sheath_ani_L = [pygame.image.load("jack draw L5.png"), pygame.image.load("jack d
             pygame.image.load("jack draw L7.png"), pygame.image.load("jack draw L7.png"),
             pygame.image.load("jack draw L8.png"), pygame.image.load("jack draw L8.png")]
 
+health_ani = [pygame.image.load("heart0.png"), pygame.image.load("heart.png"), ###
+            pygame.image.load("heart2.png"), pygame.image.load("heart3.png"),
+            pygame.image.load("heart4.png"), pygame.image.load("heart5.png")]
+
 ## classes
 class Background(pygame.sprite.Sprite):
       def __init__(self):
@@ -125,13 +129,14 @@ class Player(pygame.sprite.Sprite):
         self.vel = vec(0,0)
         self.acc = vec(0,0)
         self.direction = "RIGHT"
+        self.health = 5 ###
 
         # Movement
         self.jumping = False
         self.running = False
         self.move_frame = 0
         self.attacking = False
-        self.cooldown = False ###
+        self.cooldown = False
         self.attack_frame = 0
 
 
@@ -140,7 +145,7 @@ class Player(pygame.sprite.Sprite):
         self.acc = vec(0,0.5)
 
         # Will set running to False if the player has slowed down to a certain extent
-        if abs(self.vel.x) > 0.3:
+        if abs(self.vel.x) > 0.1: ###
             self.running = True
         else:
             self.running = False
@@ -192,11 +197,17 @@ class Player(pygame.sprite.Sprite):
             self.move_frame += 1
         # Move the character to the next frame if conditions are met
         if self.jumping == False and self.running == True:
-            if self.vel.x > 0:
+            if self.vel.x > 0.3: ###
                 self.image = run_ani_R[self.move_frame]
                 self.direction = "RIGHT"
-            else:
+            if self.vel.x < -0.3: ###
                 self.image = run_ani_L[self.move_frame]
+                self.direction = "LEFT"
+            if 0.1 < self.vel.x < 0.2: ###
+                self.image = run_start_ani_R[self.move_frame]
+                self.direction = "RIGHT"
+            if -0.2 < self.vel.x < 0.1: ###
+                self.image = run_start_ani_L[self.move_frame]
                 self.direction = "LEFT"
             self.move_frame += 1
         if self.jumping == True:
@@ -251,14 +262,19 @@ class Player(pygame.sprite.Sprite):
             self.jumping = True
             self.vel.y = -12
 
-    def player_hit(self): ###
+    def player_hit(self):
         if self.cooldown == False:
             self.cooldown = True
             pygame.time.set_timer(hit_cooldown, 1000) #may be inaccurate b/c our framerate is different than the tutorial
-            print("hit")
-            pygame.display.update()
+            #print("hit")
+            self.health = self.health - 1 ###
+            health.image = health_ani[self.health] ###
 
-class Enemy(pygame.sprite.Sprite): ### all new baybey
+            if self.health <= 0: ###
+                self.kill()
+                pygame.display.update()
+
+class Enemy(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
         self.image = pygame.image.load("Branch.png")
@@ -287,20 +303,105 @@ class Enemy(pygame.sprite.Sprite): ### all new baybey
 
         self.rect.center = self.pos #changes rect for collisions
 
-    def render(self):
-        displaysurface.blit(self.image, (self.pos.x, self.pos.y))
-
     def update(self):
         hits = pygame.sprite.spritecollide(self, Playergroup, False)
         if hits and player.attacking == True:
             self.kill()
         elif hits and player.attacking == False:
-            player.hit()
+            player.player_hit()
+    def player_hit(self): ###
+        if self.cooldown == False:
+            self.cooldown = True
+            pygame.time.set_timer(hit_cooldown, 500) # supposed to be 1 sec reset
+            print("hit")
+            pygame.display.update()
+
+    def render(self):
+        displaysurface.blit(self.image, (self.pos.x, self.pos.y))
+
+class Castle(pygame.sprite.Sprite): ###
+    def __init__(self):
+        super().__init__()
+        self.hide = False
+        self.image = pygame.image.load("launchpad.jpg")
+    def update(self):
+        if self.hide == False:
+            displaysurface.blit(self.image, (0,0))
+
+class EventHandler(): ### whole thing is new but some things are newer lol
+    def __init__(self):
+        self.enemy_count = 0
+        self.battle = False
+        self.enemy_generation = pygame.USEREVENT + 1
+        self.stage = 1 ###
+        self.stage_enemies = [] ###
+
+
+    def stage_handler(self):
+        self.root = Tk()
+        self.root.geometry('200x225')
+        button1 = Button(self.root, text = "Level 1", width = 18, height = 2,
+                        command = self.world1)
+        button2 = Button(self.root, text = "Level 2", width = 18, height = 2,
+                        command = self.world2)
+        button3 = Button(self.root, text = "Level 3", width = 18, height = 2,
+                        command = self.world3)
+        button4 = Button(self.root, text = "Level 4", width = 18, height = 2,
+                        command = self.world4)
+
+        button1.place(x = 40, y = 15)
+        button2.place(x = 40, y = 65)
+        button3.place(x = 40, y = 115)
+        button4.place(x = 40, y = 165)
+
+        self.root.mainloop()
+
+    def world1(self):
+        self.root.destroy()
+        self.stage_enemies.append((int(self.stage) * 2) + 1)
+        pygame.time.set_timer(self.enemy_generation, 2000)
+        castle.hide = True
+        self.battle = True
+
+    def world2(self):
+        self.root.destroy()
+        #self.stage_enemies.append((int(self.stage) * 2) + 1)
+        pygame.time.set_timer(self.enemy_generation, 2000)
+        castle.hide = True
+        self.battle = True
+
+    def world3(self):
+        self.root.destroy()
+        #self.stage_enemies.append((int(self.stage) * 2) + 1)
+        pygame.time.set_timer(self.enemy_generation, 2000)
+        castle.hide = True
+        self.battle = True
+
+    def world4(self):
+        self.root.destroy()
+        #self.stage_enemies.append((int(self.stage) * 2) + 1)
+        pygame.time.set_timer(self.enemy_generation, 2000)
+        castle.hide = True
+        self.battle = True
+
+    def next_stage(self): ###
+        self.stage += 1
+        print("Stage: " + str(self.stage))
+        self.enemy_count = 0
+        pygame.time.set_timer(self.enemy_generation, 1500 - (50 * self.stage))
+        self.stage_enemies.append((int(self.stage) * 2) + 1)
+
+class HealthBar(pygame.sprite.Sprite): ###
+    def __init__(self):
+        super().__init__()
+        self.image = pygame.image.load("heart5.png")
+    def render(self):
+        displaysurface.blit(self.image, (10,10))
 
 ##sprites
 player = Player()
 Playergroup = pygame.sprite.Group()
-Playergroup.add(player) ###
+Playergroup.add(player)
 
 background = Background()
 
@@ -308,46 +409,63 @@ ground = Ground()
 ground_group = pygame.sprite.Group()
 ground_group.add(ground)
 
-enemy = Enemy()
+Enemies = pygame.sprite.Group()
 
-hit_cooldown = pygame.USEREVENT + 1 ###
+castle = Castle() ###
+handler = EventHandler() ###
+health = HealthBar() ###
+
+hit_cooldown = pygame.USEREVENT + 1
 
 ##gameloop
 while True:
     player.gravity_check()
 
     for event in pygame.event.get():
+        if event.type == hit_cooldown:
+            player.cooldown = False
         if event.type == QUIT:
             pygame.quit()
             sys.exit()
+        if event.type == handler.enemy_generation: ###
+            if handler.enemy_count < handler.stage_enemies[handler.stage - 1]:
+                enemy = Enemy()
+                Enemies.add(enemy)
+                handler.enemy_count += 1
         if event.type == pygame.MOUSEBUTTONDOWN:
               pass
         if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_z: ###
+                if handler.battle == True and len(Enemies) == 0:
+                    handler.next_stage()
+            if event.key == pygame.K_x and castle.hide == False:
+                handler.stage_handler()
             if event.key == pygame.K_SPACE:
                 player.jump()
             if event.key == pygame.K_RETURN:
                 if player.attacking == False:
                     player.attack()
                     player.attacking = True
-        if event.type == hit_cooldown: ###
-            player.cooldown = False
-            pygame.time.set_timer(hit_cooldown, 0)
 
     # sprite related functions
     player.update()
     if player.attacking == True:
         player.attack()
     player.move()
-#    enemy.update()
-#    enemy.move()
 
     # Display and Background related functions
     background.render()
     ground.render()
 
-    # Rendering characters
-    displaysurface.blit(player.image, player.rect)
-#    enemy.render()
+    # Rendering sprites
+    castle.update()
+    if player.health > 0: ###
+        displaysurface.blit(player.image, player.rect)
+    health.render() ###
+    for entity in Enemies: ###
+        entity.update()
+        entity.move()
+        entity.render()
 
     pygame.display.update()
     FPS_CLOCK.tick(FPS)
