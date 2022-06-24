@@ -10,9 +10,9 @@ label start:
 jump apothecary
 
 label apothecary:
-
 scene apothecary with fade
 show jack main with moveinright
+
 j "Hello?"
 "..."
 j "Anyone?"
@@ -62,8 +62,6 @@ menu:
                     show jack main with dissolve
                     j "I'm looking for Ailea. I heard she could help me with a baby?"
                     jump rakesh_continue_1
-
-
 
 #Section 2
 label rakesh_continue_1:
@@ -117,8 +115,9 @@ menu:
                     r "Just hear me out, man!"
                     jump rakesh_continue_2
 
-#section 3
+#Section 3
 label rakesh_continue_2:
+
 if r_points < 0:
     "(Rakesh seems a bit annoyed with you.)"
     jump rakesh_section3_annoyed
@@ -129,14 +128,49 @@ if r_points == 0:
     "(Rakesh is tolerating your presence, for now.)"
     jump rakesh_section3_friendly
 
-label rakesh_section3_annoyed:
+    label rakesh_section3_annoyed:
+        $ inside = 1
+        $ distractions = 1
+        $ bull_disguise = 1
+        $ matron_disguise = 1
+        r "You'll need two things: A way inside and a distraction."
+        label rakesh_section3_annoyed_options:
+        menu:
+            "How am I supposed to get inside?" if inside == 1:
+                r "You'll have to find a disguise, I think."
+                label disguise_menu:
+                menu:
+                    "Maybe a Bull?" if bull_disguise == 1:
+                        $ bull_disguise = 0
+                        r "Hmmm... muscles too small, eyes too kind."
+                        jump disguise_menu
+                    "Maybe a Matron?" if matron_disguise == 1:
+                        $ matron_disguise = 0
+                        r "Nah... Wrong smell. Smile not fake."
+                        jump disguise_menu
+                    "... Not as a cow..." if bull_disguise == 0 and matron_disguise == 0:
+                        r "Afraid so, man."
+                        $ cow_disguise = 1
+                        $ inside = 0
+                        jump rakesh_section3_annoyed_options
 
-label rakesh_section3_friendly:
+            "A distraction?" if distractions == 1:
+                r "Nobody better at distracting than my friend Takeshi."
+                menu:
+                    "The useless washed up rockerboy?!":
+                        $ r_points -= 1
+                        $ distractions = 0
+                        r "Ugh. If you ask hir for help, try to be more polite. Xe isn't as patient as me."
+                        jump rakesh_section3_annoyed_options
+                    "Takeshi! I love hir music!":
+                        $ r_points += 1
+                        $ distractions = 0
+                        r "Tell that to Takeshi. Xe'll help for sure then."
+                        jump rakesh_section3_annoyed_options
 
 
-
-
-
+    label rakesh_section3_friendly:
+    r "I've been practicing my lockpicking, so all we need is a distraction..."
 
 
 
@@ -151,6 +185,10 @@ scene neighborhood with fade
 show jack depressed
 "You wander off, alone, unhelped. Because you were a dick for no reason."
 jump end
+
+label rakesh_good_ending:
+
+label rakesh_bad_ending:
 
 
 
