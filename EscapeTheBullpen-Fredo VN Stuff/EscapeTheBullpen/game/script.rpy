@@ -10,7 +10,7 @@ label start:
 jump apothecary
 
 label apothecary:
-scene apothecary with fade
+scene ailea_shop_bg with fade
 show jack main with moveinright
 
 j "Hello?"
@@ -38,9 +38,9 @@ menu:
         jump rakesh_continue_1
     "Oh, great, it's just some kid.":
         $ r_points -= 1
-        show rakesh upset with dissolve
-        r "Man, I'm twice your age."
-        show jack embarassed with dissolve
+        r @ angry "Man, I'm twice your age."
+        show jack upset
+        show jack embarassed
         j "..."
         menu:
             "Sorry, I didn't mean to assume...":
@@ -50,7 +50,7 @@ menu:
                 r "What the hell?! Did you just come here to be a dick?!"
                 menu:
                     "I guess I did, you little creep!":
-                        jump worst_ending
+                        jump r_worst_ending
                     "No! I'm sorry! I'm just... I'm sorry...":
                         jump rakesh_apology
 
@@ -58,7 +58,6 @@ menu:
                     $ r_points += 1
                     show jack main at right with dissolve
                     r "Hmph. Apology accepted..."
-                    pause
                     show jack main with dissolve
                     j "I'm looking for Ailea. I heard she could help me with a baby?"
                     jump rakesh_continue_1
@@ -72,6 +71,7 @@ if r_points > 0:
 if r_points == 0:
     "(Rakesh is tolerating your presence, for now.)"
 
+show rakesh main with dissolve
 r "They take her to the breeding center. They say she need to help with one of the cows, but then she never come back."
 menu:
     "She's gone? Oh God, this can't be happening...":
@@ -85,7 +85,7 @@ menu:
         menu:
             "Sorry, I'm just scared...":
                 if r_points <= -2:
-                    jump worst_ending
+                    jump r_worst_ending
                 if r_points > -2:
                         $ r_points += 1
                         r "It's OK to be scared, man. Scary times."
@@ -96,7 +96,7 @@ menu:
             "Y'know, with your hoverboard or whatever?":
                 $ r_points -= 1
                 if r_points <= -2:
-                    jump worst_ending
+                    jump r_worst_ending
                 if r_points > -2:
                         show rakesh angry with dissolve
                         r "What is this, man? Did someone send you just to mess with me?"
@@ -105,19 +105,20 @@ menu:
                         r "So stop being an ass!"
                         jump rakesh_continue_2
     "Then we'll just have to go get her.":
+            show rakesh happy with dissolve
             r "It won't be easy..."
             menu:
                 "I didn't expect it to be.":
                     $ r_points += 1
                     jump rakesh_continue_2
-                "Maybe... someone else could help?":
+                "Maybe... you could find someone other than me to help?":
                     $ r_points -=1
                     r "Just hear me out, man!"
                     jump rakesh_continue_2
 
 #Section 3
 label rakesh_continue_2:
-
+show rakesh main with dissolve
 if r_points < 0:
     "(Rakesh seems a bit annoyed with you.)"
     jump rakesh_section3_annoyed
@@ -126,7 +127,7 @@ if r_points > 0:
     jump rakesh_section3_friendly
 if r_points == 0:
     "(Rakesh is tolerating your presence, for now.)"
-    jump rakesh_section3_friendly
+    jump rakesh_section3_annoyed
 
     label rakesh_section3_annoyed:
         $ inside = 1
@@ -154,7 +155,7 @@ if r_points == 0:
                         $ inside = 0
                         jump rakesh_section3_annoyed_options
 
-            "A distraction?" if distractions == 1:
+            "How do I cause a distraction?" if distractions == 1:
                 r "Nobody better at distracting than my friend Takeshi."
                 menu:
                     "The useless washed up rockerboy?!":
@@ -167,17 +168,37 @@ if r_points == 0:
                         $ distractions = 0
                         r "Tell that to Takeshi. Xe'll help for sure then."
                         jump rakesh_section3_annoyed_options
-
+        j "OK, then. I'll go talk to Takeshi."
+        jump endings
 
     label rakesh_section3_friendly:
     r "I've been practicing my lockpicking, so all we need is a distraction..."
-
-
-
-
+    $ distractions = 1
+    j "How do I cause a distraction?"
+    r "Nobody better at distracting than my friend Takeshi."
+    menu:
+        "The useless washed up rockerboy?!":
+            $ r_points -= 1
+            r "Ugh. If you ask hir for help, try to be more polite. Xe isn't as patient as me."
+        "Takeshi! I love hir music!":
+            show jack happy with dissolve
+            $ r_points += 1
+            r @ happy "Tell that to Takeshi. Xe'll help for sure then."
+    show jack determined with dissolve
+    j "I guess my next stop is Takeshi's."
+    jump endings
 
 #Endings
-label worst_ending:
+label endings:
+if r_points > 0:
+    $ r_companion = True
+    "(Rakesh is willing to help!)."
+if r_points <= 0:
+    $ r_companion = False
+    "(Rakesh doesn't trust you enough to help.)"
+jump end
+
+label r_worst_ending:
 show rakesh main with dissolve
 r "Whatever. Not helping the likes of you. Come back when you're in a better mood."
 pause
@@ -185,11 +206,6 @@ scene neighborhood with fade
 show jack depressed
 "You wander off, alone, unhelped. Because you were a dick for no reason."
 jump end
-
-label rakesh_good_ending:
-
-label rakesh_bad_ending:
-
 
 
 #Return to Menu
