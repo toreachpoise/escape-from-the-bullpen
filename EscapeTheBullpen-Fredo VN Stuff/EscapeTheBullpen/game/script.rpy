@@ -130,85 +130,86 @@ if r_points == 0:
     jump rakesh_section3_annoyed
 
     label rakesh_section3_annoyed:
-        $ inside = 1
-        $ distractions = 1
-        $ bull_disguise = 1
-        $ matron_disguise = 1
-        r "You'll need two things: A way inside and a distraction."
-        label rakesh_section3_annoyed_options:
-        menu:
-            "How am I supposed to get inside?" if inside == 1:
-                r "You'll have to find a disguise, I think."
-                label disguise_menu:
-                menu:
-                    "Maybe a Bull?" if bull_disguise == 1:
-                        $ bull_disguise = 0
-                        r "Hmmm... muscles too small, eyes too kind."
-                        jump disguise_menu
-                    "Maybe a Matron?" if matron_disguise == 1:
-                        $ matron_disguise = 0
-                        r "Nah... Wrong smell. Smile not fake."
-                        jump disguise_menu
-                    "... Not as a cow..." if bull_disguise == 0 and matron_disguise == 0:
-                        r "Afraid so, man."
-                        $ cow_disguise = 1
-                        $ inside = 0
-                        jump rakesh_section3_annoyed_options
-
-            "How do I cause a distraction?" if distractions == 1:
-                r "Nobody better at distracting than my friend Takeshi."
-                menu:
-                    "The useless washed up rockerboy?!":
-                        $ r_points -= 1
-                        $ distractions = 0
-                        r "Ugh. If you ask hir for help, try to be more polite. Xe isn't as patient as me."
-                        jump rakesh_section3_annoyed_options
-                    "Takeshi! I love hir music!":
-                        $ r_points += 1
-                        $ distractions = 0
-                        r "Tell that to Takeshi. Xe'll help for sure then."
-                        jump rakesh_section3_annoyed_options
-        j "OK, then. I'll go talk to Takeshi."
-        jump endings
+    r "You'll need a distraction, and there's nobody more distracting than Takeshi."
+    menu:
+        "The useless washed up rockerboy?!":
+            $ r_points -= 1
+            $ distractions = 0
+            r "Ugh. If you ask hir for help, try to be more polite. Xe isn't as patient as me."
+            jump r_endings
+        "Takeshi! I love hir music!":
+            $ r_points += 1
+            $ distractions = 0
+            r "Tell that to Takeshi. Xe'll help for sure then."
+            jump r_endings
 
     label rakesh_section3_friendly:
-    r "I've been practicing my lockpicking, so all we need is a distraction..."
-    $ distractions = 1
+    r "All we need is a distraction..."
     j "How do I cause a distraction?"
-    r "Nobody better at distracting than my friend Takeshi."
+    r "Nobody better for that than my friend Takeshi."
     menu:
         "The useless washed up rockerboy?!":
             $ r_points -= 1
             r "Ugh. If you ask hir for help, try to be more polite. Xe isn't as patient as me."
+            jump r_endings
         "Takeshi! I love hir music!":
             show jack happy with dissolve
             $ r_points += 1
             r @ happy "Tell that to Takeshi. Xe'll help for sure then."
-    show jack determined with dissolve
-    j "I guess my next stop is Takeshi's."
-    jump endings
+            show jack determined with dissolve
+            jump r_endings
 
 #Endings
-label endings:
+label r_endings:
+r "We'll also need a way inside..."
 if r_points > 0:
     $ r_companion = True
-    "(Rakesh is willing to help!)."
+    show rakesh happy with dissolve
+    r "Fortunately, my lockpicking skills are second-to-none!"
+    show jack happy with dissolve
+    j "Great! I guess our next stop is Takeshi's."
+    r "Let's go!"
+    jump end
 if r_points <= 0:
     $ r_companion = False
-    "(Rakesh doesn't trust you enough to help.)"
-jump end
+    $ inside = 1
+    $ bull_disguise = 1
+    $ matron_disguise = 1
+    j "How am I supposed to do that?"
+    r "You'll have to find a disguise, I think."
+    label disguise_menu:
+        menu:
+            "Maybe a Bull?" if bull_disguise == 1:
+                $ bull_disguise = 0
+                r "Hmmm... muscles too small, eyes too kind."
+                jump disguise_menu
+            "Maybe a Matron?" if matron_disguise == 1:
+                $ matron_disguise = 0
+                r "Nah... Wrong smell. Smile not fake."
+                jump disguise_menu
+            "... Not as a cow..." if bull_disguise == 0 and matron_disguise == 0:
+                r "Afraid so, man."
+                show jack upset with dissolve
+    j "Ugh. Great."
+    r "It's OK, man. Just a disguise. Keep an eye out for something that might work."
+    show jack main with dissolve
+    j "Ok... Guess I'm headed for Takeshi's."
+    jump end
 
 label r_worst_ending:
-show rakesh main with dissolve
-r "Whatever. Not helping the likes of you. Come back when you're in a better mood."
-pause
-scene neighborhood with fade
-show jack depressed
-"You wander off, alone, unhelped. Because you were a dick for no reason."
-jump end
+    show rakesh main with dissolve
+    r "Whatever. Not helping the likes of you. Come back when you're in a better mood."
+    pause
+    scene neighborhood with fade
+    show jack depressed
+    "You wander off, alone, unhelped. Because you were a dick for no reason."
+    jump end
 
 
-#Return to Menu
 label end:
-pause
-return
+    if r_companion == True:
+        "(Rakesh has joined your party!)"
+    if r_companion == False:
+        "(Rakesh didn't trust you enough to join your party)"
+    #jump [level 2]
+    return

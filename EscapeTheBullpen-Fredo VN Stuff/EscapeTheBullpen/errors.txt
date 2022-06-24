@@ -2,17 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 189: Line is indented, but the preceding say statement statement does not expect a block. Please check this line's indentation.
-    jump endings
-    ^
-
-File "game/script.rpy", line 192: reached end of line when expecting ':'.
-    if r_points > 0
-                   ^
-
-File "game/script.rpy", line 194: reached end of line when expecting ':'.
-    if r_points <= 0
-                    ^
+File "game/script.rpy", line 178: end of line expected.
+    j "How am I supposed to get inside?":
+                                        ^
 
 Ren'Py Version: Ren'Py 7.4.11.2266
-Fri Jun 24 13:29:22 2022
+Fri Jun 24 15:36:05 2022
