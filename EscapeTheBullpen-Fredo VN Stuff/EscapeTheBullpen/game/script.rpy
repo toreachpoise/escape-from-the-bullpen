@@ -21,33 +21,43 @@ show jack main at right with moveoutright
 show rakesh main at left with moveinleft
 
 #Section 1
+$ r_not_a = 1
 r "What you want?"
+label r_greeting_menu:
 menu:
-    "You're not Ailea...":
+    "You're not Ailea..." if r_not_a == 1:
+        $ r_not_a = 0
         r "She's not here man."
         j "But I need help!"
         r @ shrug "..."
-        jump rakesh_continue_1
+        jump r_greeting_menu
     "I need birth medicine.":
         $ r_points += 1
         r @ happy "Aaaah, you look for juice in your caboose."
         r @ shrug "Everybody shoot blank these days, man. The birth police come here two days ago and take all our fertility medicine for the bulls."
-        j "No... I already have a baby. I need to get rid of it."
-        r "Oh. Sorry, man. They take the lady who can help with that too."
-        j @ worried "Where is she?"
+        j "I... I already have a baby."
+        j @ upset "INSIDE me..."
+        j "I need to get rid of it."
+        if r_not_a == 1:
+            r "Oh. Sorry, man. They take the lady who can help with that too."
+        if r_not_a == 0:
+            r "Oh. Sorry, man. Ailea's the only one who could help with that."
+        j "Where is she?"
         jump rakesh_continue_1
     "Oh, great, it's just some kid.":
         $ r_points -= 1
         r @ angry "Man, I'm twice your age."
         show jack upset
-        show jack embarassed
+        show jack embarrassed
         j "..."
         menu:
             "Sorry, I didn't mean to assume...":
                 jump rakesh_apology
             "Yeah, if I was like 3. Or younger.":
+                show jack happy with dissolve
                 $ r_points -= 1
-                r "What the hell?! Did you just come here to be a dick?!"
+                r @ angry "What the hell?! Did you just come here to be a dick?!"
+                show jack main with dissolve
                 menu:
                     "I guess I did, you little creep!":
                         jump r_worst_ending
@@ -105,20 +115,24 @@ menu:
                         r "So stop being an ass!"
                         jump rakesh_continue_2
     "Then we'll just have to go get her.":
+            $ r_points += 2
             show rakesh happy with dissolve
             r "It won't be easy..."
             menu:
                 "I didn't expect it to be.":
+                    show jack determined with dissolve
                     $ r_points += 1
                     jump rakesh_continue_2
-                "Maybe... you could find someone other than me to help?":
+                "Oh... in that case...":
                     $ r_points -=1
+                    show rakesh main with dissolve
                     r "Just hear me out, man!"
                     jump rakesh_continue_2
 
 #Section 3
 label rakesh_continue_2:
 show rakesh main with dissolve
+show jack main with dissolve
 if r_points < 0:
     "(Rakesh seems a bit annoyed with you.)"
     jump rakesh_section3_annoyed
@@ -131,32 +145,23 @@ if r_points == 0:
 
     label rakesh_section3_annoyed:
     r "You'll need a distraction, and there's nobody more distracting than Takeshi."
-    menu:
-        "The useless washed up rockerboy?!":
-            $ r_points -= 1
-            $ distractions = 0
-            r "Ugh. If you ask hir for help, try to be more polite. Xe isn't as patient as me."
-            jump r_endings
-        "Takeshi! I love hir music!":
-            $ r_points += 1
-            $ distractions = 0
-            r "Tell that to Takeshi. Xe'll help for sure then."
-            jump r_endings
+    jump takeshi_opinion
 
     label rakesh_section3_friendly:
     r "All we need is a distraction..."
-    j "How do I cause a distraction?"
+    j "Any ideas?"
     r "Nobody better for that than my friend Takeshi."
+    jump takeshi_opinion
+
+    label takeshi_opinion:
     menu:
         "The useless washed up rockerboy?!":
             $ r_points -= 1
             r "Ugh. If you ask hir for help, try to be more polite. Xe isn't as patient as me."
             jump r_endings
         "Takeshi! I love hir music!":
-            show jack happy with dissolve
             $ r_points += 1
-            r @ happy "Tell that to Takeshi. Xe'll help for sure then."
-            show jack determined with dissolve
+            r "Tell that to Takeshi. Xe'll help for sure then."
             jump r_endings
 
 #Endings
@@ -166,7 +171,7 @@ if r_points > 0:
     $ r_companion = True
     show rakesh happy with dissolve
     r "Fortunately, my lockpicking skills are second-to-none!"
-    show jack happy with dissolve
+    show jack determined with dissolve
     j "Great! I guess our next stop is Takeshi's."
     r "Let's go!"
     jump end
@@ -203,7 +208,7 @@ label r_worst_ending:
     scene neighborhood with fade
     show jack depressed
     "You wander off, alone, unhelped. Because you were a dick for no reason."
-    jump end
+    return
 
 
 label end:
@@ -211,5 +216,5 @@ label end:
         "(Rakesh has joined your party!)"
     if r_companion == False:
         "(Rakesh didn't trust you enough to join your party)"
-    #jump [level 2]
+    #currently returns to the main screen, but in game it will jump to level 2
     return
