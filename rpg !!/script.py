@@ -1,8 +1,9 @@
 ## following along from https://coderslegacy.com/python/pygame-rpg-game-tutorial/
 
-import pygame
+import pygame, traceback
 from pygame.locals import *
 import sys
+import csv, os ###
 import random
 import time
 from tkinter import filedialog
@@ -119,7 +120,6 @@ class Background(pygame.sprite.Sprite):
 
       def render(self):
             displaysurface.blit(self.bgimage, (self.bgX, self.bgY))
-
 
 class Ground(pygame.sprite.Sprite):
     def __init__(self):
@@ -349,9 +349,68 @@ class Castle(pygame.sprite.Sprite):
         if self.hide == False:
             displaysurface.blit(self.image, (0,0))
 
+class Tile(pygame.sprite.Sprite): ###
+    def __init__(self, image, x, y):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = pygame.image.load(image)
+        self.rect = self.image.get_rect()
+        self.rect.x, self.rect.y = x, y
+    def draw(self, surface):
+        surface.blit(self.image, (self.rect.x, self.rect.y))
+
+class TileMap(): ###
+    def __init__(self, filename):
+        self.tile_width = 64
+        self.tile_height = 32
+        self.start_x, self.start_y = 0, 0
+        #self.spritesheet = spritesheet
+        self.tiles = self.load_tiles(filename)
+        self.map_surface = pygame.Surface((self.map_w, self.map_h))
+        self.map_surface.set_colorkey((0,0,0))
+        self.load_map()
+
+    def draw_map(self, surface):
+        surface.blit(self.map_surface, (0,0))
+
+    def load_map(self):
+        for tile in self.tiles:
+            tile.draw(self.map_surface)
+
+    def read_csv(self, filename):
+        map = []
+        with open(os.path.join(filename)) as data:
+            data = csv.reader(data, delimiter=',')
+            for row in data:
+                map.append(list(row))
+        return map
+
+    def load_tiles(self, filename):
+        tiles = []
+        map = self.read_csv(filename)
+        x, y = 0, 0
+        for row in map:
+            x = 0
+            for tile in row:
+                if tile == '5': ##jack tile
+                    self.start_x, self.start_y = x * self.tile_width, y * self.tile_height
+                elif tile == '0': ##cement bottom
+                    tiles.append(Tile('cement bottom.png', x * self.tile_width, y * self.tile_height))
+                elif tile == '1': ##cement top
+                    tiles.append(Tile('cement top.png', x * self.tile_width, y * self.tile_height))
+                elif tile == '2': ##interior
+                    tiles.append(Tile('interior.png', x * self.tile_width, y * self.tile_height))
+                elif tile == '3': ##scaffold
+                    tiles.append(Tile('scaffold.png', x * self.tile_width, y * self.tile_height))
+                ##bull tile ID is 4
+                x += 1
+            y += 1 #move to next row
+        self.map_w, self.map_h = x * self.tile_height, y * self.tile_width
+        return tiles
+
+
 print("characters created")
 
-class Cursor(pygame.sprite.Sprite): ###
+class Cursor(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
         self.image = pygame.image.load("cursor.png")
@@ -372,7 +431,7 @@ class Cursor(pygame.sprite.Sprite): ###
         else:
             pygame.mouse.set_visible(True)
 
-class PButton(pygame.sprite.Sprite): ###
+class PButton(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
         self.vec = vec(620, 300)
@@ -433,6 +492,7 @@ class EventHandler():
     def world2(self): ###
         self.root.destroy()
         #new bg image
+        self.map = map1
         self.stage_enemies.append((int(self.stage) * 2) + 1)
         pygame.time.set_timer(self.enemy_generation, 2500)
         self.world = 2
@@ -497,7 +557,7 @@ class HealthBar(pygame.sprite.Sprite):
     def render(self):
         displaysurface.blit(self.image, (10,10))
 
-class StageDisplay(pygame.sprite.Sprite): ###
+class StageDisplay(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
         self.text = heading_font.render("STAGE: " + str(handler.stage) , True , color_green)
@@ -547,13 +607,16 @@ castle = Castle()
 handler = EventHandler()
 
 health = HealthBar()
-stage_display = StageDisplay() ###
-cursor = Cursor() ###
-button = PButton() ###
+stage_display = StageDisplay()
+cursor = Cursor()
+button = PButton()
 
 hit_cooldown = pygame.USEREVENT + 1
 
-score = heading_font.render("SCORE: " + str(handler.score), True, color_green) ###
+score = heading_font.render("SCORE: " + str(handler.score), True, color_green) # still doesnt work lol
+
+map1 = TileMap('level 1.csv') ###
+player.rect.x, player.rect.y = map1.start_x, map1.start_y ###
 
 print("sprites sprouted")
 
@@ -623,5 +686,7 @@ while running:
     handler.update() ###
     if castle.hide == True:
         displaysurface.blit(score, (500,0)) ###
+    if handler.world == 2:
+        map1.draw_map(displaysurface) ###
     pygame.display.update()
     FPS_CLOCK.tick(FPS)
