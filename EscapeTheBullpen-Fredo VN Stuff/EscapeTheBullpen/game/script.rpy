@@ -1,13 +1,16 @@
 #Dramatis Personae
 
-define j = Character("Jack", image="jack", who_color="#ad3515")
+define j = Character("Jack", image="jack", who_color="#ad3515", what_style="say_protagdialogue", who_style="protag_name")
 
 define r = Character("Rakesh", image="rakesh", who_color="#46b5dc")
 default r_points = 0
+default r_companion = False
+default rakesh_age_comment = False
 
 #Scene 1
 label start:
 jump apothecary
+#jump takeshi_garage
 
 label apothecary:
 scene ailea_shop_bg with fade
@@ -22,7 +25,8 @@ show rakesh main at left with moveinleft
 
 #Section 1
 $ r_not_a = 1
-r "What you want?"
+j "Hi, I'm Jack..."
+r "Rakesh. What you want?"
 label r_greeting_menu:
 menu:
     "You're not Ailea..." if r_not_a == 1:
@@ -46,6 +50,7 @@ menu:
         jump rakesh_continue_1
     "Oh, great, it's just some kid.":
         $ r_points -= 1
+        $ rakesh_age_comment = True
         r @ angry "Man, I'm twice your age."
         show jack upset
         show jack embarrassed
@@ -157,10 +162,12 @@ if r_points == 0:
     menu:
         "The useless washed up rockerboy?!":
             $ r_points -= 1
+            $ t_fan = False
             r "Ugh. If you ask hir for help, try to be more polite. Xe isn't as patient as me."
             jump r_endings
         "Takeshi! I love hir music!":
             $ r_points += 1
+            $ t_fan = True
             r "Tell that to Takeshi. Xe'll help for sure then."
             jump r_endings
 
@@ -206,15 +213,15 @@ label r_worst_ending:
     r "Whatever. Not helping the likes of you. Come back when you're in a better mood."
     pause
     scene neighborhood with fade
-    show jack depressed
+    show jack depressed with moveinright
     "You wander off, alone, unhelped. Because you were a dick for no reason."
     return
-
 
 label end:
     if r_companion == True:
         "(Rakesh has joined your party!)"
     if r_companion == False:
         "(Rakesh didn't trust you enough to join your party)"
-    #currently returns to the main screen, but in game it will jump to level 2
+    #currently jumps to Takeshi's scene, but in game it will jump to level 2
+    jump takeshi_garage
     return

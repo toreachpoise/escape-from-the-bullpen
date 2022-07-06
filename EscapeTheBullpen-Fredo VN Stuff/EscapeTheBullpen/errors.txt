@@ -1,0 +1,10 @@
+﻿I'm sorry, but errors were detected in your script. Please correct the
+errors listed below, and try again.
+
+
+File "game/takeshiscene.rpy", line 152: Line is indented, but the preceding jump statement statement does not expect a block. Please check this line's indentation.
+    label t_bull_postd:
+    ^
+
+Ren'Py Version: Ren'Py 7.4.11.2266
+Wed Jul  6 15:27:26 2022

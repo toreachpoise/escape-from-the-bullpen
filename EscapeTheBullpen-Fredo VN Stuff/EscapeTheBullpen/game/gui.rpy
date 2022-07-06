@@ -58,7 +58,7 @@ define gui.interface_text_color = u'#ffffff'
 define gui.text_font = "ShareTechMono-regular.ttf"
 
 ## The font used for character names.
-define gui.name_text_font = "Wurper_Comics.ttf"
+define gui.name_text_font = "ShareTechMono-regular.ttf"
 
 ## The font used for out-of-game text.
 define gui.interface_text_font = "DejaVuSans.ttf"
@@ -80,6 +80,8 @@ define gui.notify_text_size = 24
 
 ## The size of the game's title.
 define gui.title_text_size = 75
+
+
 
 
 ## Main and Game Menus #########################################################
@@ -111,6 +113,7 @@ define gui.name_ypos = 0
 ## aligned, 0.5 for centered, and 1.0 for right-aligned.
 define gui.name_xalign = 0.0
 
+
 ## The width, height, and borders of the box containing the character's name, or
 ## None to automatically size it.
 define gui.namebox_width = None
@@ -124,7 +127,6 @@ define gui.namebox_borders = Borders(5, 5, 5, 5)
 ## background of the namebox will be scaled.
 define gui.namebox_tile = False
 
-
 ## The placement of dialogue relative to the textbox. These can be a whole
 ## number of pixels relative to the left or top side of the textbox, or 0.5 to
 ## center.
@@ -137,6 +139,13 @@ define gui.dialogue_width = 1116
 ## The horizontal alignment of the dialogue text. This can be 0.0 for left-
 ## aligned, 0.5 for centered, and 1.0 for right-aligned.
 define gui.dialogue_text_xalign = 0.0
+
+## Setting text positions for Jack
+#define gui.protagdialogue_xpos = 1518
+define gui.protagdialogue_xalign = 1.0
+define gui.protagdialogue_xpos = 1518
+define gui.protagname_xalign = 1.0
+define gui.protagname_xpos = 1150
 
 
 ## Buttons #####################################################################

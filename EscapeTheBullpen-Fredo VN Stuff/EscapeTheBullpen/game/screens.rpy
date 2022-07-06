@@ -24,7 +24,6 @@ style hyperlink_text:
 style gui_text:
     properties gui.text_properties("interface")
 
-
 style button:
     properties gui.button_properties("button")
 
@@ -75,8 +74,6 @@ style frame:
     padding gui.frame_borders.padding
     background Frame("gui/frame.png", gui.frame_borders, tile=gui.frame_tile)
 
-
-
 ################################################################################
 ## In-game screens
 ################################################################################
@@ -116,7 +113,6 @@ screen say(who, what):
     if not renpy.variant("small"):
         add SideImage() xalign 0.0 yalign 1.0
 
-
 ## Make the namebox available for styling through the Character object.
 init python:
     config.character_id_prefixes.append('namebox')
@@ -125,7 +121,6 @@ style window is default
 style say_label is default
 style say_dialogue is default
 style say_thought is say_dialogue
-
 style namebox is default
 style namebox_label is say_label
 
@@ -155,11 +150,19 @@ style say_label:
 
 style say_dialogue:
     properties gui.text_properties("dialogue")
-
     xpos gui.dialogue_xpos
     xsize gui.dialogue_width
     ypos gui.dialogue_ypos
 
+style say_protagdialogue:
+    take say_dialogue
+    xpos gui.protagdialogue_xpos
+    xalign gui.protagdialogue_xalign
+
+style protag_name:
+    take say_label
+    xpos gui.protagname_xpos
+    xalign gui.protagname_xalign
 
 ## Input screen ################################################################
 ##
