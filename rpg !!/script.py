@@ -3,7 +3,7 @@
 import pygame, traceback
 from pygame.locals import *
 import sys
-import csv, os ###
+import csv, os
 import random
 import time
 from tkinter import filedialog
@@ -16,25 +16,27 @@ print("import success")
 vec = pygame.math.Vector2
 HEIGHT = 350
 WIDTH = 700
-running = True ###
+running = True
 ACC = 0.3
 FRIC = -0.10
 FPS = 24
 FPS_CLOCK = pygame.time.Clock()
 COUNT = 0
+true_scroll = [0,0] ###
+
 print("variables defined")
 
 ##display
 displaysurface = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Game")
 
-dialogue_font = pygame.font.SysFont('Arial', 15) ###
-heading_font = pygame.font.SysFont('Helvetica', 20) ###
-game_over_font = pygame.font.SysFont('Verdana', 60) ###
+dialogue_font = pygame.font.SysFont('Arial', 15)
+heading_font = pygame.font.SysFont('Helvetica', 20)
+game_over_font = pygame.font.SysFont('Verdana', 60)
 
-color_green = (136,255,77) ###
-color_red = (128,21,0) ###
-game_over = game_over_font.render("GAME OVER", True , color_red) ###
+color_green = (136,255,77)
+color_red = (128,21,0)
+game_over = game_over_font.render("GAME OVER", True , color_red)
 
 
 print("displayables ready")
@@ -70,11 +72,11 @@ run_ani_L = [pygame.image.load("jack run L1.png"), pygame.image.load("jack run L
 jump_ani_R = [pygame.image.load("jack jump 1.png"), pygame.image.load("jack jump 2.png"),
             pygame.image.load("jack jump 3.png"), pygame.image.load("jack jump 4.png"),
             pygame.image.load("jack jump 5.png"), pygame.image.load("jack jump 6.png"),
-            pygame.image.load("jack jump 7.png"), pygame.image.load("jack jump 8.png")]
+            pygame.image.load("jack jump 7.png"), pygame.image.load("jack jump 8.png"), pygame.image.load("jack jump 1.png")]
 jump_ani_L = [pygame.image.load("jack jump L1.png"), pygame.image.load("jack jump L2.png"),
             pygame.image.load("jack jump L3.png"), pygame.image.load("jack jump L4.png"),
             pygame.image.load("jack jump L5.png"), pygame.image.load("jack jump L6.png"),
-            pygame.image.load("jack jump L7.png"), pygame.image.load("jack jump L8.png")]
+            pygame.image.load("jack jump L7.png"), pygame.image.load("jack jump L8.png"), pygame.image.load("jack jump L1.png")]
 
 draw_ani_R = [pygame.image.load("jack draw 1.png"), pygame.image.load("jack draw 1.png"),
             pygame.image.load("jack draw 2.png"), pygame.image.load("jack draw 2.png"),
@@ -131,14 +133,83 @@ class Ground(pygame.sprite.Sprite):
 
     def render(self):
         displaysurface.blit(self.image, (self.bgX1, self.bgY1))
+class Castle(pygame.sprite.Sprite):
+    def __init__(self):
+        super().__init__()
+        self.hide = False
+        self.image = pygame.image.load("launchpad.jpg")
+    def update(self):
+        if self.hide == False:
+            displaysurface.blit(self.image, (0,0))
+
+class Tile(pygame.sprite.Sprite):
+    def __init__(self, image, x, y):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = pygame.image.load(image)
+        self.rect = self.image.get_rect()
+        self.rect.x, self.rect.y = x, y
+    def draw(self, surface):
+        surface.blit(self.image, (self.rect.x, self.rect.y))
+
+class TileMap():
+    def __init__(self, filename):
+        self.tile_width = 64
+        self.tile_height = 32
+        self.start_x, self.start_y = 0, 0
+        #self.spritesheet = spritesheet
+        self.tiles = self.load_tiles(filename)
+        self.map_surface = pygame.Surface((self.map_w, self.map_h))
+        self.map_surface.set_colorkey((0,0,0))
+        self.load_map()
+
+    def draw_map(self, surface):
+        surface.blit(self.map_surface, (0,0))
+
+    def load_map(self):
+        for tile in self.tiles:
+            tile.draw(self.map_surface)
+
+    def read_csv(self, filename):
+        map = []
+        with open(os.path.join(filename)) as data:
+            data = csv.reader(data, delimiter=',')
+            for row in data:
+                map.append(list(row))
+        return map
+
+    def load_tiles(self, filename):
+        true_scroll[0] += (player.rect.x-true_scroll[0]-365)/20 ###
+        true_scroll[1] += (player.rect.y-true_scroll[1]-205)/20 ###
+        scroll = true_scroll.copy() ###
+        scroll[0] = int(scroll[0]) ###
+        scroll[1] = int(scroll[1]) ###
+        map = self.read_csv(filename)
+        x, y = 0, 0
+        for row in map:
+            x = 0
+            for tile in row:
+                if tile == '5': ##jack tile
+                    self.start_x, self.start_y = x * self.tile_width, y * self.tile_height
+                elif tile == '0': ##cement bottom
+                    tiles.append(Tile('cement bottom.png', x * self.tile_width-scroll[0], y * self.tile_height-scroll[1])) ### #added scroll
+                elif tile == '1': ##cement top
+                    tiles.append(Tile('cement top.png', x * self.tile_width-scroll[0], y * self.tile_height-scroll[1])) ###
+                elif tile == '2': ##interior
+                    tiles.append(Tile('interior.png', x * self.tile_width-scroll[0], y * self.tile_height-scroll[1])) ###
+                elif tile == '3': ##scaffold
+                    tiles.append(Tile('scaffold.png', x * self.tile_width-scroll[0], y * self.tile_height-scroll[1])) ###
+                ##bull tile ID is 4
+                x += 1
+            y += 1 #move to next row
+        self.map_w, self.map_h = x * self.tile_height, y * self.tile_width
+        return tiles
+
 
 print("world built")
 
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
-        self.image = pygame.image.load("jack idle 1.png")
-        self.rect = self.image.get_rect()
 
         # Position and direction
         self.vx = 0
@@ -147,6 +218,12 @@ class Player(pygame.sprite.Sprite):
         self.acc = vec(0,0)
         self.direction = "RIGHT"
         self.health = 5
+
+        if self.direction == "RIGHT": ###
+            self.image = pygame.image.load("jack idle 1.png") ###
+        elif self.direction == "LEFT": ###
+            self.image = pygame.image.load("jack idle L1.png") ###
+        self.rect = self.image.get_rect()
 
         # Movement
         self.jumping = False
@@ -157,7 +234,16 @@ class Player(pygame.sprite.Sprite):
         self.attack_frame = 0
 
 
+    def collision_test(self,tiles):
+        hit_list = []
+        for tile in tiles:
+            if self.rect.colliderect(tile):
+                hit_list.append(tile)
+        return hit_list
+
+
     def move(self):
+        collision_types = {'top':False,'bottom':False,'right':False,'left':False}
         # Keep a constant acceleration of 0.5 in the downwards direction (gravity)
         self.acc = vec(0,0.5)
 
@@ -172,25 +258,37 @@ class Player(pygame.sprite.Sprite):
 
         # Accelerates the player in the direction of the key press
         if pressed_keys[K_LEFT]:
+            self.direction = "LEFT" ###
             self.acc.x = -ACC
         if pressed_keys[K_RIGHT]:
+            self.direction = "RIGHT" ###
             self.acc.x = ACC
 
         # Formulas to calculate velocity while accounting for friction
         self.acc.x += self.vel.x * FRIC
         self.vel += self.acc
         self.pos += self.vel + 0.5 * self.acc  # Updates Position with new values
-
+        if handler.world == 2:
+            hit_list = pygame.sprite.spritecollide(player, tiles, False)
+            for tile in hit_list:
+                if self.vel.x > 0:
+                    print("right bump")
+                    self.pos.x = (tile.rect.left - 16) ###
+                    collision_types['right'] = True
+                elif self.vel.x < 0:
+                    print("left bump")
+                    self.pos.x = (tile.rect.right + 16) ###
+                    collision_types['left'] = True
         # This causes character warping from one point of the screen to the other
-        if self.pos.x > WIDTH:
-            self.pos.x = 0
-        if self.pos.x < 0:
-            self.pos.x = WIDTH
+        #if self.pos.x > WIDTH:
+        #    self.pos.x = 0
+        #if self.pos.x < 0:
+        #    self.pos.x = WIDTH
 
         self.rect.midbottom = self.pos  # Update rect with new pos
 
     def gravity_check(self):
-        hits = pygame.sprite.spritecollide(player ,ground_group, False)
+        hits = pygame.sprite.spritecollide(player, ground_group, False)
         if self.vel.y > 0:
             if hits:
                 lowest = hits[0]
@@ -198,10 +296,25 @@ class Player(pygame.sprite.Sprite):
                     self.pos.y = lowest.rect.top + 1
                     self.vel.y = 0
                     self.jumping = False
+        hit_list = pygame.sprite.spritecollide(player, tiles, False)
+        if handler.world == 2:
+            collision_types = {'top':False,'bottom':False,'right':False,'left':False}
+            for tile in hit_list:
+                if self.vel.y > 0:
+                    print("landed")
+                    self.pos.y = (tile.rect.top + 1) ###
+                    collision_types['bottom'] = True
+                    self.jumping = False
+                    self.vel.y = 0
+                elif self.vel.y < 0:
+                    print("hit ya head")
+                    self.pos.y = (tile.rect.bottom) ###
+                    collision_types['top'] = True
+                    self.vel.y = 0.5
 
 
     def update(self):
-        if cursor.wait == 1: return ###
+        if cursor.wait == 1: return
         if self.move_frame > 7: # Return to base frame if at end of movement sequence
             self.move_frame = 0
             return
@@ -209,7 +322,7 @@ class Player(pygame.sprite.Sprite):
         if self.running == False:
             if self.direction == "RIGHT":
                 self.image = idle_ani_R[self.move_frame]
-            else:
+            elif self.direction == "LEFT": ###
                 self.image = idle_ani_L[self.move_frame]
             self.move_frame += 1
         # Move the character to the next frame if conditions are met
@@ -236,16 +349,9 @@ class Player(pygame.sprite.Sprite):
                 self.direction = "LEFT"
             self.move_frame += 1
 
-          # Returns to base frame if standing still and incorrect frame is showing
-    #      if abs(self.vel.x) < 0.2 and self.move_frame != 0:
-    #            self.move_frame = 0
-                #if self.direction == "RIGHT":
-                #      self.image = run_ani_R[self.move_frame]
-                #elif self.direction == "LEFT":
-                #      self.image = run_ani_L[self.move_frame]
 
     def attack(self):
-        if cursor.wait == 1: return ###
+        if cursor.wait == 1: return
         if self.attack_frame > 7: # If attack frame has reached end of sequence, return to base frame
             self.attack_frame = 0
             self.attacking = False
@@ -282,8 +388,8 @@ class Player(pygame.sprite.Sprite):
     def player_hit(self):
         if self.cooldown == False:
             self.cooldown = True
-            pygame.time.set_timer(hit_cooldown, 500) ### #may be inaccurate b/c our framerate is different than the tutorial
-            #print("hit")
+            pygame.time.set_timer(hit_cooldown, 500) #may be inaccurate b/c our framerate is different than the tutorial
+            print("hit")
             self.health = self.health - 1
             health.image = health_ani[self.health]
 
@@ -309,7 +415,7 @@ class Enemy(pygame.sprite.Sprite):
             self.pos.y = 235
 
     def move(self):
-        if cursor.wait == 1: return ###
+        if cursor.wait == 1: return
         if self.pos.x >= (WIDTH-15): #stops them going offscreen
             self.direction = 1
         elif self.pos.x <= 0:
@@ -322,11 +428,11 @@ class Enemy(pygame.sprite.Sprite):
         self.rect.center = self.pos #changes rect for collisions
 
     def update(self):
-        if cursor.wait == 1: return ###
+        if cursor.wait == 1: return
         hits = pygame.sprite.spritecollide(self, Playergroup, False)
         if hits and player.attacking == True:
             self.kill()
-            handler.dead_enemy_count += 1 ###
+            handler.dead_enemy_count += 1
             print("bulls killed: "+ str(handler.dead_enemy_count))
         elif hits and player.attacking == False:
             player.player_hit()
@@ -339,74 +445,6 @@ class Enemy(pygame.sprite.Sprite):
 
     def render(self):
         displaysurface.blit(self.image, (self.pos.x, self.pos.y))
-
-class Castle(pygame.sprite.Sprite):
-    def __init__(self):
-        super().__init__()
-        self.hide = False
-        self.image = pygame.image.load("launchpad.jpg")
-    def update(self):
-        if self.hide == False:
-            displaysurface.blit(self.image, (0,0))
-
-class Tile(pygame.sprite.Sprite): ###
-    def __init__(self, image, x, y):
-        pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.image.load(image)
-        self.rect = self.image.get_rect()
-        self.rect.x, self.rect.y = x, y
-    def draw(self, surface):
-        surface.blit(self.image, (self.rect.x, self.rect.y))
-
-class TileMap(): ###
-    def __init__(self, filename):
-        self.tile_width = 64
-        self.tile_height = 32
-        self.start_x, self.start_y = 0, 0
-        #self.spritesheet = spritesheet
-        self.tiles = self.load_tiles(filename)
-        self.map_surface = pygame.Surface((self.map_w, self.map_h))
-        self.map_surface.set_colorkey((0,0,0))
-        self.load_map()
-
-    def draw_map(self, surface):
-        surface.blit(self.map_surface, (0,0))
-
-    def load_map(self):
-        for tile in self.tiles:
-            tile.draw(self.map_surface)
-
-    def read_csv(self, filename):
-        map = []
-        with open(os.path.join(filename)) as data:
-            data = csv.reader(data, delimiter=',')
-            for row in data:
-                map.append(list(row))
-        return map
-
-    def load_tiles(self, filename):
-        tiles = []
-        map = self.read_csv(filename)
-        x, y = 0, 0
-        for row in map:
-            x = 0
-            for tile in row:
-                if tile == '5': ##jack tile
-                    self.start_x, self.start_y = x * self.tile_width, y * self.tile_height
-                elif tile == '0': ##cement bottom
-                    tiles.append(Tile('cement bottom.png', x * self.tile_width, y * self.tile_height))
-                elif tile == '1': ##cement top
-                    tiles.append(Tile('cement top.png', x * self.tile_width, y * self.tile_height))
-                elif tile == '2': ##interior
-                    tiles.append(Tile('interior.png', x * self.tile_width, y * self.tile_height))
-                elif tile == '3': ##scaffold
-                    tiles.append(Tile('scaffold.png', x * self.tile_width, y * self.tile_height))
-                ##bull tile ID is 4
-                x += 1
-            y += 1 #move to next row
-        self.map_w, self.map_h = x * self.tile_height, y * self.tile_width
-        return tiles
-
 
 print("characters created")
 
@@ -451,11 +489,11 @@ class PButton(pygame.sprite.Sprite):
 class EventHandler():
     def __init__(self):
         self.enemy_count = 0
-        self.dead_enemy_count = 0 ###
+        self.dead_enemy_count = 0
         self.battle = False
         self.enemy_generation = pygame.USEREVENT + 2
-        self.enemy_generation2 = pygame.USEREVENT + 3 ###
-        self.world = 0 ###
+        self.enemy_generation2 = pygame.USEREVENT + 3
+        self.world = 0
         self.stage = 1
         self.stage_enemies = []
         self.score = 0
@@ -481,19 +519,19 @@ class EventHandler():
         self.root.mainloop()
 
     def world1(self):
-        self.world = 1 ###
-        button.imgdisp = 1 ###
+        self.world = 1
+        button.imgdisp = 1
         self.root.destroy()
         self.stage_enemies.append((int(self.stage) * 2) + 1)
         pygame.time.set_timer(self.enemy_generation, 2000)
         castle.hide = True
         self.battle = True
 
-    def world2(self): ###
+    def world2(self):
         self.root.destroy()
         #new bg image
         self.map = map1
-        self.stage_enemies.append((int(self.stage) * 2) + 1)
+        #self.stage_enemies.append((int(self.stage) * 2) + 1)
         pygame.time.set_timer(self.enemy_generation, 2500)
         self.world = 2
         button.imgdisp = 1
@@ -504,7 +542,7 @@ class EventHandler():
         self.root.destroy()
         self.stage_enemies.append((int(self.stage) * 2) + 1)
         pygame.time.set_timer(self.enemy_generation, 3000)
-        button.imgdisp = 1 ###
+        button.imgdisp = 1
         castle.hide = True
         self.battle = True
 
@@ -512,30 +550,30 @@ class EventHandler():
         self.root.destroy()
         self.stage_enemies.append((int(self.stage) * 2) + 1)
         pygame.time.set_timer(self.enemy_generation, 3500)
-        button.imgdisp = 1 ###
+        button.imgdisp = 1
         castle.hide = True
         self.battle = True
 
     def next_stage(self):
-        button.imgdisp = 1 ###
+        button.imgdisp = 1
         self.stage += 1
         print("Stage: " + str(self.stage))
         self.enemy_count = 0
-        self.dead_enemy_count = 0 ###
-        if self.world == 1: ###
+        self.dead_enemy_count = 0
+        if self.world == 1:
             pygame.time.set_timer(self.enemy_generation, 1500 - (50 * self.stage))
-        elif self.world == 2: ###
+        elif self.world == 2:
             pygame.time.set_timer(self.enemygeneration2, 1500 - (50 * self.stage))
         self.stage_enemies.append((int(self.stage) * 2) + 1)
 
-    def update(self): ### needs to be fixed still
+    def update(self):
         if self.dead_enemy_count == [self.dead_enemy_count - 1]:
             print("STAGE CLEAR")
             self.dead_enemy_count = 0
             stage_display.clear = True
             stage_display.stage_clear()
 
-    def home(self): ###
+    def home(self):
         pygame.time.set_timer(self.enemy_generation, 0)
         self.battle = False
         self.enemy_count = 0
@@ -565,7 +603,7 @@ class StageDisplay(pygame.sprite.Sprite):
         self.posx = -100
         self.posy = 100
         self.display = False
-        self.clear = False ###
+        self.clear = False
 
     def move_display(self):
         self.text = heading_font.render("STAGE: " + str(handler.stage), True, color_green)
@@ -578,7 +616,7 @@ class StageDisplay(pygame.sprite.Sprite):
             self.posy = 100
 
     def stage_clear(self):
-        button.imgdisp = 0 ###
+        button.imgdisp = 0
         self.text = heading_font.render("STAGE CLEAR!", True, color_green)
         if self.posx < 720:
             self.posx += 10
@@ -596,6 +634,7 @@ Playergroup = pygame.sprite.Group()
 Playergroup.add(player)
 
 background = Background()
+tiles = []
 
 ground = Ground()
 ground_group = pygame.sprite.Group()
@@ -615,15 +654,18 @@ hit_cooldown = pygame.USEREVENT + 1
 
 score = heading_font.render("SCORE: " + str(handler.score), True, color_green) # still doesnt work lol
 
-map1 = TileMap('level 1.csv') ###
-player.rect.x, player.rect.y = map1.start_x, map1.start_y ###
+map1 = TileMap('level 1.csv')
+player.rect.x, player.rect.y = map1.start_x, map1.start_y
 
 print("sprites sprouted")
 
 ##gameloop
 while running:
+
     player.gravity_check()
-    mouse = pygame.mouse.get_pos() ###
+    player.collision_test(tiles)
+    mouse = pygame.mouse.get_pos()
+
     for event in pygame.event.get():
         if event.type == hit_cooldown:
             player.cooldown = False
@@ -631,22 +673,23 @@ while running:
             pygame.quit()
             sys.exit()
         if event.type == handler.enemy_generation:
-            if handler.enemy_count < handler.stage_enemies[handler.stage - 1]:
-                enemy = Enemy()
-                Enemies.add(enemy)
-                handler.enemy_count += 1
+            if handler.world != 2: ###
+                if handler.enemy_count < handler.stage_enemies[handler.stage - 1]:
+                    enemy = Enemy()
+                    Enemies.add(enemy)
+                    handler.enemy_count += 1
         if event.type == pygame.MOUSEBUTTONDOWN:
-            if 620 <= mouse[0] <= 660 and 300 <= mouse[1] <= 345: ###
+            if 620 <= mouse[0] <= 660 and 300 <= mouse[1] <= 345:
                 if button.imgdisp == 1:
                     cursor.pause()
                 elif button.imgdisp == 0:
                     handler.home()
-        if event.type == pygame.KEYDOWN and cursor.wait == 0: ###added cursor.wait condition
+        if event.type == pygame.KEYDOWN and cursor.wait == 0:
             if event.key == pygame.K_z:
                 if handler.battle == True and len(Enemies) == 0:
                     handler.next_stage()
-                    stage_display = StageDisplay() ###
-                    stage_display.display = True ###
+                    stage_display = StageDisplay()
+                    stage_display.display = True
             if event.key == pygame.K_x and castle.hide == False:
                 handler.stage_handler()
             if event.key == pygame.K_SPACE:
@@ -665,28 +708,28 @@ while running:
     # Display and Background related functions
     background.render()
     ground.render()
-    button.render(button.imgdisp) ###
-    cursor.hover() ###
+    button.render(button.imgdisp)
+    cursor.hover()
 
     # Rendering sprites
     castle.update()
     if player.health > 0:
         displaysurface.blit(player.image, player.rect)
-    else: ###
-        displaysurface.blit(game_over, (175,350)) ###
+    else:
+        displaysurface.blit(game_over, (175,350))
     health.render()
     for entity in Enemies:
         entity.update()
         entity.move()
         entity.render()
     if stage_display.display == True:
-        stage_display.move_display() ###
-    if stage_display.clear == True: ###
+        stage_display.move_display()
+    if stage_display.clear == True:
         stage_display.stage_clear()
-    handler.update() ###
+    handler.update()
     if castle.hide == True:
-        displaysurface.blit(score, (500,0)) ###
+        displaysurface.blit(score, (500,0))
     if handler.world == 2:
-        map1.draw_map(displaysurface) ###
+        map1.draw_map(displaysurface)
     pygame.display.update()
     FPS_CLOCK.tick(FPS)

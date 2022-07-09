@@ -1,5 +1,5 @@
 #Dramatis Presonae Addition
-define t = Character("Takeshi", image="jack", who_color="#eaffc5")
+define t = Character("Takeshi", image="jack", who_color="#eaffc5") ## should the image here be jack??
 default t_points = 0
 default t_companion = False
 default trust_response_1 = 0
@@ -345,6 +345,7 @@ label t_section3:
 label endings:
 if t_points > 0:
     "(Takeshi will aid you in your quest!)"
+    return
 if t_points <= 0:
     if t_fan == True:
         "(You may be a fan of Takeshi, but xe's no fan of yours! You travel on without hir.)"
