@@ -2,12 +2,9 @@
 define t = Character("Takeshi", image="jack", who_color="#eaffc5") ## should the image here be jack??
 default t_points = 0
 default t_companion = False
-default trust_response_1 = 0
-default t_refusedhelp = False
 default t_bull_discussion_flag = False
 
 #Scene 2
-default t_section2_flag = 0
 label takeshi_garage:
 
 scene takeshi_shop_bg with fade
@@ -36,14 +33,14 @@ if r_companion == True:
     r "That's why we're here."
     jump t_greeting_menu
 else:
-    j "Rakesh sent me... He mentioned you might be able to help."
+    j "I heard you might be able to help me..."
     t "Help with what?"
-    j "I'm pregnant. I need an abortion."
-    t "Hmmm... And Ailea's been missing for weeks. I see the problem."
+    j "I need an abortion and-..."
+    t "That's not my business. I'm just a fun times music guy."
+    t @ nervous "Who told you to come here?"
     jump t_greeting_menu
 
 #Section 1
-
 #with Rakesh
 label t_greeting_menu:
 if r_companion == True:
@@ -100,7 +97,7 @@ if r_companion == True:
                 jump t_bull_flashback
             "Human beings?! Do you have any idea what bulls have done to me?!":
                 t "I have an idea. To you and a lot of people..."
-                j "Yeah, beacuse you were one of the ones doing it!"
+                j "Yeah, because you were one of the ones doing it!"
                 t @ angry "I never..."
                 show takeshi sad
                 t "*sigh*"
@@ -110,19 +107,20 @@ if r_companion == True:
             show takeshi sad
             t "When they find out you're a bull, they come for you."
             t "They take you from your family."
-            t "They pump you full of so many drugs and hormones that you're always horny."
-            t "The older bulls can't always get access to the cows, if too many of them are pregnant or injured..."
-            t "So they start fighting."
+            t "They pump you full of drugs and hormones to keep you pissed off and horny."
+            t "There are never enough cows to go around, especially if too many of them get pregnant or injured..."
+            t "So the bulls start fighting."
             t "And the fighting turns into fucking... and the younger bulls don't really have a say in the matter."
             show jack main with dissolve
             t "I was 16 when I got out. By then, I had lost count of how many times I'd been raped."
-            t "So believe me, I have some idea of what bulls can do."
+            t "I don't know if it's worse for the cows... it probably is..."
+            t "But believe me. I know what bulls can do."
             menu:
                 "That's... that's terrible. I never thought about what bulls go through...":
                     show jack main with dissolve
                     $ t_points += 1
                     t "I get it... If you're a cow, all you ever see is the ones who make it through."
-                    t "To be a bull, to be the bull they want, you have to the strong and cruel..."
+                    t "To be a bull, to be the kind of prize bull they want, you have to be strong and cruel..."
                     t "Most don't survive. They're gelded and turned out to the streets."
                     t "Without the drugs to keep them going, they get sick... well. Like I said, most don't survive."
                     t "But some of us... we make it out, and we do our best to pick up the pieces."
@@ -149,13 +147,13 @@ if r_companion == True:
                         j "Yeah... But it sure as shit won't be the bulls doing the burning."
                     else:
                         t "It would be better for everyone, bulls included, if it burned to the ground."
-                        j "Yeah, but it sure as shit own't be the bulls doing the burning."
+                        j "Yeah, but it sure as shit won't be the bulls doing the burning."
             t "Maybe you're right, Jack..."
             jump t_bull_postd
             label t_bull_postd:
                 show takeshi main
                 t "Anyway, it was Ailea who got me out. She risked her life and safety for me. So if you're rescuing her from that place..."
-                extend "I'll do what I can to help..."
+                t "I'll do what I can to help..."
                 t "But I can't go back inside."
                 if t_section2_flag == 1:
                     jump t_plan_menu
@@ -163,123 +161,212 @@ if r_companion == True:
                     jump t_section2
 
 #Without Rakesh
+default t_no_r_response1 = False
+default t_no_r_response2 = False
+default t_no_r_response3 = False
+default t_no_r_menu_rakeshflag = False
+default t_no_r_refusal = 0
+default t_recursion = False
+default t_paranoidresponse1 = False
+default t_no_r_menu2_insert1_1 = False
+default t_no_r_menu2_insert1_2 = False
+default t_no_r_menu2_insert2_1 = False
+default t_no_r_menu2_insert2_2 = False
+default t_no_r_menu2_insert2_3 = False
 if r_companion == False:
+    label t_no_r_menu:
     menu:
-        "Hang on, how do I know I can trust you?!" if trust_response_1 == 0:
-            $t_points -= 1
-            $ trust_response_1 = 1
-            t "Hm. I could ask you the same question, but where would that get us?"
-            j "Uh..."
-            t "If Rakesh sent you, just ask yourself: do you trust Rakesh?"
-            menu:
-                "How am I supposed to know!? I literally met him this morning.":
-                    $t_points += 1
-                    t "Ah... recursion. Neat."
-                    j "What do you mean?"
-                    t "How do you know if you trust someone..."
-                    t "...if you don't know if you can trust someone else..."
-                    t "...because you don't know if you can trust someone else..."
-                    j "..."
-                    t "Mad respect, bro. You're asking deep questions."
-                    j "Thanks? I guess?"
-                    t "Totally."
-                    jump t_greeting_menu
-                "Yes, of course, he helped me...":
-                    $ trust_response_1 = 2
-                    t "Then you should trust me."
-                    j "OK, that makes sense!"
-                    t "Of course, that doesn't explain why Rakesh didn't help you himself..."
-                    menu:
-                        "He did his part, right? From here on out, it's up to me.":
-                            $ t_points += 1
-                            t "I suppose it is."
-                            jump t_greeting_menu
-                        "Hey... yeah! Why didn't Rakesh come with me?":
-                            t "Who can say? Rakesh is an enigmatic being."
-                            jump t_greeting_menu
-                "No... he claims he's an adult, yet he looks like a child." if rakesh_age_comment == True:
-                    $t_points -= 1
-                    $ trust_response_1 = 3
-                    t "That's... a terrible reason to not trust someone."
-                    j "..."
-                    t "Well, he sent you here, so you apparently trusted him enough to listen."
-                    jump t_greeting_menu
-                "No. I've never seen him before..." if rakesh_age_comment == False:
-                    $ trust_response_1 = 3
-                    t "Maybe open yourself up to new experiences. Not everybody's out to get you."
-                    jump t_greeting_menu
-        "But about this trust thing..." if trust_response_1 == 1 or trust_response_1 == 3:
-            t "Yeah?"
-            j "I still don't know where we stand!"
-            t "Does it matter?"
-            menu:
-                "Yes.":
-                    $trust_response_1 = 4
-                    t "Ah. Well. Then decide for yourself..."
-                    t "And then, however you end up feeling, decide what you're going to do."
-                    jump t_greeting_menu
-                "No.":
-                    $trust_response_1 = 4
-                    t "OK. Then why ask?!"
-                    jump t_greeting_menu
-        "Do you trust me?" if trust_response_1 == 2:
-            $ trust_response_1 = 4
-            t "Yes."
-            j "Oh..."
-            t "It can be that simple, kid."
-            j "Huh..."
-            jump t_greeting_menu
-        "I need your help rescuing Ailea.":
+        "Rakesh told me you might be able to help." if t_no_r_response1 == False and t_no_r_menu_rakeshflag == False and t_no_r_response3 == False:
+            $ t_no_r_response1 = True
             $ t_points += 1
-            t "Whoa... You mean... You're gonna break into the breeding center?"
-            j "That's the idea."
-            j @ determined "But we'll need a plan."
-            jump t_section2
-        "Never mind, I don't need your help." if t_refusedhelp == False:
-            $ t_points -= 1
-            $ t_refusedhelp = True
-            t "Are you sure? Why did Rakesh send you here?"
+            t "Rakesh, eh? The scooter guy?"
             menu:
-                "I don't care what Rakesh says, I'll do it on my own!":
-                    $ t_points -= 1
-                    t "Yeah, I've heard that before."
-                    t "Right before whatever lone wolf individualist got themselves KILLED."
-                    menu:
-                        "You can't scare me with your collectivist fear-mongering! My own strength will carry me through!":
-                            $ t_points -= 1
-                            t "OK, guy, just think about what you're saying."
-                            t "You didn't make it this far on your own."
-                            extend "You needed Rakesh."
-                            t "You can't give yourself an abortion."
-                            extend "You need Ailea."
-                            t "You see what I'm saying?"
-                            menu:
-                                "You're right... none of us can do it on our own...":
-                                    $t_points += 1
-                                    t "Exactly, my friend. So. How can I help you?"
-                                    jump t_greeting_menu
-                                "Well. I'm special, so don't even worry about it.":
-                                    $ t_points -= 1
-                                    t "..."
-                                    t "I..."
-                                    extend "Ugh. OK, I guess. I'll see you later."
-                                    jump t_worstending
-                        "Ah... I see your point.":
-                            $ t_points += 2
-                            j "I didn't get this far by relying on myself... I got this far by seeking help from others, from helping in return..."
-                            t "Precisely my point. And now that points is no longer mine, but ours, as all things should be."
-                            j "W..."
-                            extend "What?"
-                            t "I... you know, we're all in this together. What's mine is yours. Ownership is an illusion."
-                            j "Right..."
-                            jump t_greeting_menu
-                "I guess... he wanted to help me.":
+                "Uh… do you mean hoverboard?":
                     $ t_points += 1
-                    t "Seems reasonable. I am, after all, very helpful."
-                    jump t_greeting_menu
+                    t "Hmmm. Fine. What did he say?"
+                    j "He said you’d be able to help me. Said you were good at causing distractions."
+                    t "Yeah? That old flatterer."
+                    jump t_no_r_menu2
+                "Yeah, that’s the one.":
+                    $ t_points -= 1
+                    t "Uh-huh, OK. What did he tell you about me?"
+                    j "He said you’d be able to help me, something about being good at distractions?"
+                    t "I am that..."
+                    jump t_no_r_menu2
+        "I... I'm not sure I should say. You could be one of {i}them{/i}!" if t_no_r_response2 == False:
+            $ t_no_r_response2 = True
+            t "Says the stranger walking into my place with vague requests and dodgy answers."
+            menu:
+                "Says the shop owner with trust issues!":
+                    $ t_points -= 1
+                    $ t_recursion = True
+                    t "I’m not about to get stuck in your rhetorical spirals, buddy. What do you want?"
+                    j "I want your help! I wasn’t lying!"
+                    t "You have a funny way of going about it. Now who sent you?"
+                    jump t_no_r_menu
+                "OK, OK... You promise you're chill?":
+                    $ t_no_r_menu_rakeshflag = True
+                    t "..."
+                    extend "Yeah."
+                    j "Here goes, deep breath..."
+                    t "Uh-huh..."
+                    jump t_no_r_menu
+        "That's none of your damn business. Can you help me or not?" if t_no_r_response3 == False:
+            $ t_no_r_response3 = True
+            $ t_points -= 1
+            t "Whoa, that’s a lot of bad vibes. Probably not, my dude, unless you get real chill all of a sudden."
+            jump t_no_r_menu
+        "OK, Fine. I'll tell you. Rakesh sent me." if t_no_r_menu_rakeshflag == True or t_no_r_response3 == True:
+            t "Why didn’t you just say that?"
+            menu:
+                "I thought, y’know, for safety and stuff?":
+                    $ t_points += 1
+                    t "OK, I guess I can’t fault you for that..."
+                    jump t_no_r_menu2
+                "It’s my philosophy in life. Trust no one. Not even yourself.":
+                    $ t_points -= 1
+                    t "That's your... like your worldview?"
+                    j "Always has been."
+                    t "How’s it working out for you?"
+                    j "..."
+                    jump t_no_r_menu2
+        "I can't tell you." if t_no_r_menu_rakeshflag == True or t_no_r_response3 == True:
+            $ t_no_r_refusal += 1
+            if t_no_r_refusal > 1:
+                jump t_worstending
+            else:
+                t "You're going to have to, or we're done."
+                jump t_no_r_menu
+
+
+    label t_no_r_menu2:
+        t "So... what did Rakesh think you could help me with?"
+        j "He thought you could help by causing a distraction."
+        t "And whom, pray tell, would need to be distracted to get you an abortion?"
+        label t_no_r_menu2insert:
+        menu:
+            "OK, don't freak out when I tell you...":
+                $ t_points += 1
+                t "I'm not freaking out. Just tell me."
+                j "We're breaking into the breeding center to rescue Ailea."
+                t "..."
+                extend "Fair enough, I'm freaking out a little."
+                j "Don't worry, Rakesh and I figured the whole thing out..."
+                jump t_no_r_menu2_cont
+            "We're rescuing Ailea from the breeding center.":
+                t "The... the breeding center?"
+                j "That's where Rakesh thinks they're holding her."
+                t "And you think you can just... go in and get her?"
+                j "There's a plan..."
+                jump t_no_r_menu2_cont
+            "Compartmentalization. Nobody can know the whole plan." if t_paranoidresponse1 == False:
+                $ t_points -= 1
+                $ t_paranoidresponse1 = True
+                if t_recursion == True:
+                    t "Nah. Not going through this again. Stop spiraling and tell me."
+                else:
+                    t "Nah. Not gonna do this paranoid shit. Just tell me."
+                jump t_no_r_menu2insert
+        label t_no_r_menu2_cont:
+            t "Well, whatever it is, leave me the fuck out."
+            t "No chance in hell am I going back to the breeding center."
+            j "Whoa... wait..."
+            t "Sorry about whatever you and Rakesh have going on, but I'm not fucking going back there."
+            extend "Ever."
+            j "..."
+            t "..."
+            t "Sorry. I just... it took everything I had to get out of there..."
+            t "I'm sorry if this ruins y'all's plan."
+            j "No, don't worry about that... I get it."
+            j "I escaped too, sort of..."
+            j "Mostly."
+            t "I know what you mean. There's some things you can't escape. Even if we aren't behind those bars..."
+            j "As long as the breeding center exists..."
+            t "Yeah. None of us are free."
+            t "I probably had it easier than you... they used me as a bull..."
+            j "YOU WERE A BULL?!??!"
+            t "..."
+            extend "No."
+            extend " Just like you were never a cow."
+            t "We aren't what they make of us, or the function of our bodies."
+            label t_no_r_menu2_insert2:
+            menu:
+                "But it's different for 'assigned' bulls." if t_no_r_menu2_insert2_1 == False:
+                    $ t_points -= 1
+                    $ t_no_r_menu2_insert2_1 = True
+                    t "Why? Like the bodies of bulls aren't just as instrumentalized as the cows?"
+                    j "Are they?"
+                    t "Yes. It takes less of a toll on their bodies, but the ideology is the same."
+                    j "And you don't think the toll on their bodies matters?!"
+                    t "Of course it does, Jack. I literally said, 'I probably had it easier'."
+                    j "Hmm. But even if we can make ourselves whatever we want..."
+                    j "Don't you think it matters that what {i}they {/i} make of us is based on our bodies?"
+                    t "It does matter. It affects everything; specifically, what kind of abuse they think is appropriate to subject us to."
+                    t "So if all they do is instrumentalize and abuse, why should we listen to a single fucking word they say?"
+                    j "Hmmmm."
+                    t "So what if they try to define us by a function our bodies can perform?"
+                    t "Their definitions are imposed by force, and therefore meaningless."
+                    jump t_no_r_menu2_insert2
+                "It's hard to remember that when you're fucking pregnant." if t_no_r_menu2_insert2_2 == False:
+                    $ t_no_r_menu2_insert2_2 = True
+                    t "Hmph. I guess that would make it harder."
+                    j "Every day, I have to remember that what they want to use my body for and what I want my body to be are different..."
+                    j "And what they wanted won out, because they control everything. It's easy to say that we're more than our function."
+                    j "But what if they force that function onto us?!"
+                    t "Yeah..."
+                    j "Or... I guess that's exactly what they do to the bulls, isn't it..."
+                    t "Yeah."
+                    j @ depressed "Ugh..."
+                    jump t_no_r_menu2_insert2
+                "You're right... those labels are pointless. We should be free of all of it." if t_no_r_menu2_insert2_1 == True or t_no_r_menu2_insert2_2 == True:
+                    $ t_points += 1
+                    t "Hell yeah, bro!"
+                    j "So help us free Ailea. She has knowledge that can help liberate people from the labels they impose on us."
+                    t "..."
+                    show takeshi happy with dissolve
+                    extend "OK. Tell me your plan."
+                    jump t_section2
+                "You're wrong... those labels reflect a material truth that affects us in material ways." if t_no_r_menu2_insert2_1 == True or t_no_r_menu2_insert2_2 == True:
+                    $ t_points -= 1
+                    t "No. Listen. Those labels are assigned to material factors, but that does not make them a reflection of truth."
+                    j "Does that make them any less real? They still affect us! It doesn't matter if they're valid labels or not."
+                    t "It does matter, because if we demonstrate that they aren't valid, if we can show they aren't true..."
+                    t "People will stop believing in fake categories that don't make any sense."
+                    menu:
+                        "People don't care about that. They just care about what they've always known.":
+                            $ t_points -= 1
+                            t "So cynical."
+                            j "What else am I supposed to be?"
+                            t "Fair enough..."
+                            t "As long as you're not so cynical that you don't want to save Ailea..."
+                            menu:
+                                "I'm saving her for my own reasons. I need her to help me.":
+                                    $ t_points -= 1
+                                    t "Great. Well. As long as she gets saved. What's the plan?"
+                                    jump t_section2
+                                "Never that cynical, no. The world sucks, but I don't have to.":
+                                    $ t_points += 1
+                                    t "OK. Differences aside for now. What's the plan?"
+                                    jump t_section2
+                            jump t_section2
+                        "You're too optimistic. Things will never change.":
+                            $ t_points -= 1
+                            t "You're too pessimistic. Change demands that we divest ourselves of despair."
+                            j "Huh?"
+                            t "Never mind. What matters is we're saving Ailea. Let's go over the plan."
+                            jump t_section2
+                        "I hope you're right...":
+                            $ t_points += 1
+                            t "Me too. Now let's go over this plan of yours, and I'll see what I can do to help."
+                            jump t_section2
+
+
 
 #Section 2
+default t_section2_flag = 0
 label t_section2:
+show takeshi main
+show jack main
 $ t_section2_flag = 1
 $ plan_getin = 0
 $ plan_inside = 0
@@ -339,9 +426,6 @@ label t_plan_menu:
 
 label t_section3:
     jump endings
-
-
-
 label endings:
 if t_points > 0:
     "(Takeshi will aid you in your quest!)"
@@ -351,12 +435,14 @@ if t_points <= 0:
         "(You may be a fan of Takeshi, but xe's no fan of yours! You travel on without hir.)"
     if t_fan == False:
         "(Takeshi didn't think your plan was going to help anyone. Xe's staying home on this one, pal.)"
-    return
 
-label t_worstending:
-"(You proceed without Takeshi's assistance)."
-#jumps to level 3 without takeshi
 return
 
-
+label t_worstending:
+t "OK, pal. Sorry we couldn't do business. See ya!"
+scene neighborhood with fade
+show jack depressed with moveinbottom
+show jack depressed at center
+"You convinced Takeshi to not help you. You won't have hir support when rescuing Ailea."
+#jumps to level 3 without takeshi
 return
