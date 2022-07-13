@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/takeshiscene.rpy", line 152: Line is indented, but the preceding jump statement statement does not expect a block. Please check this line's indentation.
-    label t_bull_postd:
-    ^
+File "game/takeshiscene.rpy", line 457: Line is followed by a block, despite not being a menu choice. Did you forget a colon at the end of the line?
+    "Go up to the gate and do a little dance, maybe?"
+                                                     ^
 
 Ren'Py Version: Ren'Py 7.4.11.2266
-Wed Jul  6 15:27:26 2022
+Wed Jul 13 12:29:22 2022

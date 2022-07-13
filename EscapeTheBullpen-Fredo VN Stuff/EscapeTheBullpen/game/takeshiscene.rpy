@@ -28,8 +28,8 @@ if r_companion == True:
     show rakesh main at center with moveinright:
         xzoom -1
     r "Hey, Takeshi! How you been, man?"
-    t "Been better, been worse..."
-    t "I heard about Ailea, brother. Can't believe they got to her."
+    t @ happy "Been better, been worse... Just vibing as a fun times music guy..."
+    t @ sad "I heard about Ailea, brother. Can't believe they got to her."
     r "That's why we're here."
     jump t_greeting_menu
 else:
@@ -247,9 +247,10 @@ if r_companion == False:
         menu:
             "OK, don't freak out when I tell you...":
                 $ t_points += 1
-                t "I'm not freaking out. Just tell me."
+                t "I'm not going to freak out."
                 j "We're breaking into the breeding center to rescue Ailea."
                 t "..."
+                show takeshi nervous with dissolve
                 extend "Fair enough, I'm freaking out a little."
                 j "Don't worry, Rakesh and I figured the whole thing out..."
                 jump t_no_r_menu2_cont
@@ -268,13 +269,15 @@ if r_companion == False:
                     t "Nah. Not gonna do this paranoid shit. Just tell me."
                 jump t_no_r_menu2insert
         label t_no_r_menu2_cont:
-            t "Well, whatever it is, leave me the fuck out."
-            t "No chance in hell am I going back to the breeding center."
+            t "Well, whatever it is, leave me the fuck out!"
+            t "No chance in hell am I going back to the breeding center!"
             j "Whoa... wait..."
-            t "Sorry about whatever you and Rakesh have going on, but I'm not fucking going back there."
-            extend "Ever."
+            t "Sorry about whatever you and Rakesh have going on, but..."
+            extend "I'M NOT FUCKING GOING BACK THERE!"
+            extend "EVER!"
             j "..."
             t "..."
+            show takeshi main with dissolve
             t "Sorry. I just... it took everything I had to get out of there..."
             t "I'm sorry if this ruins y'all's plan."
             j "No, don't worry about that... I get it."
@@ -284,7 +287,7 @@ if r_companion == False:
             j "As long as the breeding center exists..."
             t "Yeah. None of us are free."
             t "I probably had it easier than you... they used me as a bull..."
-            j "YOU WERE A BULL?!??!"
+            j @ upset "YOU WERE A BULL?!??!"
             t "..."
             extend "No."
             extend " Just like you were never a cow."
@@ -364,6 +367,7 @@ if r_companion == False:
 
 #Section 2
 default t_section2_flag = 0
+default t_plan_menu_insert1_fight = False
 label t_section2:
 show takeshi main
 show jack main
@@ -379,7 +383,6 @@ if t_points < 0:
     "(You have angered Takeshi.)"
 label t_plan_menu:
     if plan_getout == 1 and plan_inside == 1 and plan_getin == 1:
-        t "So what's my part in all this?"
         jump t_section3
     menu:
         "Let's talk about getting into the breeding center." if plan_getin == 0:
@@ -414,15 +417,53 @@ label t_plan_menu:
                                 t "Time we don't have, my friend."
                                 jump t_plan_menu
                     "Yeah, that could work...":
+                        $ t_points += 1
                         t "And also, with a veil, you can keep what's sure to be an expression of purest revulsion hidden!"
-                        j "Hey! Multiple uses."
+                        j @ happy "Hey! Multiple uses."
                         jump t_plan_menu
         "Let's talk about what's inside." if plan_inside == 0:
             $ plan_inside = 1
-            jump t_plan_menu
+            t "So you make it past the Matron at the gate. Then what?"
+            label t_plan_menu_insert1:
+            menu:
+                "We'll fight our way through!" if t_plan_menu_insert1_fight == False:
+                    $ t_plan_menu_insert1_fight = True
+                    t "That seems like a really bad idea..."
+                    t "As soon as you start taking people out, they'll send the bulls after you, roided up and angry."
+                    j "Hmmm..."
+                    menu:
+                        "I can handle it.":
+                            $ breakin_combat = True
+                            $ t_points += 1
+                            t "OK, buddy. I love the self confidence."
+                            jump t_plan_menu
+                        "OK, let me rethink this...":
+                            jump t_plan_menu_insert1
+                "We play it cool until we find Ailea.":
+                    $ t_points += 1
+                    t "Yeah, that sounds about right. Ailea will probably be somewhere on the upper floors, with the cows."
+                    j "Ugh... I never thought I'd be walking in there on purpose."
+                    t "Don't worry, my friend. This time, you'll be armed and dangerous."
+                    jump t_plan_menu
         "Let's talk about how to escape." if plan_getout == 0:
             $ plan_getout = 1
-            jump t_plan_menu
+            t "That might be tricky... once you're in and trying to get out with precious cargo, everyone will be on high alert..."
+            j "That's where Rakesh said you'd be able to help."
+            t "Yeah?"
+            menu:
+                "Like you said, you're a fun times music guy, right?":
+                    $ t_points += 1
+                    t "Yeah! Looks like it's time for the next unnanounced underground Takeshi Musical Happening."
+                    t @ excited "With FIREWORKS."
+                    t "..."
+                    t "By which I mean homebrew explosives."
+                    j "Nice."
+                    jump t_plan_menu
+                "Go up to the gate and do a little dance, maybe?":
+                    $ t_points -= 1
+                    t "Ummm... yeah. Sure. My dignity is worth Ailea's freedom. I guess."
+                    j "You're a hero, Takeshi."
+                    jump t_plan_menu
 
 label t_section3:
     jump endings

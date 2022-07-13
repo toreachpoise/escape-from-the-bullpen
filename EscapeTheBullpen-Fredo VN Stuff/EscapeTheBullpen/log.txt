@@ -1,13 +1,13 @@
-Tue Jul 12 14:27:26 2022
+Wed Jul 13 12:30:46 2022
 Windows-10-10.0.19041
 Ren'Py 7.4.11.2266
  
 
-Bootstrap to the start of init.init took 0.09s
+Bootstrap to the start of init.init took 0.10s
 Early init took 0.00s
 Loader init took 0.04s
-Loading error handling took 0.02s
-Loading script took 0.39s
+Loading error handling took 0.04s
+Loading script took 0.52s
 Loading save slot metadata. took 0.03s
 Loading persistent took 0.00s
 Importing _renpysteam: ImportError('No module named _renpysteam',)
@@ -19,20 +19,20 @@ Backing up script files to 'C:\\Users\\sever\\AppData\\Roaming/RenPy/backups\\Es
 Dump and make backups. took 0.09s
 Cleaning cache took 0.00s
 Making clean stores took 0.00s
-Initial gc. took 0.02s
+Initial gc. took 0.03s
 DPI scale factor: 1.000000
 nvdrs: Loaded, about to disable thread optimizations.
 nvdrs: Disabled thread optimizations.
-Creating interface object took 0.30s
+Creating interface object took 0.32s
 Cleaning stores took 0.00s
-Init translation took 0.04s
-Build styles took 0.00s
+Init translation took 0.06s
+Build styles took 0.01s
 Load screen analysis took 0.00s
 Analyze screens took 0.01s
 Save screen analysis took 0.03s
 Prepare screens took 0.07s
-Save pyanalysis. took 0.03s
-Save bytecode. took 0.03s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.02s
 Running _start took 0.00s
 Performance test:
 Interface start took 0.11s
@@ -45,8 +45,12 @@ Vendor: 'NVIDIA Corporation'
 Renderer: 'NVIDIA GeForce RTX 2060 SUPER/PCIe/SSE2'
 Version: '4.6.0 NVIDIA 516.59'
 Display Info: None
-Screen sizes: virtual=(1920, 1080) physical=(1739, 978) drawable=(1739, 978)
+Screen sizes: virtual=(1920, 1080) physical=(1488, 837) drawable=(1488, 837)
 Maximum texture size: 4096x4096
-controller: '030000005e0400008e02000000007200' 'Xbox 360 Controller' 1L
-Screen sizes: virtual=(1920, 1080) physical=(1600, 837) drawable=(1600, 837)
-Maximum texture size: 4096x4096
+Cleaning stores took 0.00s
+Init translation took 0.00s
+Build styles took 0.00s
+Load screen analysis took 0.02s
+Analyze screens took 0.00s
+Prepare screens took 0.00s
+Running _start took 0.00s
