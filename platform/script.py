@@ -129,10 +129,10 @@ class Ground(pygame.sprite.Sprite):
         self.image = pygame.image.load("Ground.png")
         self.rect = self.image.get_rect(center = (350, 350))
         self.bgX1 = 0
-        self.bgY1 = 285
+        self.bgY1 = 325
 
     def render(self):
-        displaysurface.blit(self.image, (self.bgX1, self.bgY1))
+        displaysurface.blit(self.image, (self  .bgX1, self.bgY1))
 class Castle(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
