@@ -36,7 +36,6 @@ try:
         def __init__(self):
             super().__init__()
             self.image = pygame.image.load("ground.png")
-            #self.surf = pygame.transform.scale(self.image, (25, display_width)) ###
             self.rect = self.image.get_rect(topleft=(0, 325))
             self.image.set_colorkey((255,255,255))
 
@@ -50,23 +49,19 @@ try:
             self.rect = self.image.get_rect()
             self.rect.x, self.rect.y = x, y
         def render(self, surface):
-            display.blit(self.image, (self.rect.x, self.rect,y))
+            display.blit(self.image, (self.rect.x-scroll[0], self.rect.y-scroll[1]))
 
     class TileMap():
         def __init__(self, filename):
             self.tile_width = 64
             self.tile_height = 32
             self.start_x, self.start_y = 0, 0
-            tiles = self.load_tiles(filename)
+            self.tiles = self.load_tiles(filename)
             self.map_surface = pygame.Surface((self.map_w, self.map_h))
             self.map_surface.set_colorkey((0,0,0))
 
         def load_tiles(self, filename):
-            #true_scroll[0] += (player.rect.x-true_scroll[0]-365)/20
-            #true_scroll[1] += (player.rect.y-true_scroll[1]-205)/20
-            #scroll = true_scroll.copy()
-            #scroll[0] = int(scroll[0])
-            #scroll[1] = int(scroll[1])
+            tilelist = pygame.sprite.Group()
             tiles = []
             map = self.read_csv(filename)
             y = 0
@@ -80,21 +75,23 @@ try:
                     elif tile == '1': ##cement top
                         tiles.append(Tile('cement top.png', x * self.tile_width-scroll[0], y * self.tile_height-scroll[1]))
                     elif tile == '2': ##interior
-                        tiles.append(Tile('interior.png', x * self.tile_width-scroll[0], y * self.tile_height-scroll[1])) ###
+                        tiles.append(Tile('interior.png', x * self.tile_width-scroll[0], y * self.tile_height-scroll[1]))
                     elif tile == '3': ##scaffold
-                        tiles.append(Tile('scaffold.png', x * self.tile_width-scroll[0], y * self.tile_height-scroll[1])) ###
+                        tiles.append(Tile('scaffold.png', x * self.tile_width-scroll[0], y * self.tile_height-scroll[1]))
                     ##bull tile ID is 4
                     x += 1
                 y += 1 #move to next row
+            for tile in tiles:
+                tilelist.add(tile)
             self.map_w, self.map_h = x * self.tile_height, y * self.tile_width
-            return tiles
+            return tilelist
 
-        def draw_map(self):
-            display.blit(self.map_surface, (0,0))
+        def render(self):
+            display.blit(self.map_surface, (0-scroll[0],0-scroll[1]))
 
         def load_map(self, filename):
             self.load_tiles(filename)
-            for tile in tiles:
+            for tile in self.tiles:
                 tile.render(self.map_surface)
 
         def read_csv(self, filename):
@@ -110,35 +107,42 @@ try:
             super().__init__()
             self.x_direction = "RIGHT"
             self.y_direction = "DOWN"
-            self.pos = vec((0,320))
+            self.pos = vec((tilemap.start_x, tilemap.start_y))
             self.vel = vec(0,0)
             self.acc = vec(0,0)
-            self.image = pygame.image.load("jack attack 1.png")
+            self.image = pygame.image.load("jack idle 1.png")
             self.rect = self.image.get_rect(topleft=self.pos)
 
-        def collision_test(self, ground_group):
+        def collision_test(self, tilelist):
             if abs(self.vel.x) > 0:
-                if pygame.sprite.spritecollide(self, ground_group, False):
-                    if self.vel.x > 0:
-                        print("right bump")
-                        pass
-                    if self.vel.x < 0:
-                        print("left bump")
-                        pass
-            if abs(self.vel.y) > 0:
-                hits = pygame.sprite.spritecollide(self, ground_group, False)
+                print("moving horizontally")
+                hits = pygame.sprite.spritecollide(self, tilelist, False)
                 if hits:
+                    print("horizontal collision")
+                    if self.vel.x > 0:
+                        #self.pos.x = hits[0].rect.left
+                        #self.vel.x = 0
+                        #self.acc.x = 0
+                        print("right bump")
+                    if self.vel.x < 0:
+                        #self.pos.x = hits[0].rect.right
+                        #self.vel.x = 0
+                        #self.acc.x = 0
+                        print("left bump")
+            if abs(self.vel.y) > 0:
+                print("moving vertically")
+                hits = pygame.sprite.spritecollide(self, tilelist, False)
+                if hits:
+                    print("vertical collision")
                     if self.vel.y > 0:
+                        self.pos.y = hits[0].rect.y - 59
                         self.vel.y = 0
                         self.acc.y = 0
-                        self.pos.y = hits[0].rect.y - 59
                         print("bottom bump")
-                        pass
                     if self.vel.y < 0:
                         self.acc.y = 0.5
                         self.rect.top = hits[0].rect.bottom
                         print("top bump")
-                        pass
 
         def move(self):
             self.acc = vec(0,0.5) #downward acceleration aka gravity
@@ -158,9 +162,9 @@ try:
             if abs(self.acc.x) < 0.1:
                 self.acc.x = 0
                 self.vel.x = 0
-            self.collision_test(ground_group)
+            self.collision_test(tilelist)
             if pressed_keys[K_SPACE]:
-                hits = pygame.sprite.spritecollide(self, ground_group, False)
+                hits = pygame.sprite.spritecollide(self, tilelist, False)
                 if hits:
                     print("jump")
                     self.y_direction = "UP"
@@ -170,7 +174,7 @@ try:
                 self.y_direction = "DOWN"
             self.vel.y += self.acc.y + acceleration
             self.pos.y += self.vel.y
-            self.collision_test(ground_group)
+            self.collision_test(tilelist)
 
             self.rect.topleft = self.pos
 
@@ -184,9 +188,8 @@ try:
     ground = Ground()
     ground_group = pygame.sprite.Group()
     tilemap = TileMap("level 1.csv")
-    tiles = []
+    tilelist = pygame.sprite.Group()
     ground_group.add(ground)
-    ground_group.add(tiles)
     jack = Player()
     print("sprites sprouted")
 
@@ -203,7 +206,7 @@ try:
         background.render()
         ground.render()
         tilemap.load_map("level 1.csv")
-        tilemap.draw_map()
+        tilemap.render()
         jack.move()
         jack.render()
 
@@ -220,4 +223,4 @@ except:
     print("you crashed bitch")
     exc_type, exc_value, exc_traceback = sys.exc_info()
     traceback.print_exception(exc_type, exc_value, exc_traceback,
-                              limit=2, file=sys.stdout)
+                              limit=5, file=sys.stdout)
