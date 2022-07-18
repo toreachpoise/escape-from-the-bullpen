@@ -9,8 +9,8 @@ default rakesh_age_comment = False
 
 #Scene 1
 label start:
-#jump apothecary
-jump takeshi_garage
+jump apothecary
+#jump takeshi_garage
 
 label apothecary:
 scene ailea_shop_bg with fade
@@ -153,7 +153,7 @@ if r_points == 0:
     jump takeshi_opinion
 
     label rakesh_section3_friendly:
-    r "All we need is a distraction..."
+    r "We'll need a distraction to cover our escape."
     j "Any ideas?"
     r "Nobody better for that than my friend Takeshi."
     jump takeshi_opinion

@@ -2,7 +2,6 @@
 define t = Character("Takeshi", image="jack", who_color="#eaffc5") ## should the image here be jack??
 default t_points = 0
 default t_companion = False
-default t_bull_discussion_flag = False
 
 #Scene 2
 label takeshi_garage:
@@ -15,7 +14,7 @@ show jack main at right with moveinright
 t "Well, well, well. Who is this, alighting upon my doorstep?"
 menu:
     "Oh, wow... it's really you! I'm trying not to freak out.":
-        $ t_points += 2
+        $ t_points += 1
         show jack upset with dissolve
         j "Your music is EVERYTHING."
         show jack main with dissolve
@@ -46,7 +45,7 @@ label t_greeting_menu:
 if r_companion == True:
     j "Takeshi, we need your help."
     r "We're breaking Ailea out of the breeding facility."
-    t @ scared "The breeding facility... you're not asking me to go back, are you?"
+    t @ nervous "The breeding facility... you're not asking me to go back, are you?"
     j "Uh... Go back?"
     r "Takeshi... xe escape once before..."
     menu:
@@ -67,7 +66,6 @@ if r_companion == True:
             show jack upset
             jump t_bull_discussion
     label t_bull_discussion:
-        $ t_bull_discussion_flag = True
         j "YOU WERE A BULL?!"
         t "..."
         extend "Yeah."
@@ -184,14 +182,15 @@ if r_companion == False:
                 "Uh… do you mean hoverboard?":
                     $ t_points += 1
                     t "Hmmm. Fine. What did he say?"
-                    j "He said you’d be able to help me. Said you were good at causing distractions."
-                    t "Yeah? That old flatterer."
+                    j "He said you’d be able to help me."
+                    t "Yeah? I mean, I would help him..."
+                    j "Well, what about me? We're buddies."
                     jump t_no_r_menu2
                 "Yeah, that’s the one.":
                     $ t_points -= 1
                     t "Uh-huh, OK. What did he tell you about me?"
-                    j "He said you’d be able to help me, something about being good at distractions?"
-                    t "I am that..."
+                    j "He said you’d be able to help me."
+                    t "Hmmm..."
                     jump t_no_r_menu2
         "I... I'm not sure I should say. You could be one of {i}them{/i}!" if t_no_r_response2 == False:
             $ t_no_r_response2 = True
@@ -240,15 +239,22 @@ if r_companion == False:
 
 
     label t_no_r_menu2:
-        t "So... what did Rakesh think you could help me with?"
-        j "He thought you could help by causing a distraction."
+        if t_points > 0:
+            "(Takeshi seems to like you.)"
+        if t_points == 0:
+            "(Takeshi regards you with an inscrutably neutral expression.)"
+        if t_points < 0:
+            "(You have angered Takeshi.)"
+        t "OK. Talk to me. What did Rakesh say, exactly?"
+        j "Well, we have a plan, and it involves you causing a distraction."
         t "And whom, pray tell, would need to be distracted to get you an abortion?"
         label t_no_r_menu2insert:
         menu:
             "OK, don't freak out when I tell you...":
                 $ t_points += 1
                 t "I'm not going to freak out."
-                j "We're breaking into the breeding center to rescue Ailea."
+                j "OK, good."
+                j "Because we're breaking into the breeding center to rescue Ailea."
                 t "..."
                 show takeshi nervous with dissolve
                 extend "Fair enough, I'm freaking out a little."
@@ -260,7 +266,7 @@ if r_companion == False:
                 t "And you think you can just... go in and get her?"
                 j "There's a plan..."
                 jump t_no_r_menu2_cont
-            "Compartmentalization. Nobody can know the whole plan." if t_paranoidresponse1 == False:
+            "Ever heard of compartmentalization?! Nobody can know the whole plan." if t_paranoidresponse1 == False:
                 $ t_points -= 1
                 $ t_paranoidresponse1 = True
                 if t_recursion == True:
@@ -269,6 +275,7 @@ if r_companion == False:
                     t "Nah. Not gonna do this paranoid shit. Just tell me."
                 jump t_no_r_menu2insert
         label t_no_r_menu2_cont:
+            show takeshi angry
             t "Well, whatever it is, leave me the fuck out!"
             t "No chance in hell am I going back to the breeding center!"
             j "Whoa... wait..."
@@ -368,6 +375,7 @@ if r_companion == False:
 #Section 2
 default t_section2_flag = 0
 default t_plan_menu_insert1_fight = False
+default t_rejection1 = False
 label t_section2:
 show takeshi main
 show jack main
@@ -376,14 +384,14 @@ $ plan_getin = 0
 $ plan_inside = 0
 $ plan_getout = 0
 if t_points > 0:
-    "(Takeshi seems to like you.)"
+    "(You've charmed Takeshi, for now.)"
 if t_points == 0:
     "(Takeshi regards you with an inscrutably neutral expression.)"
 if t_points < 0:
-    "(You have angered Takeshi.)"
+    "(Takeshi seems real miffed.)"
 label t_plan_menu:
     if plan_getout == 1 and plan_inside == 1 and plan_getin == 1:
-        jump t_section3
+        jump endings
     menu:
         "Let's talk about getting into the breeding center." if plan_getin == 0:
             $ plan_getin = 1
@@ -435,7 +443,7 @@ label t_plan_menu:
                         "I can handle it.":
                             $ breakin_combat = True
                             $ t_points += 1
-                            t "OK, buddy. I love the self confidence."
+                            t "OK, buddy. Great self-confidence."
                             jump t_plan_menu
                         "OK, let me rethink this...":
                             jump t_plan_menu_insert1
@@ -447,35 +455,105 @@ label t_plan_menu:
                     jump t_plan_menu
         "Let's talk about how to escape." if plan_getout == 0:
             $ plan_getout = 1
-            t "That might be tricky... once you're in and trying to get out with precious cargo, everyone will be on high alert..."
-            j "That's where Rakesh said you'd be able to help."
-            t "Yeah?"
-            menu:
-                "Like you said, you're a fun times music guy, right?":
-                    $ t_points += 1
-                    t "Yeah! Looks like it's time for the next unnanounced underground Takeshi Musical Happening."
-                    t @ excited "With FIREWORKS."
-                    t "..."
-                    t "By which I mean homebrew explosives."
-                    j "Nice."
-                    jump t_plan_menu
-                "Go up to the gate and do a little dance, maybe?":
-                    $ t_points -= 1
-                    t "Ummm... yeah. Sure. My dignity is worth Ailea's freedom. I guess."
-                    j "You're a hero, Takeshi."
-                    jump t_plan_menu
+            if t_points > 0:
+                t "That might be tricky... once you're in and trying to get out with precious cargo, everyone will be on high alert..."
+                j "That's where Rakesh said you'd be able to help."
+                t "Yeah?"
+                menu:
+                    "Like you said, you're a fun times music guy, right?":
+                        $ t_points += 1
+                        t "Yeah! Looks like it's time for the next unnanounced underground Takeshi Musical Happening."
+                        t @ excited "With FIREWORKS."
+                        t "..."
+                        t "By which I mean homebrew explosives."
+                        j "Nice."
+                        jump t_plan_menu
+                    "Go up to the gate and do a little dance, maybe?":
+                        $ t_points -= 1
+                        t "Ummm... yeah. Sure. My dignity is worth Ailea's freedom. I guess."
+                        j "You're a hero, Takeshi."
+                        jump t_plan_menu
+            if t_points <= 0:
+                $ t_rejection1 = True
+                t "That might be tricky... All I can recommend is to get ready to fight."
+                j "Rakesh mentioned you'd be able to help cover our escape..."
+                if r_companion == True:
+                    r "I thought you'd be good for it, Takeshi... But no pressure, no demands here."
+                    t "I'm sorry, my friends. This just... isn't something I want to get involved in."
+                    menu:
+                        "Goddammit, Takeshi!":
+                            $ t_points -= 1
+                            t "Sorry. I just don't think I'm equipped to help you."
+                            jump t_plan_menu
+                        "It's OK. I wouldn't want to get involved either.":
+                            $ t_points += 1
+                            t "Yeah..."
+                            jump t_plan_menu
+                        "Aren't you already involved?":
+                            if r_companion == True:
+                                r "The kid's got a point there... Like you said, it was Ailea who got you out."
+                            t "..."
+                            jump t_plan_menu_insert2
+                else:
+                    jump t_plan_menu_insert2
 
-label t_section3:
-    jump endings
+                    label t_plan_menu_insert2:
+                    t "Sorry. I just don't think I'm the best person to help you."
+                    menu:
+                        "I didn't think I was the right person to help Ailea either. But here I am.":
+                            $ t_points += 2
+                            t "I... I see your point."
+                            jump t_plan_menu
+                        "Ugh, typical. Always on my own.":
+                            $ t_points -= 2
+                            t "Not always, Jack. Maybe this time, though."
+                            jump t_plan_menu
 label endings:
 if t_points > 0:
-    "(Takeshi will aid you in your quest!)"
-    return
-if t_points <= 0:
-    if t_fan == True:
-        "(You may be a fan of Takeshi, but xe's no fan of yours! You travel on without hir.)"
-    if t_fan == False:
-        "(Takeshi didn't think your plan was going to help anyone. Xe's staying home on this one, pal.)"
+    if t_rejection1 == True:
+        j "OK. I guess I'm heading out then..."
+        t "Wait... I've... I've changed my mind."
+        j "You'll help?"
+        t "If y'all need me to cover your escape... if it's for Ailea..."
+        t "I'd never forgive myself if I didn't do everything I could to help."
+        j "You mean it?"
+        t "Yeah. You boys can count on me!"
+        if r_companion == True:
+            r "OK. Two hours, and then..."
+        else:
+            j "OK. I think if you give me... two hours, that'll be enough."
+        t "Two hours until it's time for the next unnanounced underground Takeshi Musical Happening."
+        t @ excited "With FIREWORKS."
+        t "..."
+        t "By which I mean homebrew explosives."
+        j "Nice."
+        "(Takeshi will aid you in your quest!)"
+    else:
+        t "OK. We have a plan... all that's left is the execution. You ready?"
+        j "Ready!"
+        if r_companion == True:
+            r "Ready as I'll ever be."
+        "(Takeshi will aid you in your quest!)"
+        return
+if t_points <= 0 and t_rejection1 == False:
+    t "OK. Sounds like we have a plan..."
+    j "Great! Thanks for the help-..."
+    t "I'm not helping for you. I owe Ailea a lot. Rakesh too. I'm not about to let you get them both killed."
+    menu:
+        "Understood.":
+            t "Glad we understand each other."
+            "(Takeshi will aid you in your quest!)"
+        "Oh, blow it out your asshole, Takeshi.":
+           t "See? This is exactly what I mean!"
+           "(Takeshi will aid you in your quest!)"
+
+if t_points <= 0 and t_rejection1 == True:
+    t "But still... we've talked for a little bit now..."
+    t "And frankly, I don't trust you or your motivations. Rakesh might be willing to work with you..."
+    t "But like I said, I'm just a fun times music guy. I have a good life."
+    t "I'm not going to risk it for you."
+    "(Takeshi didn't trust you enough to lend hir aid.)"
+
 
 return
 

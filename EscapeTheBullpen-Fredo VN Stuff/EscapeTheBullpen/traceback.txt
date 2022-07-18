@@ -1,28 +1,24 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/takeshiscene.rpy", line 149, in script
-    if t_section2_flag == 1:
-  File "game/takeshiscene.rpy", line 149, in <module>
-    if t_section2_flag == 1:
-NameError: name 't_section2_flag' is not defined
+  File "game/takeshiscene.rpy", line 472, in script
+    if r_companion = True:
+SyntaxError: invalid syntax (takeshiscene.rpy, line 472)
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/takeshiscene.rpy", line 149, in script
-    if t_section2_flag == 1:
+  File "game/takeshiscene.rpy", line 472, in script
+    if r_companion = True:
   File "renpy/ast.py", line 1898, in execute
     if renpy.python.py_eval(condition):
-  File "renpy/python.py", line 2276, in py_eval
-    return py_eval_bytecode(code, globals, locals)
-  File "renpy/python.py", line 2269, in py_eval_bytecode
-    return eval(bytecode, globals, locals)
-  File "game/takeshiscene.rpy", line 149, in <module>
-    if t_section2_flag == 1:
-NameError: name 't_section2_flag' is not defined
+  File "renpy/python.py", line 2274, in py_eval
+    code = py_compile(code, 'eval')
+  File "renpy/python.py", line 835, in py_compile
+    raise e
+SyntaxError: invalid syntax (takeshiscene.rpy, line 472)
 
 Windows-10-10.0.19041
 Ren'Py 7.4.11.2266
 EscapeTheBullpen 1.0
-Wed Jul  6 15:02:07 2022
+Mon Jul 18 11:53:55 2022

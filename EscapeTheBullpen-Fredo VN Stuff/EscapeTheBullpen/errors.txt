@@ -2,9 +2,11 @@
 errors listed below, and try again.
 
 
-File "game/takeshiscene.rpy", line 457: Line is followed by a block, despite not being a menu choice. Did you forget a colon at the end of the line?
-    "Go up to the gate and do a little dance, maybe?"
-                                                     ^
+The label t_plan_menu_insert1 is defined twice, at File "game/takeshiscene.rpy", line 435:
+            label t_plan_menu_insert1:
+and File "game/takeshiscene.rpy", line 500:
+            label t_plan_menu_insert1:
+
 
 Ren'Py Version: Ren'Py 7.4.11.2266
-Wed Jul 13 12:29:22 2022
+Mon Jul 18 12:34:36 2022
