@@ -1,5 +1,5 @@
 #Dramatis Presonae Addition
-define t = Character("Takeshi", image="jack", who_color="#eaffc5") ## should the image here be jack??
+define t = Character("Takeshi", image="takeshi", who_color="#eaffc5")
 default t_points = 0
 default t_companion = False
 
@@ -35,8 +35,9 @@ else:
     j "I heard you might be able to help me..."
     t "Help with what?"
     j "I need an abortion and-..."
+    show takeshi nervous
     t "That's not my business. I'm just a fun times music guy."
-    t @ nervous "Who told you to come here?"
+    t "Who told you to come here?"
     jump t_greeting_menu
 
 #Section 1
@@ -213,9 +214,10 @@ if r_companion == False:
         "That's none of your damn business. Can you help me or not?" if t_no_r_response3 == False:
             $ t_no_r_response3 = True
             $ t_points -= 1
-            t "Whoa, that’s a lot of bad vibes. Probably not, my dude, unless you get real chill all of a sudden."
+            t @ angry "Whoa, that’s a lot of bad vibes. Probably not, my dude, unless you get real chill all of a sudden."
             jump t_no_r_menu
         "OK, Fine. I'll tell you. Rakesh sent me." if t_no_r_menu_rakeshflag == True or t_no_r_response3 == True:
+            show takeshi main
             t "Why didn’t you just say that?"
             menu:
                 "I thought, y’know, for safety and stuff?":
@@ -256,7 +258,7 @@ if r_companion == False:
                 j "OK, good."
                 j "Because we're breaking into the breeding center to rescue Ailea."
                 t "..."
-                show takeshi nervous with dissolve
+                show takeshi nervous
                 extend "Fair enough, I'm freaking out a little."
                 j "Don't worry, Rakesh and I figured the whole thing out..."
                 jump t_no_r_menu2_cont
@@ -284,7 +286,7 @@ if r_companion == False:
             extend "EVER!"
             j "..."
             t "..."
-            show takeshi main with dissolve
+            show takeshi sad with dissolve
             t "Sorry. I just... it took everything I had to get out of there..."
             t "I'm sorry if this ruins y'all's plan."
             j "No, don't worry about that... I get it."
@@ -296,10 +298,12 @@ if r_companion == False:
             t "I probably had it easier than you... they used me as a bull..."
             j @ upset "YOU WERE A BULL?!??!"
             t "..."
+            show takeshi nervous
             extend "No."
             extend " Just like you were never a cow."
             t "We aren't what they make of us, or the function of our bodies."
             label t_no_r_menu2_insert2:
+            show takeshi main
             menu:
                 "But it's different for 'assigned' bulls." if t_no_r_menu2_insert2_1 == False:
                     $ t_points -= 1
@@ -426,7 +430,7 @@ label t_plan_menu:
                                 jump t_plan_menu
                     "Yeah, that could work...":
                         $ t_points += 1
-                        t "And also, with a veil, you can keep what's sure to be an expression of purest revulsion hidden!"
+                        t @ happy "And also, with a veil, you can keep what's sure to be an expression of purest revulsion hidden!"
                         j @ happy "Hey! Multiple uses."
                         jump t_plan_menu
         "Let's talk about what's inside." if plan_inside == 0:
@@ -465,8 +469,8 @@ label t_plan_menu:
                         t "Yeah! Looks like it's time for the next unnanounced underground Takeshi Musical Happening."
                         t @ excited "With FIREWORKS."
                         t "..."
-                        t "By which I mean homebrew explosives."
-                        j "Nice."
+                        t @ nervous "By which I mean homebrew explosives."
+                        j @ happy "Nice."
                         jump t_plan_menu
                     "Go up to the gate and do a little dance, maybe?":
                         $ t_points -= 1
@@ -525,8 +529,8 @@ if t_points > 0:
         t "Two hours until it's time for the next unnanounced underground Takeshi Musical Happening."
         t @ excited "With FIREWORKS."
         t "..."
-        t "By which I mean homebrew explosives."
-        j "Nice."
+        t @ nervous "By which I mean homebrew explosives."
+        j @ happy "Nice."
         "(Takeshi will aid you in your quest!)"
     else:
         t "OK. We have a plan... all that's left is the execution. You ready?"
