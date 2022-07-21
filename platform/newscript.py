@@ -24,6 +24,7 @@ try:
     gravity = 1
     scroll = true_scroll.copy()
     font = pygame.font.SysFont("Verdana", 60)
+    endgame = False
     game_over = font.render("Game Over", True, (255,255,255))
     print("variables defined")
 
@@ -148,13 +149,13 @@ try:
             self.x_direction = "RIGHT"
             self.y_direction = "DOWN"
             self.move_frame = 0
-            self.touching_ground = False
             self.pos = vec((tilemap.start_x, tilemap.start_y))
             self.vel = vec(0,0)
             self.acc = vec(0,0)
             self.image = pygame.image.load("jack idle 1.png")
             self.rect = self.image.get_rect(topleft=self.pos)
-            self.health = 1
+            self.on_the_ground = False
+            self.fallcount = 0
 
         def collision_test(self, tilelist):
             if abs(self.vel.x) > 0:
@@ -174,19 +175,19 @@ try:
             if abs(self.vel.y) > 0:
                 for tile in tilemap.tiles:
                     if self.rect.colliderect(tile.rect) == 1:
-                        if 0 < self.vel.y < 10:
+                        if self.vel.y > 0:
                             self.pos.y = tile.rect.y - 59
-                            self.touching_ground = True
+                            self.on_the_ground = True
+                            self.fallcount = 0
                             self.vel.y = 0
                             self.acc.y = 0
-                        if self.vel.y > 0:
-                            self.health = 0
-                            self.kill()
                         if self.vel.y < 0:
                             self.acc.y = gravity
                             #self.pos.y = tile.rect.y + tilemap.tile_height
+
         def move(self):
             self.acc = vec(0,gravity) #downward acceleration aka gravity
+            self.on_the_ground = False
             pressed_keys = pygame.key.get_pressed() # Returns the current key presses
             if pressed_keys[K_LEFT]: # Accelerates the player in the direction of the key press
                 self.x_direction = "LEFT"
@@ -210,18 +211,24 @@ try:
                         print("jump")
                         self.y_direction = "UP"
                         self.pos.y -= jump_height
+                        self.on_the_ground == False
                         self.vel.y = -(5 * jump_height)
-                        self.touching_ground = False
+                        #self.fallcount += 1
             if self.vel.y > 0:
                 self.y_direction = "DOWN"
             self.vel.y += self.acc.y + acceleration
             self.pos.y += self.vel.y
             self.collision_test(tilelist)
-
+            if self.on_the_ground == False:
+                self.fallcount += 1
             self.rect.topleft = self.pos
+            if self.fallcount > 3:
+                print("falling hard")
+                endgame = True
+                #self.kill()
 
         def render(self):
-            if self.touching_ground:
+            if self.fallcount == 0:
                 if self.vel == (0,0):
                     if self.x_direction == "RIGHT":
                         self.image = idle_ani_R[self.move_frame]
@@ -239,6 +246,7 @@ try:
                     if self.x_direction == "LEFT":
                         self.image = run_start_ani_L[self.move_frame]
             else:
+                # now that there's fallcount I can implement jump start and end animations
                 if self.x_direction == "RIGHT":
                     self.image = jump_ani_R[self.move_frame]
                 elif self.x_direction == "LEFT":
@@ -280,11 +288,8 @@ try:
                 running = False
                 pygame.quit()
                 sys.exit()
-        if jack.health == 1:
+        if endgame == False:
             display.blit(jack.image, (jack.pos.x - true_scroll[0], jack.pos.y - true_scroll[1]))
-        else:
-            display.fill((255,0,0))
-            display.blit(game_over, (display_width/3, display_height/3))
         screen.blit(pygame.transform.scale(display, window_size), (0,0)) #scaling display to fit the screen
         pygame.display.update()
         clock.tick(24) #number sets framerate in fps
