@@ -72,11 +72,11 @@ run_ani_L = [pygame.image.load("jack run L1.png"), pygame.image.load("jack run L
 jump_ani_R = [pygame.image.load("jack jump 1.png"), pygame.image.load("jack jump 2.png"),
             pygame.image.load("jack jump 3.png"), pygame.image.load("jack jump 4.png"),
             pygame.image.load("jack jump 5.png"), pygame.image.load("jack jump 6.png"),
-            pygame.image.load("jack jump 7.png"), pygame.image.load("jack jump 8.png"), pygame.image.load("jack jump 1.png")]
+            pygame.image.load("jack jump 7.png"), pygame.image.load("jack jump 8.png")]
 jump_ani_L = [pygame.image.load("jack jump L1.png"), pygame.image.load("jack jump L2.png"),
             pygame.image.load("jack jump L3.png"), pygame.image.load("jack jump L4.png"),
             pygame.image.load("jack jump L5.png"), pygame.image.load("jack jump L6.png"),
-            pygame.image.load("jack jump L7.png"), pygame.image.load("jack jump L8.png"), pygame.image.load("jack jump L1.png")]
+            pygame.image.load("jack jump L7.png"), pygame.image.load("jack jump L8.png")]
 
 draw_ani_R = [pygame.image.load("jack draw 1.png"), pygame.image.load("jack draw 1.png"),
             pygame.image.load("jack draw 2.png"), pygame.image.load("jack draw 2.png"),

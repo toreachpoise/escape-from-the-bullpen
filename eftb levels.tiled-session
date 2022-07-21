@@ -17,8 +17,8 @@
             "scale": 0.33,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 768.1818181818182,
-                "y": -136.36363636363637
+                "x": 786.3636363636363,
+                "y": -872.7272727272727
             }
         },
         "level 1.tmx#escape from the bullpen": {
@@ -39,12 +39,13 @@
     "map.lastUsedExportFilter": "CSV files (*.csv)",
     "map.lastUsedFormat": "tmx",
     "openFiles": [
-        "level 1.tmx"
+        "level 1.tmx",
+        "platform/escape from the bullpen.tsx"
     ],
     "project": "eftb levels.tiled-project",
     "recentFiles": [
-        "level 1.tmx",
         "platform/escape from the bullpen.tsx",
+        "level 1.tmx",
         "escape from the bullpen.tsx"
     ],
     "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",
