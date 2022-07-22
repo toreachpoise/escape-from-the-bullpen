@@ -11,6 +11,8 @@ try:
 
     ## variables
     pygame.display.set_caption("escape the bullpen")
+    bullimg = pygame.image.load("branch.png")
+    pygame.display.set_icon(bullimg)
     vec = pygame.math.Vector2 #2d babey
     window_size = (1260, 630) #scaled from display
     screen = pygame.display.set_mode(window_size, 0, 32)
@@ -20,12 +22,16 @@ try:
     acceleration = 5
     jump_height = 7
     friction = 0.1
+    topspeed = 20
     true_scroll = [0,0]
     gravity = 1
     scroll = true_scroll.copy()
     font = pygame.font.SysFont("Verdana", 60)
-    endgame = False
-    game_over = font.render("Game Over", True, (255,255,255))
+    fontsmall = pygame.font.SysFont("Verdana", 32)
+    congratulations = font.render("congratulations", False, (255,255,255))
+    completed = fontsmall.render("you have finished the demo of Escape the Bullpen", False, (0,0,0))
+    gameover = pygame.image.load("game over screen.png")
+    gameover.convert()
     print("variables defined")
 
     ##animations
@@ -65,6 +71,14 @@ try:
                 pygame.image.load("jack jump L5.png"), pygame.image.load("jack jump L6.png"),
                 pygame.image.load("jack jump L7.png"), pygame.image.load("jack jump L8.png")]
 
+    elevator_ani = [pygame.image.load("elevator 1.png"), pygame.image.load("elevator 2.png"),
+                pygame.image.load("elevator 3.png"), pygame.image.load("elevator 4.png"),
+                pygame.image.load("elevator 5.png"), pygame.image.load("elevator 6.png"),
+                pygame.image.load("elevator 7.png"), pygame.image.load("elevator 7.png"), pygame.image.load("elevator 6.png"),
+                pygame.image.load("elevator 5.png"), pygame.image.load("elevator 4.png"),
+                pygame.image.load("elevator 3.png"), pygame.image.load("elevator 2.png"),
+                pygame.image.load("elevator 1.png")]
+
     ## classes
     class Background(pygame.sprite.Sprite):
       def __init__(self):
@@ -75,17 +89,6 @@ try:
       def render(self):
             display.blit(self.image, (0,0))
 
-
-#    class Ground(pygame.sprite.Sprite):
-#        def __init__(self):
-#            super().__init__()
-#            self.image = pygame.image.load("ground.png")
-#            self.rect = self.image.get_rect(topleft=(0, 325))
-#            self.image.set_colorkey((255,255,255))
-#
-#        def render(self):
-
-##            display.blit(self.image, (0-scroll[0],325-scroll[1]))
     class Tile(pygame.sprite.Sprite):
         def __init__(self, image, x, y):
             pygame.sprite.Sprite.__init__(self)
@@ -103,6 +106,7 @@ try:
             self.tiles = self.load_tiles(filename)
             self.map_surface = pygame.Surface((self.map_w, self.map_h))
             self.map_surface.set_colorkey((0,0,0))
+            #self.elevator_pos_x, self.elevator_pos_y =
 
         def load_tiles(self, filename):
             tilelist = []
@@ -122,6 +126,8 @@ try:
                     elif tile == '3': ##scaffold
                         tilelist.append(Tile('scaffold.png', x * self.tile_width-scroll[0], y * self.tile_height-scroll[1]))
                     ##bull tile ID is 4
+                    #elif tile == '6': ##Elevator
+                    #    self.elevator_pos_x, self.elevator_pos_y = x * self.tile_width, y * self.tile_height
                     x += 1
                 y += 1 #move to next row
             self.map_w, self.map_h = x * self.tile_height, y * self.tile_width
@@ -158,6 +164,18 @@ try:
             self.fallcount = 0
 
         def collision_test(self, tilelist):
+            if abs(self.vel.y) > 0:
+                for tile in tilemap.tiles:
+                    if self.rect.colliderect(tile.rect) == 1:
+                        if self.vel.y > 0:
+                            self.pos.y = tile.rect.y - 59
+                            self.on_the_ground = True
+                            self.fallcount = 0
+                            self.vel.y = 0
+                            self.acc.y = 0
+                        if self.vel.y < 0:
+                            self.acc.y = gravity
+                            #self.pos.y = tile.rect.y + tilemap.tile_height
             if abs(self.vel.x) > 0:
                 for tile in tilemap.tiles:
                     if self.rect.colliderect(tile.rect) == 1:
@@ -172,18 +190,6 @@ try:
                             #self.vel.x = -acceleration
                             #self.acc.x = 0
                             print("right bump")
-            if abs(self.vel.y) > 0:
-                for tile in tilemap.tiles:
-                    if self.rect.colliderect(tile.rect) == 1:
-                        if self.vel.y > 0:
-                            self.pos.y = tile.rect.y - 59
-                            self.on_the_ground = True
-                            self.fallcount = 0
-                            self.vel.y = 0
-                            self.acc.y = 0
-                        if self.vel.y < 0:
-                            self.acc.y = gravity
-                            #self.pos.y = tile.rect.y + tilemap.tile_height
 
         def move(self):
             self.acc = vec(0,gravity) #downward acceleration aka gravity
@@ -204,6 +210,12 @@ try:
             if abs(self.acc.x) < 0.1:
                 self.acc.x = 0
                 self.vel.x = 0
+            if abs(self.vel.x) > topspeed:
+                self.acc.x = 0
+                if self.vel.x > 0:
+                    self.vel.x = topspeed
+                else:
+                    self.vel.x = -topspeed
             self.collision_test(tilelist)
             if pressed_keys[K_SPACE]:
                 for tile in tilemap.tiles:
@@ -213,7 +225,6 @@ try:
                         self.pos.y -= jump_height
                         self.on_the_ground == False
                         self.vel.y = -(5 * jump_height)
-                        #self.fallcount += 1
             if self.vel.y > 0:
                 self.y_direction = "DOWN"
             self.vel.y += self.acc.y + acceleration
@@ -222,10 +233,7 @@ try:
             if self.on_the_ground == False:
                 self.fallcount += 1
             self.rect.topleft = self.pos
-            if self.fallcount > 3:
-                print("falling hard")
-                endgame = True
-                #self.kill()
+
 
         def render(self):
             if self.fallcount == 0:
@@ -256,7 +264,42 @@ try:
                 self.move_frame = 0
                 return
 
+    class Elevator(pygame.sprite.Sprite):
+        def __init__(self):
+            super().__init__()
+            self.move_frame = 0
+            self.image = elevator_ani[self.move_frame]
+            self.image.set_colorkey((0,255,0))
+            self.rect = self.image.get_rect()
+            self.pos = (tilemap.elevator_pos_x, tilemap.elevator_pos_y)
+
+        def render(self):
+            self.move_frame+= 1
+            if self.move_frame > 13: # Return to base frame if at end of movement sequence
+                self.move_frame = 0
+            display.blit(self.image, self.pos)
+
+        def stageend(self, player):
+            hits = self.rect.colliderect(player.rect)
+            if hits:
+                display.fill((0,0,255))
+                display.blit(congratulations, (display_width/2, display_height/2))
+                display.blit(completed, (display_width/2, display_height/2))
+
     print("you got a class system, bitch")
+
+    def game_over():
+        if jack.fallcount > 15:
+            print("game over")
+            jack.kill()
+            #display.fill((255,0,0))
+            #display.blit(gameover, (jack.pos.x - true_scroll[0], jack.pos.y - true_scroll[1]))
+            pygame.time.wait(5000)
+            running = False
+            pygame.quit()
+            sys.exit()
+        else:
+            pass
 
     background = Background()
 #    ground = Ground()
@@ -265,6 +308,7 @@ try:
     tilelist = []
 #    ground_group.add(ground)
     jack = Player()
+#    elevator = Elevator()
     print("sprites sprouted")
 
 
@@ -288,8 +332,10 @@ try:
                 running = False
                 pygame.quit()
                 sys.exit()
-        if endgame == False:
-            display.blit(jack.image, (jack.pos.x - true_scroll[0], jack.pos.y - true_scroll[1]))
+
+        display.blit(jack.image, (jack.pos.x - true_scroll[0], jack.pos.y - true_scroll[1]))
+        game_over()
+        #elevator.render()
         screen.blit(pygame.transform.scale(display, window_size), (0,0)) #scaling display to fit the screen
         pygame.display.update()
         clock.tick(24) #number sets framerate in fps
