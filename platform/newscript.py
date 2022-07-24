@@ -2,6 +2,7 @@
 
 import pygame, sys, traceback, os, csv
 from pygame.locals import *
+from tkinter import *
 
 try:
     clock = pygame.time.Clock()
@@ -25,12 +26,16 @@ try:
     topspeed = 20
     true_scroll = [0,0]
     gravity = 1
+    falltodeath = 15
     scroll = true_scroll.copy()
     font = pygame.font.SysFont("Verdana", 60)
     fontsmall = pygame.font.SysFont("Verdana", 32)
     congratulations = font.render("congratulations", False, (255,255,255))
-    completed = fontsmall.render("you have finished the demo of Escape the Bullpen", False, (0,0,0))
+    completed1 = fontsmall.render("you have finished the demo", False, (0,0,0))
+    completed2 = fontsmall.render("of Escape the Bullpen", False, (0,0,0))
+    completed3 = fontsmall.render("full game coming soon", False, (200,0,50))
     gameover = pygame.image.load("game over screen.png")
+    restart = fontsmall.render("press R to restart ...", False, (0,0,0))
     gameover.convert()
     print("variables defined")
 
@@ -92,7 +97,10 @@ try:
     class Tile(pygame.sprite.Sprite):
         def __init__(self, image, x, y):
             pygame.sprite.Sprite.__init__(self)
-            self.image = pygame.image.load(image)
+            if isinstance(self, Elevator):
+                self.image = image
+            else:
+                self.image = pygame.image.load(image)
             self.rect = self.image.get_rect()
             self.rect.x, self.rect.y = x, y
         def render(self, surface):
@@ -106,7 +114,7 @@ try:
             self.tiles = self.load_tiles(filename)
             self.map_surface = pygame.Surface((self.map_w, self.map_h))
             self.map_surface.set_colorkey((0,0,0))
-            #self.elevator_pos_x, self.elevator_pos_y =
+            self.elevator_pos_x, self.elevator_pos_y = 0, 0
 
         def load_tiles(self, filename):
             tilelist = []
@@ -126,8 +134,9 @@ try:
                     elif tile == '3': ##scaffold
                         tilelist.append(Tile('scaffold.png', x * self.tile_width-scroll[0], y * self.tile_height-scroll[1]))
                     ##bull tile ID is 4
-                    #elif tile == '6': ##Elevator
-                    #    self.elevator_pos_x, self.elevator_pos_y = x * self.tile_width, y * self.tile_height
+                    elif tile == '6': ##Elevator
+                        tilelist.append(Elevator(elevator_ani, x * self.tile_width-scroll[0], y * self.tile_height-scroll[1]))
+                        self.elevator_pos_x, self.elevator_pos_y = x * self.tile_width-scroll[0], (y * self.tile_height-scroll[1]) - 32
                     x += 1
                 y += 1 #move to next row
             self.map_w, self.map_h = x * self.tile_height, y * self.tile_width
@@ -162,6 +171,7 @@ try:
             self.rect = self.image.get_rect(topleft=self.pos)
             self.on_the_ground = False
             self.fallcount = 0
+            self.died = False
 
         def collision_test(self, tilelist):
             if abs(self.vel.x) > 0:
@@ -234,6 +244,8 @@ try:
             self.collision_test(tilelist)
             if self.on_the_ground == False:
                 self.fallcount += 1
+            if self.fallcount >= falltodeath:
+                self.died = True
             self.rect.topleft = self.pos
 
 
@@ -266,51 +278,76 @@ try:
                 self.move_frame = 0
                 return
 
-    class Elevator(pygame.sprite.Sprite):
-        def __init__(self):
-            super().__init__()
-            self.move_frame = 0
-            self.image = elevator_ani[self.move_frame]
-            self.image.set_colorkey((0,255,0))
-            self.rect = self.image.get_rect()
-            self.pos = (tilemap.elevator_pos_x, tilemap.elevator_pos_y)
 
-        def render(self):
+    class Elevator(Tile):
+        def __init__(self, image, x, y):
+            self.move_frame = 0
+            self.image = image[self.move_frame]
+            self.image.set_colorkey((0,153,51))
+            self.rect = self.image.get_rect()
+            self.pos = (x, y)
+
+        def render(self, map_surface):
+            self.pos = tilemap.elevator_pos_x, tilemap.elevator_pos_y
+            self.rect.topleft = self.pos
             self.move_frame+= 1
             if self.move_frame > 13: # Return to base frame if at end of movement sequence
                 self.move_frame = 0
+            pygame.draw.rect(display, (255,0,0), self.rect, 0)
             display.blit(self.image, self.pos)
 
         def stageend(self, player):
-            hits = self.rect.colliderect(player.rect)
-            if hits:
-                display.fill((0,0,255))
-                display.blit(congratulations, (display_width/2, display_height/2))
-                display.blit(completed, (display_width/2, display_height/2))
+            if self.rect.left < (player.rect.right - true_scroll[0]):
+                if self.rect.top <= player.rect.top: # + true_scroll[1]:
+                    print("stage completed")
+                    jack.kill()
+                    display.fill((0,0,255))
+                    display.blit(congratulations, (display_width/5, display_height/3))
+                    display.blit(completed1, (display_width/10, display_height/2))
+                    display.blit(completed2, (display_width/10, display_height/1.7))
+                    display.blit(completed3, (display_width/10, display_height/1.4))
 
-    print("you got a class system, bitch")
+    class Handler():
+        def init(self):
+            self.level = 1
 
-    def game_over():
-        if jack.fallcount > 15:
-            print("game over")
-            jack.kill()
-            #display.fill((255,0,0))
-            #display.blit(gameover, (jack.pos.x - true_scroll[0], jack.pos.y - true_scroll[1]))
-            pygame.time.wait(5000)
+        def game_over(self):
+            if jack.died:
+                print("game over")
+                display.fill((255,0,0))
+                #self.root = Tk()
+                #self.root.geometry('170x200')
+                #button1 = Button(self.root, text="continue", width = 18, height = 5, command = self.restart)
+                #button2 = Button(self.root, text="quit", width = 18, height = 5, command = self.quit)
+                #button1.pack()
+                #button2.pack()
+                #self.root.mainloop()
+                display.blit(gameover, (0,0))
+                display.blit(restart, (display_width/10, display_height/1.2))
+                pressed_keys = pygame.key.get_pressed() # Returns the current key presses
+                if pressed_keys[K_r]:
+                    handler.restart()
+        def restart(self):
+            #self.root.destroy()
+            jack.died = False
+            jack.fallcount = 0
+            jack.pos.x = tilemap.start_x
+            jack.pos.y = tilemap.start_y
+        def quit(self):
+            #self.root.destroy()
             running = False
             pygame.quit()
             sys.exit()
-        else:
-            pass
+
+    print("you got a class system, bitch")
+
 
     background = Background()
-#    ground = Ground()
-#    ground_group = pygame.sprite.Group()
     tilemap = TileMap("level 1.csv")
     tilelist = []
-#    ground_group.add(ground)
     jack = Player()
-#    elevator = Elevator()
+    elevator = Elevator(elevator_ani, tilemap.elevator_pos_x, tilemap.elevator_pos_y)
+    handler = Handler()
     print("sprites sprouted")
 
 
@@ -328,7 +365,6 @@ try:
         tilemap.render()
         jack.move()
         jack.render()
-
         for event in pygame.event.get():
             if event.type == QUIT:
                 running = False
@@ -336,8 +372,10 @@ try:
                 sys.exit()
 
         display.blit(jack.image, (jack.pos.x - true_scroll[0], jack.pos.y - true_scroll[1]))
-        game_over()
-        #elevator.render()
+        elevator.render(tilemap.map_surface)
+        #pygame.draw.rect(display, (0,0,255), [jack.pos.x - true_scroll[0], jack.pos.y - true_scroll[1], 60, 60], 0) ##representation of jack rect
+        elevator.stageend(jack)
+        handler.game_over()
         screen.blit(pygame.transform.scale(display, window_size), (0,0)) #scaling display to fit the screen
         pygame.display.update()
         clock.tick(24) #number sets framerate in fps
