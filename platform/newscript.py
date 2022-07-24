@@ -2,6 +2,7 @@
 
 import pygame, sys, traceback, os, csv
 from pygame.locals import *
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 try:
     clock = pygame.time.Clock()

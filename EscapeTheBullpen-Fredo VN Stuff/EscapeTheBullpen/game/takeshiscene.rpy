@@ -532,13 +532,15 @@ if t_points > 0:
         t @ nervous "By which I mean homebrew explosives."
         j @ happy "Nice."
         "(Takeshi will aid you in your quest!)"
+        jump BC_gates
     else:
         t "OK. We have a plan... all that's left is the execution. You ready?"
         j "Ready!"
         if r_companion == True:
             r "Ready as I'll ever be."
         "(Takeshi will aid you in your quest!)"
-        return
+        jump BC_gates
+
 if t_points <= 0 and t_rejection1 == False:
     t "OK. Sounds like we have a plan..."
     j "Great! Thanks for the help-..."
@@ -547,9 +549,11 @@ if t_points <= 0 and t_rejection1 == False:
         "Understood.":
             t "Glad we understand each other."
             "(Takeshi will aid you in your quest!)"
+            jump BC_gates
         "Oh, blow it out your asshole, Takeshi.":
            t "See? This is exactly what I mean!"
            "(Takeshi will aid you in your quest!)"
+           jump BC_gates
 
 if t_points <= 0 and t_rejection1 == True:
     t "But still... we've talked for a little bit now..."
@@ -557,7 +561,7 @@ if t_points <= 0 and t_rejection1 == True:
     t "But like I said, I'm just a fun times music guy. I have a good life."
     t "I'm not going to risk it for you."
     "(Takeshi didn't trust you enough to lend hir aid.)"
-
+    jump BC_gates
 
 return
 
@@ -567,5 +571,4 @@ scene neighborhood with fade
 show jack depressed with moveinbottom
 show jack depressed at center
 "You convinced Takeshi to not help you. You won't have hir support when rescuing Ailea."
-#jumps to level 3 without takeshi
-return
+jump BC_gates
