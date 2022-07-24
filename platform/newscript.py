@@ -164,6 +164,22 @@ try:
             self.fallcount = 0
 
         def collision_test(self, tilelist):
+            if abs(self.vel.x) > 0:
+                for tile in tilemap.tiles:
+                    if self.rect.colliderect(tile.rect) == 1:
+                        if self.pos.y + 50 >= tile.rect.y:
+                            self.pos.y = tile.rect.bottom + 60
+                            print("horizontal collision")
+                            if self.x_direction == "LEFT":
+                                self.pos.x = tile.rect.right
+                                self.vel.x = 2 * acceleration
+                                self.acc.x = 0
+                                print("left bump")
+                            if self.x_direction == "RIGHT":
+                                self.pos.x = tile.rect.left - 60
+                                self.vel.x = -2 * acceleration
+                                self.acc.x = 0
+                                print("right bump")
             if abs(self.vel.y) > 0:
                 for tile in tilemap.tiles:
                     if self.rect.colliderect(tile.rect) == 1:
@@ -176,20 +192,6 @@ try:
                         if self.vel.y < 0:
                             self.acc.y = gravity
                             #self.pos.y = tile.rect.y + tilemap.tile_height
-            if abs(self.vel.x) > 0:
-                for tile in tilemap.tiles:
-                    if self.rect.colliderect(tile.rect) == 1:
-                        print("horizontal collision")
-                        if self.x_direction == "LEFT":
-                            #self.pos.x = tile.rect.right
-                            #self.vel.x = acceleration
-                            #self.acc.x = 0
-                            print("left bump")
-                        if self.x_direction == "RIGHT":
-                            #self.pos.x = tile.rect.left
-                            #self.vel.x = -acceleration
-                            #self.acc.x = 0
-                            print("right bump")
 
         def move(self):
             self.acc = vec(0,gravity) #downward acceleration aka gravity
