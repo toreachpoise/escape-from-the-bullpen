@@ -1,24 +1,66 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/takeshiscene.rpy", line 472, in script
-    if r_companion = True:
-SyntaxError: invalid syntax (takeshiscene.rpy, line 472)
+  File "renpy/common/00keymap.rpy", line 469, in script
+    python hide:
+  File "renpy/common/00keymap.rpy", line 469, in script
+    python hide:
+  File "renpy/common/00keymap.rpy", line 469, in <module>
+    python hide:
+  File "renpy/common/00keymap.rpy", line 488, in _execute_python_hide
+    renpy.save("_reload-1", "reload save game")
+AttributeError: 'NoneType' object has no attribute 'stores'
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/takeshiscene.rpy", line 472, in script
-    if r_companion = True:
-  File "renpy/ast.py", line 1898, in execute
-    if renpy.python.py_eval(condition):
-  File "renpy/python.py", line 2274, in py_eval
-    code = py_compile(code, 'eval')
-  File "renpy/python.py", line 835, in py_compile
-    raise e
-SyntaxError: invalid syntax (takeshiscene.rpy, line 472)
+  File "renpy/bootstrap.py", line 331, in bootstrap
+    renpy.main.main()
+  File "renpy/main.py", line 550, in main
+    if renpy.parser.report_parse_errors():
+  File "renpy/parser.py", line 3015, in report_parse_errors
+    renpy.display.error.report_parse_errors(full_text, error_fn)
+  File "renpy/display/error.py", line 198, in report_parse_errors
+    error_fn=error_fn,
+  File "renpy/game.py", line 284, in invoke_in_new_context
+    return callable(*args, **kwargs)
+  File "renpy/display/error.py", line 46, in call_exception_screen
+    return renpy.ui.interact(mouse="screen", type="screen", suppress_overlay=True, suppress_underlay=True)
+  File "renpy/ui.py", line 298, in interact
+    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
+  File "renpy/display/core.py", line 3325, in interact
+    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, **kwargs)
+  File "renpy/display/core.py", line 3800, in interact_core
+    renpy.loader.check_autoreload()
+  File "renpy/loader.py", line 1132, in check_autoreload
+    renpy.exports.reload_script()
+  File "renpy/exports.py", line 1867, in reload_script
+    renpy.game.call_in_new_context("_save_reload_game")
+  File "renpy/game.py", line 344, in call_in_new_context
+    return renpy.execution.run_context(False)
+  File "renpy/execution.py", line 922, in run_context
+    context.run()
+  File "renpy/common/00keymap.rpy", line 469, in script
+    python hide:
+  File "renpy/common/00keymap.rpy", line 469, in script
+    python hide:
+  File "renpy/ast.py", line 928, in execute
+    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
+  File "renpy/python.py", line 2245, in py_exec_bytecode
+    exec(bytecode, globals, locals)
+  File "renpy/common/00keymap.rpy", line 469, in <module>
+    python hide:
+  File "renpy/common/00keymap.rpy", line 488, in _execute_python_hide
+    renpy.save("_reload-1", "reload save game")
+  File "renpy/loadsave.py", line 394, in save
+    roots = renpy.game.log.freeze(None)
+  File "renpy/python.py", line 2142, in freeze
+    self.complete(False)
+  File "renpy/python.py", line 1726, in complete
+    self.current.stores[name], self.current.delta_ebc[name] = sd.get_changes(begin)
+AttributeError: 'NoneType' object has no attribute 'stores'
 
 Windows-10-10.0.19041
 Ren'Py 7.4.11.2266
 EscapeTheBullpen 1.0
-Mon Jul 18 11:53:55 2022
+Thu Jul 21 12:53:26 2022

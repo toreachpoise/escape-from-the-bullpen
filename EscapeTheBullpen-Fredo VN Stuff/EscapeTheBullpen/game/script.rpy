@@ -8,8 +8,9 @@ default rakesh_age_comment = False
 
 #Scene 1
 label start:
-jump apothecary
+#jump apothecary
 #jump takeshi_garage
+jump BC_gates
 
 label apothecary:
 scene ailea_shop_bg with fade
