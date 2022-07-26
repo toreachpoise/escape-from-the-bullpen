@@ -33,13 +33,13 @@ label BC_gates:
 label BC_gates_withr:
     show jack main at right with moveinright
     show rakesh main at center with moveinright
-        r "OK, no problem here at all, just give me one moment."
+    r "OK, no problem here at all, just give me one moment."
     show rakesh main at right with moveinright
     show rakesh lockpicking with dissolve
-        "(A moment passes)"
-        r "There we go. Let's move fast, get to Ailea."
-        j "Damn, Rakesh. You weren't kidding."
-        r @ happy "Like I said. No problem at all."
-        j "What would I do without you?"
-        r "Suffer."
-        jump hospitalharem
+    "(A moment passes)"
+    r "There we go. Let's move fast, get to Ailea."
+    j "Damn, Rakesh. You weren't kidding."
+    r @ happy "Like I said. No problem at all."
+    j "What would I do without you?"
+    r "Suffer."
+    jump hospitalharem

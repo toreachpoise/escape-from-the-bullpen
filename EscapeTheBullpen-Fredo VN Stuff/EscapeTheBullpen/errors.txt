@@ -2,13 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/matronscene.rpy", line 36: Line is indented, but the preceding show statement statement does not expect a block. Please check this line's indentation.
-    r "OK, no problem here at all, just give me one moment."
-    ^
-
-File "game/matronscene.rpy", line 39: Line is indented, but the preceding show statement statement does not expect a block. Please check this line's indentation.
-    "(A moment passes)"
-    ^
+File "game/aileascene.rpy", line 8: expected ':' not found.
+    transform center_left
+                         ^
 
 Ren'Py Version: Ren'Py 7.4.11.2266
-Thu Jul 21 12:53:03 2022
+Tue Jul 26 16:10:24 2022
