@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/aileascene.rpy", line 8: expected ':' not found.
-    transform center_left
-                         ^
+File "game/aileascene.rpy", line 63: Line is followed by a block, despite not being a menu choice. Did you forget a colon at the end of the line?
+    "What are you talking about?! We came to rescue {i}you{/i}, not a bunch of cows!"
+                                                                                     ^
 
 Ren'Py Version: Ren'Py 7.4.11.2266
-Tue Jul 26 16:10:24 2022
+Wed Jul 27 13:50:42 2022

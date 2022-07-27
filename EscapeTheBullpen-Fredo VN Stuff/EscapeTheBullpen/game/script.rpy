@@ -2,8 +2,10 @@
 
 define j = Character("Jack", image="jack", who_color="#ad3515", what_style="say_protagdialogue", who_style="protag_name")
 define r = Character("Rakesh", image="rakesh", who_color="#46b5dc")
+
+#Rakesh Defaults
 default r_points = 0
-default r_companion = False
+default r_companion = True
 default rakesh_age_comment = False
 
 #Scene 1
