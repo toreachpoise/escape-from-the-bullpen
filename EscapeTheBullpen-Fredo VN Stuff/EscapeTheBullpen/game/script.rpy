@@ -36,7 +36,7 @@ menu:
         $ r_not_a = 0
         r "She's not here man."
         j "But I need help!"
-        r @ shrug "..."
+        r @ shrug R"..."
         jump r_greeting_menu
     "I need birth medicine.":
         $ r_points += 1
@@ -62,10 +62,10 @@ menu:
             "Sorry, I didn't mean to assume...":
                 jump rakesh_apology
             "Yeah, if I was like 3. Or younger.":
-                show jack happy with dissolve
+                show jack happy
                 $ r_points -= 1
                 r @ angry "What the hell?! Did you just come here to be a dick?!"
-                show jack main with dissolve
+                show jack main
                 menu:
                     "I guess I did, you little creep!":
                         jump r_worst_ending
@@ -74,9 +74,9 @@ menu:
 
                 label rakesh_apology:
                     $ r_points += 1
-                    show jack main at right with dissolve
+                    show jack main
                     r "Hmph. Apology accepted..."
-                    show jack main with dissolve
+                    show jack main
                     j "I'm looking for Ailea. I heard she could help me with a baby?"
                     jump rakesh_continue_1
 
@@ -89,7 +89,7 @@ if r_points > 0:
 if r_points == 0:
     "(Rakesh is tolerating your presence, for now.)"
 
-show rakesh main with dissolve
+show rakesh main
 r "They take her to the breeding center. They say she need to help with one of the cows, but then she never come back."
 menu:
     "She's gone? Oh God, this can't be happening...":
@@ -98,7 +98,7 @@ menu:
         r "What do you think, man? We gotta rescue her!"
         jump rakesh_continue_2
     "What, you couldn't stop them?":
-        show rakesh angry with dissolve
+        show rakesh angry
         r "..."
         menu:
             "Sorry, I'm just scared...":
@@ -116,7 +116,7 @@ menu:
                 if r_points <= -2:
                     jump r_worst_ending
                 if r_points > -2:
-                        show rakesh angry with dissolve
+                        show rakesh angry
                         r "What is this, man? Did someone send you just to mess with me?"
                         j "No! I really do need help!"
                         r @ happy "I love to help!"
@@ -124,23 +124,23 @@ menu:
                         jump rakesh_continue_2
     "Then we'll just have to go get her.":
             $ r_points += 2
-            show rakesh happy with dissolve
+            show rakesh happy
             r "It won't be easy..."
             menu:
                 "I didn't expect it to be.":
-                    show jack determined with dissolve
+                    show jack determined
                     $ r_points += 1
                     jump rakesh_continue_2
                 "Oh... in that case...":
                     $ r_points -=1
-                    show rakesh main with dissolve
+                    show rakesh main
                     r "Just hear me out, man!"
                     jump rakesh_continue_2
 
 #Section 3
 label rakesh_continue_2:
-show rakesh main with dissolve
-show jack main with dissolve
+show rakesh main
+show jack main
 if r_points < 0:
     "(Rakesh seems a bit annoyed with you.)"
     jump rakesh_section3_annoyed
@@ -179,9 +179,9 @@ label r_endings:
 r "We'll also need a way inside..."
 if r_points > 0:
     $ r_companion = True
-    show rakesh happy with dissolve
+    show rakesh happy
     r "Fortunately, my lockpicking skills are second-to-none!"
-    show jack determined with dissolve
+    show jack determined
     j "Great! I guess our next stop is Takeshi's."
     r "Let's go!"
     jump end
@@ -204,15 +204,15 @@ if r_points <= 0:
                 jump disguise_menu
             "... Not as a cow..." if bull_disguise == 0 and matron_disguise == 0:
                 r "Afraid so, man."
-                show jack upset with dissolve
+                show jack upset
     j "Ugh. Great."
     r "It's OK, man. Just a disguise. Keep an eye out for something that might work."
-    show jack main with dissolve
+    show jack main
     j "Ok... Guess I'm headed for Takeshi's."
     jump end
 
 label r_worst_ending:
-    show rakesh main with dissolve
+    show rakesh main
     r "Whatever. Not helping the likes of you. Come back when you're in a better mood."
     pause
     scene neighborhood with fade

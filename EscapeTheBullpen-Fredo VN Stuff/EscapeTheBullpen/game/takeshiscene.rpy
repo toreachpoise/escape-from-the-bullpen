@@ -15,9 +15,9 @@ t "Well, well, well. Who is this, alighting upon my doorstep?"
 menu:
     "Oh, wow... it's really you! I'm trying not to freak out.":
         $ t_points += 1
-        show jack upset with dissolve
+        show jack upset
         j "Your music is EVERYTHING."
-        show jack main with dissolve
+        show jack main
         t "Oh, well, hello! Always nice to meet a fan, uh..."
         j "Jack."
         t @ happy "Always nice to meet a fan, Jack."
@@ -70,7 +70,7 @@ if r_companion == True:
         j "YOU WERE A BULL?!"
         t "..."
         extend "Yeah."
-        show jack upset with dissolve
+        show jack upset
         if r_companion == True:
             t "Rakesh, why would you bring me here?! This lunatic could go berserk any second!"
             r "Calm down, friend. Takeshi's OK."
@@ -110,13 +110,13 @@ if r_companion == True:
             t "There are never enough cows to go around, especially if too many of them get pregnant or injured..."
             t "So the bulls start fighting."
             t "And the fighting turns into fucking... and the younger bulls don't really have a say in the matter."
-            show jack main with dissolve
+            show jack main
             t "I was 16 when I got out. By then, I had lost count of how many times I'd been raped."
             t "I don't know if it's worse for the cows... it probably is..."
             t "But believe me. I know what bulls can do."
             menu:
                 "That's... that's terrible. I never thought about what bulls go through...":
-                    show jack main with dissolve
+                    show jack main
                     $ t_points += 1
                     t "I get it... If you're a cow, all you ever see is the ones who make it through."
                     t "To be a bull, to be the kind of prize bull they want, you have to be strong and cruel..."
@@ -241,6 +241,7 @@ if r_companion == False:
 
 
     label t_no_r_menu2:
+        show takeshi main
         if t_points > 0:
             "(Takeshi seems to like you.)"
         if t_points == 0:
@@ -283,10 +284,10 @@ if r_companion == False:
             j "Whoa... wait..."
             t "Sorry about whatever you and Rakesh have going on, but..."
             extend "I'M NOT FUCKING GOING BACK THERE!"
-            extend "EVER!"
+            extend " EVER!"
             j "..."
             t "..."
-            show takeshi sad with dissolve
+            show takeshi sad
             t "Sorry. I just... it took everything I had to get out of there..."
             t "I'm sorry if this ruins y'all's plan."
             j "No, don't worry about that... I get it."
@@ -337,7 +338,7 @@ if r_companion == False:
                     t "Hell yeah, bro!"
                     j "So help us free Ailea. She has knowledge that can help liberate people from the labels they impose on us."
                     t "..."
-                    show takeshi happy with dissolve
+                    show takeshi happy
                     extend "OK. Tell me your plan."
                     jump t_section2
                 "You're wrong... those labels reflect a material truth that affects us in material ways." if t_no_r_menu2_insert2_1 == True or t_no_r_menu2_insert2_2 == True:
@@ -471,11 +472,13 @@ label t_plan_menu:
                         t "..."
                         t @ nervous "By which I mean homebrew explosives."
                         j @ happy "Nice."
+                        $t_concert_plan = True
                         jump t_plan_menu
                     "Go up to the gate and do a little dance, maybe?":
                         $ t_points -= 1
                         t "Ummm... yeah. Sure. My dignity is worth Ailea's freedom. I guess."
                         j "You're a hero, Takeshi."
+                        $ t_dance_plan = True
                         jump t_plan_menu
             if t_points <= 0:
                 $ t_rejection1 = True

@@ -1,40 +1,22 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/aileascene.rpy", line 52, in script
-    play sound alarm.mp3
-  File "renpy/common/000statements.rpy", line 300, in execute_play_sound
-    renpy.sound.play(_audio_eval(p["file"]),
-  File "renpy/common/000statements.rpy", line 32, in _audio_eval
-    return eval(expr, locals=store.audio.__dict__)
-  File "game/aileascene.rpy", line 52, in <module>
-    play sound alarm.mp3
-AttributeError: 'unicode' object has no attribute 'mp3'
+  File "game/aileascene.rpy", line 231, in script
+    jump section3
+ScriptError: could not find label 'section3'.
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/aileascene.rpy", line 52, in script
-    play sound alarm.mp3
-  File "renpy/ast.py", line 2015, in execute
-    self.call("execute")
-  File "renpy/ast.py", line 2003, in call
-    return renpy.statements.call(method, parsed, *args, **kwargs)
-  File "renpy/statements.py", line 278, in call
-    return method(parsed, *args, **kwargs)
-  File "renpy/common/000statements.rpy", line 300, in execute_play_sound
-    renpy.sound.play(_audio_eval(p["file"]),
-  File "renpy/common/000statements.rpy", line 32, in _audio_eval
-    return eval(expr, locals=store.audio.__dict__)
-  File "renpy/python.py", line 2276, in py_eval
-    return py_eval_bytecode(code, globals, locals)
-  File "renpy/python.py", line 2269, in py_eval_bytecode
-    return eval(bytecode, globals, locals)
-  File "game/aileascene.rpy", line 52, in <module>
-    play sound alarm.mp3
-AttributeError: 'unicode' object has no attribute 'mp3'
+  File "game/aileascene.rpy", line 231, in script
+    jump section3
+  File "renpy/ast.py", line 1757, in execute
+    rv = renpy.game.script.lookup(target)
+  File "renpy/script.py", line 918, in lookup
+    raise ScriptError("could not find label '%s'." % str(original))
+ScriptError: could not find label 'section3'.
 
 Windows-10-10.0.19041
 Ren'Py 7.4.11.2266
 EscapeTheBullpen 1.0
-Wed Jul 27 13:23:04 2022
+Thu Jul 28 15:41:58 2022

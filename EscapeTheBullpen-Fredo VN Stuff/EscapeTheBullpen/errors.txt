@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/aileascene.rpy", line 63: Line is followed by a block, despite not being a menu choice. Did you forget a colon at the end of the line?
-    "What are you talking about?! We came to rescue {i}you{/i}, not a bunch of cows!"
-                                                                                     ^
+File "game/aileascene.rpy", line 223: is not terminated with a newline. (Check strings and parenthesis.)
+(Perhaps you left out a " at the end of the first line.)
+        "
 
 Ren'Py Version: Ren'Py 7.4.11.2266
-Wed Jul 27 13:50:42 2022
+Thu Jul 28 15:25:45 2022
