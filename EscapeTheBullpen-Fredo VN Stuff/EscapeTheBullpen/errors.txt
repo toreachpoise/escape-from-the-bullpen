@@ -2,9 +2,17 @@
 errors listed below, and try again.
 
 
-File "game/aileascene.rpy", line 223: is not terminated with a newline. (Check strings and parenthesis.)
-(Perhaps you left out a " at the end of the first line.)
-        "
+File "game/aileascene.rpy", line 249: end of line expected.
+    j "Well... I don't really have a deathwish, so why don't we just walk out the way I came in?":
+                                                                                                 ^
+
+File "game/aileascene.rpy", line 265: expected menuitem
+    a_section2_menu1
+    ^
+
+File "game/aileascene.rpy", line 337: expected ':' not found.
+    label alarm_nor_section2
+                            ^
 
 Ren'Py Version: Ren'Py 7.4.11.2266
-Thu Jul 28 15:25:45 2022
+Thu Jul 28 18:26:27 2022

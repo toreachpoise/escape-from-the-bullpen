@@ -1,22 +1,22 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/aileascene.rpy", line 231, in script
-    jump section3
-ScriptError: could not find label 'section3'.
+  File "game/aileascene.rpy", line 22, in script
+    jump a_section1_no_r
+ScriptError: could not find label 'a_section1_no_r'.
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/aileascene.rpy", line 231, in script
-    jump section3
+  File "game/aileascene.rpy", line 22, in script
+    jump a_section1_no_r
   File "renpy/ast.py", line 1757, in execute
     rv = renpy.game.script.lookup(target)
   File "renpy/script.py", line 918, in lookup
     raise ScriptError("could not find label '%s'." % str(original))
-ScriptError: could not find label 'section3'.
+ScriptError: could not find label 'a_section1_no_r'.
 
 Windows-10-10.0.19041
 Ren'Py 7.4.11.2266
 EscapeTheBullpen 1.0
-Thu Jul 28 15:41:58 2022
+Thu Jul 28 18:10:54 2022

@@ -5,7 +5,7 @@ define r = Character("Rakesh", image="rakesh", who_color="#46b5dc")
 
 #Rakesh Defaults
 default r_points = 0
-default r_companion = True
+default r_companion = False
 default rakesh_age_comment = False
 
 #Scene 1

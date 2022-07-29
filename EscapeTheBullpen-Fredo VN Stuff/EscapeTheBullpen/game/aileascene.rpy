@@ -63,7 +63,7 @@ label a_section1_with_r:
     jump a_section2
 
 
-label a_section1_nor:
+label a_section1_no_r:
 show jack cow at right with moveinright
 show heloise main at center_left with moveinleft:
     xzoom -1
@@ -89,6 +89,7 @@ j "Come on, the way was clear on the way in, we can get out the same way."
 a "Whoa, there. Jack, right?"
 j "Y-yeah?"
 a "Slow down. I appreciate you coming here, but I think I have a better way out."
+j "OK, let's hear it."
 jump a_section2
 
 #Section 2
@@ -202,46 +203,157 @@ label a_section2_withr:
                             a "Ah, that's very kind, Jack. But no."
                             a "Heloise and Mona are... bolder than the others."
                             a @ sad "I hate to leave anyone behind, but I have to help who I can with what I have right now."
+                            jump alarm_withr
 
 label alarm_withr:
-play sound "audio/alarm.mp3" volume .25
-j "..."
-a "..."
-r "..."
-r "I knew I missed something somewhere. My bad, everyone."
-a "Well, looks like the decision's been made. No way out now."
-r "I'll see what I can do to jam the doors."
-hide rakesh with moveoutright
-a "Also, please turn the sound off."
-r "No shit."
-play sound "audio/brokenelectronics.mp3" volume.25
-r "..."
-r "Is that better?"
-stop sound
-a "Much better, thanks, Rakesh!"
-menu:
-    "We're trapped! I'm going to die in here!":
-        show jack scared
-        a "Hey! Snap out of it, Jack! You got this far, which means you're a badass."
-        j "Y-yeah?"
-        a "Yeah!"
-        a "So go get Mona and Heloise, and tell them we're going. Right now!"
-        j @ determined "You can count on me!"
-        jump section3
-    "OK. What's next? We gotta move!":
-        show jack determined
-        show jack main
-        a "Do you know how to get parachutes ready?"
-        menu:
-            "I can try my best?":
-                a "Yeah, OK, dumb question. I need you to talk to Mona and Heloise. Get them ready to go."
-                jump section3
-            "No! Why would I?!":
-                a "Fair enough. Go talk to Mona and Heloise. They need to be ready as soon as possible."
-                jump section3
+    play sound "audio/alarm.mp3" volume .25
+    j "..."
+    a "..."
+    r "..."
+    r "I knew I missed something somewhere. My bad, everyone."
+    a "Well, looks like the decision's been made. No way out now."
+    r "I'll see what I can do to jam the doors."
+    hide rakesh with moveoutright
+    a "Also, please turn the sound off."
+    r "No shit."
+    play sound "audio/brokenelectronics.mp3" volume.25
+    r "..."
+    r "Is that better?"
+    stop sound
+    a "Much better, thanks, Rakesh!"
+    menu:
+        "We're trapped! I'm going to die in here!":
+            show jack scared
+            a "Hey! Snap out of it, Jack! You got this far, which means you're a badass."
+            j "Y-yeah?"
+            a "Yeah!"
+            a "So go get Mona and Heloise, and tell them we're going. Right now!"
+            j @ determined "You can count on me!"
+            jump section3
+        "OK. What's next? We gotta move!":
+            show jack determined
+            show jack main
+            a "Do you know how to get parachutes ready?"
+            menu:
+                "I can try my best?":
+                    a "Yeah, OK, dumb question. I need you to talk to Mona and Heloise. Get them ready to go."
+                    jump section3
+                "No! Why would I?!":
+                    a "Fair enough. Go talk to Mona and Heloise. They need to be ready as soon as possible."
+                    jump section3
 
-
+default a_section2_loop1_1 = False
+default a_section2_loop2_1 = False
 label a_section2_nor:
+    j "Parachutes?"
+    a @ happy "Specifically, parachuting off the top of the building, floating over the walls, and into the loving embrace of the city on the other side."
+    j "..."
+    j "Well... I don't really have a deathwish, so why don't we just walk out the way I came in?"
+    a "You came in as one person dressed as a cow... I'm guessing by that swell in your tummy that you're on their fertility roster..."
+    j "Yeah, so?"
+    a "So of course they were going to let you in!"
+    a "But what do you think will happen if you and I try leaving with two of their blue-ribbon cows?"
+    j "Wait... hold on. Who said anything about two cows?!"
+    a "Heloise and Mona are coming with us, obviously."
+    j "I came here to rescue {i}you{/i}! I'm not about to risk it all for a couple of cows!"
+    a "It's non-negotiable. They're either coming with us, or you'll be leaving alone."
+    menu:
+        "Goddammit!":
+            $ a_points -= 1
+            a "Whoa there, settle down! Why did you come this far in the first place?"
+            j "To rescue you! I need an abortion..."
+            a "And you thought... what, you think my only responsibility is to help you specifically?"
+            label a_section2_loop1:
+            menu:
+                "I'm helping {i}you{/i} specifically, so yeah. You kinda owe me one." if a_section2_loop1_1 == False:
+                    $ a_section2_loop1_1 = True
+                    show ailea upset
+                    $ a_points -= 1
+                    a "I don't owe you anything, except what I owe to anyone else alive."
+                    j "But-..."
+                    a "'But' BULLSHIT. Fuck your 'but' and your 'owing' and everything else."
+                    a "If you can't accept that your individual problems are part of a larger whole..."
+                    a "And if you can't accept that its everyone's responsibility to help who they can with what they have right now..."
+                    a "Then I have nothing else to say to you."
+                    show ailea main
+                    a "You can come with us when we escape, or you can stay behind."
+                    j "But I came all this way!"
+                    a "Isn't that a good thing? You came a long way and did crazy shit to help me, a stranger."
+                    a "All only because I could help you?"
+                    jump a_section2_loop1
+                "I guess not...":
+                    a "Why not?"
+                    j "Isn't that what you... wanted me to say?"
+                    a "I wanted you to speak honestly. With conviction."
+                    label a_section2_loop2:
+                    menu:
+                        "I'm not sure what my convictions are..." if a_section2_loop2_1 == False:
+                            $ a_section2_loop2_1 = True
+                            a "That's OK. Maybe take some time to think on it."
+                            j "I mean... This morning, I made a decision."
+                            j "I couldn't have this baby. I didn't want this baby. I had to get an abortion."
+                            a "Yes."
+                            j "And so I set out looking for you, and now, after everything... I ended up here."
+                            j "I didn't set out because I believed in anything except my own desires."
+                            j "How is that any kind of conviction at all?"
+                            a "Whatever I might think of your motivation, it got you this far. There's some kind of power in that, don't you think?"
+                            j "I guess so. Yeah."
+                            a "And it drove you to a place where, everything else aside, you've put yourself in danger to help me."
+                            j "Yeah..."
+                            a "But now that you're here, what do you find? I'm not the one who needs help."
+                            a @ happy "I have parachutes and a plan."
+                            a "So now that you are {i}here{/i}, and need as much help as Heloise and Mona, what will drive you? And where will it take you?"
+                            a "You've helped in your way. That's in the past."
+                            a "Now that I'm helping in my way, what would you like me to do? Is it my responsibility to help only you? Or is my responsibility to help..."
+                            show ailea akimbo with dissolve
+                            a "... as many people as I can."
+                            show ailea main with dissolve
+                            jump a_section2_loop2
+                        "Then... you're right. It's not your responsibility to help me specifically.":
+                            $ a_points += 1
+                            a "No?"
+                            j "No... no. If I've learned anything today, it's that we're all helping each other."
+                            j "Or at least..."
+                            j "When we all help each other, more things get done."
+                            j "Even if I'm kind of anti-social, even if I can sometimes be mean and rude and selfish..."
+                            j "When I looked for help, I found it."
+                            a "Ah."
+                            a "And isn't that a beautiful thing?"
+                            j "Yeah..."
+                            j @ happy "Yeah, I guess it is."
+                            jump alarm_nor
+                        "I don't care. I've helped you by coming here, so now you should help me.":
+                            a "Wow, no, bad take alert! Weeeeh-oooooh! Weeeeeh-ooooh! Bad take alarm going off! Weee-oooh!"
+                            ##MORE DIALOGUE##
+        "Fine, if it's important to you, it's important to me.":
+            a "It is, Jack. Will you help me get them out?"
+            menu:
+                "I will.":
+                    $ a_points += 1
+                    a "Whoa, sick!"
+                    ##MORE DIALOGUE##
+                "They can tag along, but don't expect me to take on a bull for them.":
+                    $ a_points -= 1
+                    show ailea upset
+                    a "Ah. Well. I see Rakesh has found quite a mercenary this time."
+                    a "Nothing I can do about it now."
+                    a "But maybe consider that there's three of us and one of you..."
+                    a "And maybe consider that it's {i}my{/i} plan we'll be using..."
+                    a "So maybe it's more like {i}you're{/i} tagging along with us?"
+                    menu:
+                        "I see your point. What do I have to do?":
+                            a "Well, first things first, why don't we-..."
+                            jump alarm_nor
+                        "Y'know, I never actually agreed to your plan in the first place.":
+                            a "You're unbelievable-..."
+                            jump alarm_nor_noplan
+
+label alarm_nor:
+
+label alarm_nor_noplan:
+
+label alarm_nor_section2:
+
 
 #ailea has her parachute plan, but won't leave before talking to Mona and Heloise, the two cows who most expressed a desire to escape
 
