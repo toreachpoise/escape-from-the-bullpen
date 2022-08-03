@@ -24,7 +24,7 @@ menu:
     "Uh... Takeshi?":
         t "The literal one and only!"
 if r_companion == True:
-    show rakesh main at center with moveinright:
+    show rakesh main at center_right with moveinright:
         xzoom -1
     r "Hey, Takeshi! How you been, man?"
     t @ happy "Been better, been worse... Just vibing as a fun times music guy..."
@@ -87,6 +87,8 @@ if r_companion == True:
         menu:
             "Not like me and Rakesh, they're not. Rakesh, get behind me." if r_companion == True:
                 $ t_points -= 1
+                show jack upset at center with moveinright
+                show rakesh at right with moveoutright
                 r @ shrug "I... *sigh* Sorry, Takeshi. Didn't know he'd be like this."
                 t "It's fine. Let me... let me just explain"
                 jump t_bull_flashback
@@ -120,7 +122,7 @@ if r_companion == True:
                     $ t_points += 1
                     t "I get it... If you're a cow, all you ever see is the ones who make it through."
                     t "To be a bull, to be the kind of prize bull they want, you have to be strong and cruel..."
-                    t "Most don't survive. They're gelded and turned out to the streets."
+                    t "Most don't survive. The ones who can't cut it are gelded and turned out to the streets."
                     t "Without the drugs to keep them going, they get sick... well. Like I said, most don't survive."
                     t "But some of us... we make it out, and we do our best to pick up the pieces."
                     menu:
@@ -130,7 +132,7 @@ if r_companion == True:
                             t @ sad "..."
                             extend "I'll be OK."
                             jump t_bull_postd
-                        "Good riddance to the ones who die.":
+                        "Well if a bull dies in the gutters, good riddance.":
                             $ t_points -= 1
                             t "No matter what you think of them, their lives are being ruined. They're being hurt."
                             j "I guess so... I feel bad for the young ones at least."
@@ -404,7 +406,7 @@ label t_plan_menu:
             if r_companion == True:
                 j "Rakesh?"
                 r "I take care of any locks. No problem at all."
-                t "Wow. Loving the confidence."
+                t @ excited "Wow. Loving the confidence."
                 jump t_plan_menu
             if r_companion == False:
                 j "I found a disguise that I think will work... I'll be able to get in if I look like *ugh* a cow."
@@ -436,7 +438,10 @@ label t_plan_menu:
                         jump t_plan_menu
         "Let's talk about what's inside." if plan_inside == 0:
             $ plan_inside = 1
-            t "So you make it past the Matron at the gate. Then what?"
+            if r_companion == False:
+                t "So you make it past the Matron at the gate. Then what?"
+            if r_companion == True:
+                t "So you pick the lock on the gate when nobody's looking. Then what?"
             label t_plan_menu_insert1:
             menu:
                 "We'll fight our way through!" if t_plan_menu_insert1_fight == False:
@@ -448,7 +453,11 @@ label t_plan_menu:
                         "I can handle it.":
                             $ breakin_combat = True
                             $ t_points += 1
-                            t "OK, buddy. Great self-confidence."
+                            t @ happy "OK, buddy. Great self-confidence."
+                            t "Just... maybe try sneaking around a bit first?"
+                            j "We'll see..."
+                            if r_companion == True:
+                                r "I'll make sure we're OK, Takeshi."
                             jump t_plan_menu
                         "OK, let me rethink this...":
                             jump t_plan_menu_insert1
@@ -456,7 +465,10 @@ label t_plan_menu:
                     $ t_points += 1
                     t "Yeah, that sounds about right. Ailea will probably be somewhere on the upper floors, with the cows."
                     j "Ugh... I never thought I'd be walking in there on purpose."
-                    t "Don't worry, my friend. This time, you'll be armed and dangerous."
+                    if t_points > 0:
+                        t "Don't worry, my friend. This time, you'll be armed and dangerous."
+                    if t_points <= 0:
+                        t "Don't worry about it. This time you'll be armed and ready for them."
                     jump t_plan_menu
         "Let's talk about how to escape." if plan_getout == 0:
             $ plan_getout = 1
@@ -535,6 +547,7 @@ if t_points > 0:
         t @ nervous "By which I mean homebrew explosives."
         j @ happy "Nice."
         "(Takeshi will aid you in your quest!)"
+        $ t_companion = True
         jump BC_gates
     else:
         t "OK. We have a plan... all that's left is the execution. You ready?"
@@ -542,6 +555,7 @@ if t_points > 0:
         if r_companion == True:
             r "Ready as I'll ever be."
         "(Takeshi will aid you in your quest!)"
+        $ t_companion = True
         jump BC_gates
 
 if t_points <= 0 and t_rejection1 == False:
@@ -552,10 +566,12 @@ if t_points <= 0 and t_rejection1 == False:
         "Understood.":
             t "Glad we understand each other."
             "(Takeshi will aid you in your quest!)"
+            $ t_companion = True
             jump BC_gates
         "Oh, blow it out your asshole, Takeshi.":
            t "See? This is exactly what I mean!"
            "(Takeshi will aid you in your quest!)"
+           $ t_companion = True
            jump BC_gates
 
 if t_points <= 0 and t_rejection1 == True:
@@ -564,6 +580,7 @@ if t_points <= 0 and t_rejection1 == True:
     t "But like I said, I'm just a fun times music guy. I have a good life."
     t "I'm not going to risk it for you."
     "(Takeshi didn't trust you enough to lend hir aid.)"
+    $ t_companion = False
     jump BC_gates
 
 return

@@ -32,14 +32,25 @@ label BC_gates:
 
 label BC_gates_withr:
     show jack main at right with moveinright
-    show rakesh main at center with moveinright
-    r "OK, no problem here at all, just give me one moment."
-    show rakesh main at right with moveinright
-    show rakesh lockpicking with dissolve
+    show rakesh main at center_right with moveinright:
+            xzoom -1
+    j "Rakesh? You're up, buddy."
+    r "OK, just give me one moment."
+    show rakesh main at left with moveoutleft
+    show rakesh lockpicking with dissolve:
+        xzoom -1
     "(A moment passes)"
+    pause 1.0
+    show rakesh main at left with dissolve:
+        xzoom 1
     r "There we go. Let's move fast, get to Ailea."
     j "Damn, Rakesh. You weren't kidding."
     r @ happy "Like I said. No problem at all."
     j "What would I do without you?"
     r "Suffer."
+    show jack happy
+    show rakesh main at left:
+        xzoom -1
+    hide rakesh with moveoutleft
+    pause 1.0
     jump hospitalharem

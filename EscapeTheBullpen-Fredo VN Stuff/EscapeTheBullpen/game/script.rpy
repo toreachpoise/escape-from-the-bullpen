@@ -10,10 +10,10 @@ default rakesh_age_comment = False
 
 #Scene 1
 label start:
-#jump apothecary
+jump apothecary
 #jump takeshi_garage
 #jump BC_gates
-jump hospitalharem
+#jump hospitalharem
 
 label apothecary:
 scene ailea_shop_bg with fade
@@ -36,7 +36,7 @@ menu:
         $ r_not_a = 0
         r "She's not here man."
         j "But I need help!"
-        r @ shrug R"..."
+        r @ shrug "..."
         jump r_greeting_menu
     "I need birth medicine.":
         $ r_points += 1
@@ -51,7 +51,7 @@ menu:
             r "Oh. Sorry, man. Ailea's the only one who could help with that."
         j "Where is she?"
         jump rakesh_continue_1
-    "Oh, great, it's just some kid.":
+    "Ugh, great, it's just some kid.":
         $ r_points -= 1
         $ rakesh_age_comment = True
         r @ angry "Man, I'm twice your age."
