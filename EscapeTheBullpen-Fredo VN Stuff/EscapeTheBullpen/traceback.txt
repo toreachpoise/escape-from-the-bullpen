@@ -1,22 +1,36 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/aileascene.rpy", line 466, in script
-    jump cow_conversation
-ScriptError: could not find label 'cow_conversation'.
+  File "game/script.rpy", line 39, in script
+    r @ shrug R"..."
+Exception: Image 'rakesh shrug' does not accept attributes 'R'.
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/aileascene.rpy", line 466, in script
-    jump cow_conversation
-  File "renpy/ast.py", line 1757, in execute
-    rv = renpy.game.script.lookup(target)
-  File "renpy/script.py", line 918, in lookup
-    raise ScriptError("could not find label '%s'." % str(original))
-ScriptError: could not find label 'cow_conversation'.
+  File "game/script.rpy", line 39, in script
+    r @ shrug R"..."
+  File "renpy/ast.py", line 721, in execute
+    renpy.exports.say(who, what, *args, **kwargs)
+  File "renpy/exports.py", line 1419, in say
+    who(what, *args, **kwargs)
+  File "renpy/character.py", line 1189, in __call__
+    old_attr_state = self.handle_say_attributes(False, interact)
+  File "renpy/character.py", line 1012, in handle_say_attributes
+    if self.resolve_say_attributes(predicting, temporary_attrs):
+  File "renpy/character.py", line 957, in resolve_say_attributes
+    renpy.exports.show(show_image)
+  File "renpy/exports.py", line 742, in show
+    if not base.find_target() and renpy.config.missing_show:
+  File "renpy/display/image.py", line 409, in find_target
+    self.target = target._duplicate(a)
+  File "renpy/display/core.py", line 390, in _duplicate
+    args.extraneous()
+  File "renpy/display/core.py", line 271, in extraneous
+    " ".join(self.args),
+Exception: Image 'rakesh shrug' does not accept attributes 'R'.
 
 Windows-10-10.0.19041
 Ren'Py 7.4.11.2266
 EscapeTheBullpen 1.0
-Mon Aug  1 18:05:58 2022
+Wed Aug  3 11:41:08 2022

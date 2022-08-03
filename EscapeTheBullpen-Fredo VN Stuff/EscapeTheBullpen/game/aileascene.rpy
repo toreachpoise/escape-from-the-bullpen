@@ -115,8 +115,9 @@ label a_section2_withr:
         "What do you mean by parachutes?":
             a "See, long ago, before they figured out anti-gravity technology, the only way to slow your fall was through air resistance."
             a "They would take these giant sheets of fabric and jump off all sorts of things, and the surface area of the-..."
-            j "I know what parachutes are! What's your plan?"
-            a "Oh. We jump off the roof with parachutes."
+            j @ upset "I know what parachutes are! What's your plan?"
+            a "Oh."
+            a @ happy "We jump off the roof with parachutes."
         "Um... 'not again'? 'This time'?!? What's going on...":
             r @ exhasperated "Years ago, Ailea break both her damn ankles trying to make her own parachute."
             a "Yes, and like I told you then, I just hadn't been able to requisition enough fabric."
@@ -137,7 +138,7 @@ label a_section2_withr:
         "But why can't we just walk out?":
             a "It'll be way harder for a big group of us to sneak out than it will be for two of you to sneak in!"
             j "A big group?"
-            a "Well... is five a big group? You two, me, Heloise, Mona."
+            a "Well... is five a big group? You two, me, Heloise, Mona. I hope this isn't a problem..."
             menu:
                 "What are you talking about?! We came to rescue {i}you{/i}, not a bunch of cows!":
                     $ a_points -= 1
@@ -230,7 +231,7 @@ label alarm_withr:
     a "..."
     r "..."
     r "I knew I missed something somewhere. My bad, everyone."
-    a "Well, looks like the decision's been made. No way out now."
+    a "Well, looks like the decision's been made. No way out now but the roof."
     r "I'll see what I can do to jam the doors."
     hide rakesh with moveoutright
     a "Also, please turn the sound off."
@@ -374,8 +375,8 @@ label a_section2_nor:
                                     j "I'm begging you, just... please tell me the truth."
                                     a "OK."
                                     a "Then in all likelihood, we'll all be dead or captured before we even get to the roof."
-                                    j @ horror "..."
-                                    j @ horror "Wh-..."
+                                    j @ cowhorror "..."
+                                    j @ cowhorror "Wh-..."
                                     show ailea happy
                                     pause 1.5
                                     show ailea main
@@ -587,7 +588,7 @@ default cow_convo_loop_1_4 = False
 
 label cow_convo:
     scene harem bg with fade
-    show heloise main at center_left with moveinleft:
+     heloise main at center_left with moveinleft:
         xzoom -1
     show mona main at left with moveinleft:
         xzoom -1
@@ -601,14 +602,22 @@ label cow_convo:
         show jack cowmain at right with moveinright
     h "Was that alarm your fault?"
     m "Stop it, Heloise! I'm sure it was nothing to do with him. Probably just some bulls getting into a fight or..."
-    j "No, it was me."
-    h "OK. Thanks for that, then. Can't wait to get cavity searched."
+    if r_companion == False:
+        j "No, it was me."
+        h @ upset "OK. Thanks for that, then. Can't wait to get cavity searched."
+    if r_companion == True:
+        menu:
+            "Y-yeah, that was my fault. Sorry.":
+                h @ upset "OK. Thanks for that, then. Can't wait to get cavity searched."
+            "It was Rakesh, actually.":
+                h @ upset "OK, great. Now I know who to blame when we all get cavity searched."
     j "Not this time."
     h "..."
+    h "What does that mean?!"
     j "Ailea says it's time to go."
     show heloise happy
     "We're escaping?"
-    show mona worried
+    show mona scared
     m "We're... escaping?"
     label cow_convo_loop_1:
     if cow_convo_loop_1_2 and cow_convo_loop_1_1 == True:
@@ -633,7 +642,7 @@ label cow_convo:
                         j "..."
                         j "Yeah?"
                         m "OK!!! As long as it's peer reviewed, I trust the science."
-                        h @ main "Yes. So glad our new friend here {i}understands the science{/i}."
+                        h @ suspicious "Yes. So glad our new friend here {i}understands the science{/i}."
                         jump cow_convo_loop_1
                     if parachute_reassurance == False:
                         j "I've heard about these things, these parachute things, they... I know they work, y'know. I've seen videos and stuff."
@@ -646,7 +655,7 @@ label cow_convo:
                         extend " you..."
                         extend " ???"
                         j "Good, because I'm telling the truth."
-                        m "Yeah! OK!"
+                        m @ happy "Yeah! OK!"
                         jump cow_convo_loop_1
                 "I know what you mean, but what other choice do we have?!":
                     $ c_points -= 1
@@ -671,10 +680,20 @@ label cow_convo:
                 h "And hey, if this kid came from out there, it can't be all bad!"
             if r_companion == True:
                 h "And hey, at least two of the people out there came in here to save us, so it can't be that bad!"
-            m "Yeah..."
+            if t_companion == True:
+                if r_companion == True:
+                    show jack cowhappy
+                if r_companion == False:
+                    show jack happy
+                j "And also this person Takeshi is waiting out there for us! The world is {i}full{/i} of helpful people!"
+                if r_companion == True:
+                    show jack cowmain
+                if r_companion == False:
+                    show jack main
+            m "Yeah... I guess you're right."
             m "And like I said, if I stay here... I won't survive. It's time to go."
-            h "Yeah, Jack! Time to go!"
-            m "What the hell are we doing standing around talking?!"
+            h @ upset"Yeah, Jack! Time to go!"
+            m @ upset "What the hell are we doing standing around talking?!"
             j "All right, jeez..."
             jump cow_convo_loop_1
     label cow_convo_continue:
@@ -711,7 +730,7 @@ label cow_convo_denied:
                             m "Yay!"
                             j "Thanks, Mona."
                         "It's... it's just too late for me. I'll hold them off as long as they can":
-                            h "Oh my {i}God{/i} this dude."
+                            h "Oh my {i}God{/i}, this dude."
                             m @ sad "Y-you're sure?"
                             menu:
                                 "Yeah, just go. I'm done.":
@@ -766,8 +785,8 @@ label cow_convo_denied:
                                         "(Sit down and wait)":
                                             jump a_worst_ending
                                 "Just shut up.":
-                                    m @ angry "!!!"
-                                    h @ angry "Hey! Lay off, buddy."
+                                    m @ upset "!!!"
+                                    h @ upset "Hey! Lay off, buddy."
                                     j "Of course I understand how it might apply to me, but that doesn't mean I think it's possible."
                                     h "OK, well. Whatever, dude. Like mona said, you have a choice to make."
                                     hide heloise with moveoutleft
@@ -800,7 +819,7 @@ label cow_convo_denied:
                                     h "OK, then. Both of you, come on!"
                                     jump a_jack_reluctant_ending
                                 "I don't think you're one to be handing out life advice.":
-                                    h @ angry "Hey!"
+                                    h @ upset "Hey!"
                                     h "OK, Mona, let's get out of here."
                                     hide heloise with moveoutleft
                                     m "So rude..."
@@ -835,7 +854,7 @@ label cow_convo_denied:
                             m "Um, OK, fair, wow."
                             m "But I'm still going."
                             m "Whatever it is that's keeping you here..."
-                            m @ angry "GET OVER IT!!!"
+                            m @ upset "GET OVER IT!!!"
                             m "This isn't where you want to die."
                             menu:
                                 "No... I guess not.":
@@ -895,21 +914,81 @@ label a_worst_ending:
     "They take you alive."
     "You never learn what happened to the others."
     return
+
 label a_jack_reluctant_ending:
-    "Jack rejoins the party, and the escape proceeds as normal."
+    #"Jack rejoins the party, and the escape proceeds as normal."
+    scene harem bg with fade
+    show jack cowmain at right
+    show mona main at center_left:
+        xzoom -1
+    show heloise main at left:
+        xzoom -1
+    show ailea main at center
+    m @ happy "Jack! You're coming after all!"
+    j "Yeah. What's the point of staying behind to either die or live a life of torture."
+    h @ happy "Suddenly reasonable. All's well that ends well."
+    j "Just... hang on a second..."
+    hide jack with moveoutright
+    show jack main at right with moveinright
+    m "Ooooh!"
+    m "If you don't want it anymore..."
+    m "Can I have your outfit?"
+    a "OK, enough! We gotta move."
+    a "Heloise, you can take care of Mona, right?"
+    h "You betcha."
+    show mona happy
+    a "Jack, with me."
+    a "Follow close, everyone! We're getting out of here!"
+    m @ happy "Yay!"
+    h @ happy "Finally."
+    j @ happy"Let's go!"
+    #jump to level 4 - no rakesh, check for takeshi companion: y/n, plan: concert/dance
     return
+
 label a_section4_withr:
-    "Jack and Rakesh discuss final dealings with Ailea + Co"
+    #"Jack and Rakesh discuss final dealings with Ailea + Co"
+    scene harem bg with fade
+    show rakesh main at center_right:
+        xzoom -1
+    show jack main at right
+    show mona main at center_left:
+        xzoom -1
+    show heloise main at left:
+        xzoom -1
+    show ailea main at center
+    a "OK, everyone ready?"
+    m @ happy "Yeah!"
+    h @ happy "Been ready for a while now."
+    j @ happy "Good to go!"
+    r @ happy "What are we waiting for?!"
+    a "Heloise, you can take care of Mona, right?"
+    h "Of course."
+    show mona happy
+    a "Jack, you're with me."
+    a "Rakesh..."
+    r @ happy "Hoverboard juiced up and ready to fly."
+    a "Then let's fucking go!"
+    #jump to level 4 - with rakesh, check for takeshi companion: y/n, plan: concert/dance
     return
+
 label a_section4_nor:
-    "Jack discusses final dealings with Ailea + Co"
+    #"Jack discusses final dealings with Ailea + Co"
+    scene harem bg with fade
+    show jack main at right
+    show ailea main at center
+    show mona main at center_left:
+        xzoom -1
+    show heloise main at left:
+        xzoom -1
+    a "OK, everyone ready?"
+    m @ happy "Yeah!"
+    h @ happy "Been ready for a while now."
+    j @ happy "Now that I'm back in my normal clothes, yeah!"
+    m "Aww, I thought it was nice."
+    a "Heloise, you can take care of Mona, right?"
+    h "Of course."
+    show mona happy
+    a "Jack, you're with me."
+    a "Let's fucking go!"
+    #jump to level 4 - no rakesh, check for takeshi companion: y/n, plan: concert/dance
     return
-
-
-#Endings, arrangements of parachute partners, etc.
-
-#if t_companion == false:
-    #Boss fight!
-#else:
-    #takeshi's musical happening begins
-    #Takeshi blows up the gate

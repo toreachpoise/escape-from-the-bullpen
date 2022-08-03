@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/aileascene.rpy", line 573: Line is followed by a block, despite not being a menu choice. Did you forget a colon at the end of the line?
-    "I'm staying. I want to take out as many bulls as I can today."
-                                                                   ^
+File "game/matronscene.rpy", line 42: expected 'image_name_component' not found.
+    show show rakesh main at left with moveoutleft:
+        ^
 
 Ren'Py Version: Ren'Py 7.4.11.2266
-Mon Aug  1 18:18:34 2022
+Wed Aug  3 11:50:58 2022
