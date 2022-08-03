@@ -506,7 +506,7 @@ label alarm_nor:
                                     a "If people are used as tools, then they've been victimized."
                                     a "Cows, bulls, matrons..."
                                     a "We've all been tortured into our roles in one way or another."
-                                    j "The only difference is, so me roles get to turn around and start torturing everyone else."
+                                    j "The only difference is, some roles get to turn around and start torturing everyone else."
                                     a "Do you think that's a reward? Do you think being a torturer is good for you? For your soul and mind?"
                                     a "Hold them accountable, Jack, but don't lose your compassion."
                                     j "Compassion for torturers?"
@@ -742,7 +742,7 @@ label cow_convo_denied:
                                             jump a_jack_reluctant_ending
                                         "(Sit down and wait)":
                                             jump a_worst_ending
-                "I think my whole {i}life{/i} is just a series mistakes.":
+                "I think my whole {i}life{/i} is just a series of mistakes.":
                     m "Well... mine too, but I'm ready to start changinging that."
                     menu:
                         "Good for you.":

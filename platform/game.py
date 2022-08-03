@@ -134,7 +134,8 @@ try:
                         tilelist.append(Tile('interior.png', x * self.tile_width-scroll[0], y * self.tile_height-scroll[1]))
                     elif tile == '3': ##scaffold
                         tilelist.append(Tile('scaffold.png', x * self.tile_width-scroll[0], y * self.tile_height-scroll[1]))
-                    ##bull tile ID is 4
+                    elif tile == '4': ##bull
+                        tilelist.append(Tile('branch.png', x * self.tile_width-scroll[0], y * self.tile_height-scroll[1]))
                     elif tile == '6': ##Elevator
                         tilelist.append(Elevator(elevator_ani, x * self.tile_width-scroll[0], y * self.tile_height-scroll[1]))
                         self.elevator_pos_x, self.elevator_pos_y = x * self.tile_width-scroll[0], (y * self.tile_height-scroll[1]) - 32
@@ -169,7 +170,7 @@ try:
             self.vel = vec(0,0)
             self.acc = vec(0,0)
             self.image = pygame.image.load("jack idle 1.png")
-            self.rect = self.image.get_rect(topleft=self.pos)
+            self.rect = Rect((self.pos), (30,60))
             self.on_the_ground = False
             self.fallcount = 0
             self.died = False
@@ -340,11 +341,14 @@ try:
             pygame.quit()
             sys.exit()
 
+    def Loadify(imgname):
+        return pygame.image.load(imgname).convert_alpha()
+
     print("you got a class system, bitch")
 
 
     background = Background()
-    tilemap = TileMap("level 1.csv")
+    tilemap = TileMap("level 2.csv") ## change to change levels
     tilelist = []
     jack = Player()
     elevator = Elevator(elevator_ani, tilemap.elevator_pos_x, tilemap.elevator_pos_y)
@@ -354,15 +358,15 @@ try:
 
     while running:
 
-        true_scroll[0] += (jack.rect.x-true_scroll[0]-350)/20
-        true_scroll[1] += (jack.rect.y-true_scroll[1]-100)/20
+        true_scroll[0] += (jack.rect.x-true_scroll[0]-350)/10
+        true_scroll[1] += (jack.rect.y-true_scroll[1]-100)/10
         scroll = true_scroll.copy()
         scroll[0] = int(scroll[0])
         scroll[1] = int(scroll[1])
 
         background.render()
         #ground.render()
-        tilemap.load_map("level 1.csv")
+        tilemap.load_map("level 2.csv") ## change to change levels
         tilemap.render()
         jack.move()
         jack.render()

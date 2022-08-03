@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "platform/level 2.tmx",
+    "activeFile": "level 3b with rakesh.tmx",
     "expandedProjectPaths": [
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
@@ -14,17 +14,41 @@
             "scaleInEditor": 1
         },
         "level 1.tmx": {
-            "scale": 0.25,
+            "scale": 0.125,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 836,
-                "y": -236
+                "x": 988,
+                "y": -56
             }
         },
         "level 1.tmx#escape from the bullpen": {
             "dynamicWrapping": false,
             "scaleInDock": 1,
             "scaleInEditor": 1
+        },
+        "level 3a.tmx": {
+            "scale": 0.125,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1620,
+                "y": -1264
+            }
+        },
+        "level 3b no rakesh.tmx": {
+            "scale": 0.0625,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 3848,
+                "y": -1536
+            }
+        },
+        "level 3b with rakesh.tmx": {
+            "scale": 0.0625,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 3880,
+                "y": -224
+            }
         },
         "platform/escape from the bullpen.tsx": {
             "dynamicWrapping": true,
@@ -35,8 +59,8 @@
             "scale": 0.125,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 2992,
-                "y": -464
+                "x": 3060,
+                "y": -488
             }
         }
     },
@@ -49,13 +73,19 @@
     "openFiles": [
         "level 1.tmx",
         "platform/escape from the bullpen.tsx",
-        "platform/level 2.tmx"
+        "platform/level 2.tmx",
+        "level 3a.tmx",
+        "level 3b with rakesh.tmx",
+        "level 3b no rakesh.tmx"
     ],
     "project": "eftb levels.tiled-project",
     "recentFiles": [
         "level 1.tmx",
         "platform/escape from the bullpen.tsx",
         "platform/level 2.tmx",
+        "level 3a.tmx",
+        "level 3b no rakesh.tmx",
+        "level 3b with rakesh.tmx",
         "escape from the bullpen.tsx"
     ],
     "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",
