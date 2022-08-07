@@ -105,7 +105,9 @@ try:
             self.rect = self.image.get_rect()
             self.rect.x, self.rect.y = x, y
         def render(self, surface):
-            display.blit(self.image, (self.rect.x-scroll[0], self.rect.y-scroll[1]))
+            if -tilemap.tile_width < self.rect.x-scroll[0] < display_width:
+                if -tilemap.tile_height < self.rect.y-scroll[1] < display_height:
+                    display.blit(self.image, (self.rect.x-scroll[0], self.rect.y-scroll[1]))
 
     class TileMap():
         def __init__(self, filename):
@@ -144,13 +146,10 @@ try:
             self.map_w, self.map_h = x * self.tile_height, y * self.tile_width
             return tilelist
 
-        def render(self):
-            display.blit(self.map_surface, (0-scroll[0],0-scroll[1]))
-
-        def load_map(self, filename):
-            self.load_tiles(filename)
+        def render(self, filename):
             for tile in self.tiles:
                 tile.render(self.map_surface)
+            display.blit(self.map_surface, (0-scroll[0],0-scroll[1]))
 
         def read_csv(self, filename):
             map = []
@@ -167,10 +166,12 @@ try:
             self.y_direction = "DOWN"
             self.move_frame = 0
             self.pos = vec((tilemap.start_x, tilemap.start_y))
+            self.start_position = self.pos
             self.vel = vec(0,0)
             self.acc = vec(0,0)
             self.image = pygame.image.load("jack idle 1.png").convert_alpha()
-            self.rect = Rect((self.pos), (30,60))
+            self.mask = pygame.mask.from_surface(self.image)
+            self.rect = self.mask.get_rect(topleft = self.pos)
             self.on_the_ground = False
             self.fallcount = 0
             self.died = False
@@ -317,6 +318,10 @@ try:
         def init(self):
             self.level = 1
 
+        def status_update(self):
+            status_message = fontsmall.render(str(int(clock.get_fps())), False, (255,0,0))
+            display.blit(status_message, (0,0))
+
         def game_over(self):
             if jack.died:
                 print("game over")
@@ -337,8 +342,7 @@ try:
             #self.root.destroy()
             jack.died = False
             jack.fallcount = 0
-            jack.pos.x = tilemap.start_x
-            jack.pos.y = tilemap.start_y
+            jack.pos = jack.start_position
         def quit(self):
             #self.root.destroy()
             running = False
@@ -370,8 +374,8 @@ try:
 
         background.render()
         #ground.render()
-        tilemap.load_map("level 2.csv") ## change to change levels
-        tilemap.render()
+        #tilemap.load_map("level 2.csv") ## change to change levels
+        tilemap.render("level 2")
         jack.move()
         jack.render()
         for event in pygame.event.get():
@@ -383,8 +387,9 @@ try:
         display.blit(jack.image, (jack.pos.x - true_scroll[0], jack.pos.y - true_scroll[1]))
         elevator.render(tilemap.map_surface)
         #pygame.draw.rect(display, (0,0,255), [jack.pos.x - true_scroll[0], jack.pos.y - true_scroll[1], 60, 60], 0) ##representation of jack rect
-        elevator.stageend(jack)
+        #elevator.stageend(jack)
         handler.game_over()
+        handler.status_update()
         screen.blit(pygame.transform.scale(display, window_size), (0,0)) #scaling display to fit the screen
         pygame.display.update()
         clock.tick(FPS)
