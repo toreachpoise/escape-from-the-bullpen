@@ -16,6 +16,7 @@ try:
     bullimg = pygame.image.load("branch.png")
     pygame.display.set_icon(bullimg)
     vec = pygame.math.Vector2 #2d babey
+    FPS = 60
     window_size = (1260, 630) #scaled from display
     screen = pygame.display.set_mode(window_size, 0, 32)
     display_width = 700
@@ -35,61 +36,60 @@ try:
     completed1 = fontsmall.render("you have finished the demo", False, (0,0,0))
     completed2 = fontsmall.render("of Escape the Bullpen", False, (0,0,0))
     completed3 = fontsmall.render("full game coming soon", False, (200,0,50))
-    gameover = pygame.image.load("game over screen.png")
+    gameover = pygame.image.load("game over screen.png").convert_alpha()
     restart = fontsmall.render("press R to restart ...", False, (0,0,0))
-    gameover.convert()
     print("variables defined")
 
     ##animations
-    idle_ani_R = [pygame.image.load("jack idle 1.png"), pygame.image.load("jack idle 1.png"),
-                pygame.image.load("jack idle 2.png"), pygame.image.load("jack idle 2.png"),
-                pygame.image.load("jack idle 3.png"), pygame.image.load("jack idle 3.png"),
-                pygame.image.load("jack idle 4.png"), pygame.image.load("jack idle 4.png")]
-    idle_ani_L = [pygame.image.load("jack idle L1.png"), pygame.image.load("jack idle L1.png"),
-                pygame.image.load("jack idle L2.png"), pygame.image.load("jack idle L2.png"),
-                pygame.image.load("jack idle L3.png"), pygame.image.load("jack idle L3.png"),
-                pygame.image.load("jack idle L4.png"), pygame.image.load("jack idle L4.png")]
+    idle_ani_R = [pygame.image.load("jack idle 1.png").convert_alpha(), pygame.image.load("jack idle 1.png").convert_alpha(),
+                pygame.image.load("jack idle 2.png").convert_alpha(), pygame.image.load("jack idle 2.png").convert_alpha(),
+                pygame.image.load("jack idle 3.png").convert_alpha(), pygame.image.load("jack idle 3.png").convert_alpha(),
+                pygame.image.load("jack idle 4.png").convert_alpha(), pygame.image.load("jack idle 4.png").convert_alpha()]
+    idle_ani_L = [pygame.image.load("jack idle L1.png").convert_alpha(), pygame.image.load("jack idle L1.png").convert_alpha(),
+                pygame.image.load("jack idle L2.png").convert_alpha(), pygame.image.load("jack idle L2.png").convert_alpha(),
+                pygame.image.load("jack idle L3.png").convert_alpha(), pygame.image.load("jack idle L3.png").convert_alpha(),
+                pygame.image.load("jack idle L4.png").convert_alpha(), pygame.image.load("jack idle L4.png").convert_alpha()]
 
-    run_start_ani_R = [pygame.image.load("jack run start 1.png"), pygame.image.load("jack run start 2.png"),
-                pygame.image.load("jack run start 3.png"), pygame.image.load("jack run start 4.png"),
-                pygame.image.load("jack run start 5.png"), pygame.image.load("jack run start 6.png"),
+    run_start_ani_R = [pygame.image.load("jack run start 1.png").convert_alpha(), pygame.image.load("jack run start 2.png").convert_alpha(),
+                pygame.image.load("jack run start 3.png").convert_alpha(), pygame.image.load("jack run start 4.png").convert_alpha(),
+                pygame.image.load("jack run start 5.png").convert_alpha(), pygame.image.load("jack run start 6.png").convert_alpha(),
                 pygame.image.load("jack run start 7.png"), pygame.image.load("jack run start 8.png")]
-    run_start_ani_L = [pygame.image.load("jack run start L1.png"), pygame.image.load("jack run start L2.png"),
-                pygame.image.load("jack run start L3.png"), pygame.image.load("jack run start L4.png"),
-                pygame.image.load("jack run start L5.png"), pygame.image.load("jack run start L6.png"),
-                pygame.image.load("jack run start L7.png"), pygame.image.load("jack run start L8.png")]
+    run_start_ani_L = [pygame.image.load("jack run start L1.png").convert_alpha(), pygame.image.load("jack run start L2.png").convert_alpha(),
+                pygame.image.load("jack run start L3.png").convert_alpha(), pygame.image.load("jack run start L4.png").convert_alpha(),
+                pygame.image.load("jack run start L5.png").convert_alpha(), pygame.image.load("jack run start L6.png").convert_alpha(),
+                pygame.image.load("jack run start L7.png").convert_alpha(), pygame.image.load("jack run start L8.png").convert_alpha()]
 
-    run_ani_R = [pygame.image.load("jack run 1.png"), pygame.image.load("jack run 2.png"),
-                pygame.image.load("jack run 3.png"), pygame.image.load("jack run 4.png"),
-                pygame.image.load("jack run 5.png"), pygame.image.load("jack run 6.png"),
-                pygame.image.load("jack run 7.png"), pygame.image.load("jack run 8.png")]
-    run_ani_L = [pygame.image.load("jack run L1.png"), pygame.image.load("jack run L2.png"),
-                pygame.image.load("jack run L3.png"), pygame.image.load("jack run L4.png"),
-                pygame.image.load("jack run L5.png"), pygame.image.load("jack run L6.png"),
-                pygame.image.load("jack run L7.png"), pygame.image.load("jack run L8.png")]
+    run_ani_R = [pygame.image.load("jack run 1.png").convert_alpha(), pygame.image.load("jack run 2.png").convert_alpha(),
+                pygame.image.load("jack run 3.png").convert_alpha(), pygame.image.load("jack run 4.png").convert_alpha(),
+                pygame.image.load("jack run 5.png").convert_alpha(), pygame.image.load("jack run 6.png").convert_alpha(),
+                pygame.image.load("jack run 7.png").convert_alpha(), pygame.image.load("jack run 8.png").convert_alpha()]
+    run_ani_L = [pygame.image.load("jack run L1.png").convert_alpha(), pygame.image.load("jack run L2.png").convert_alpha(),
+                pygame.image.load("jack run L3.png").convert_alpha(), pygame.image.load("jack run L4.png").convert_alpha(),
+                pygame.image.load("jack run L5.png").convert_alpha(), pygame.image.load("jack run L6.png").convert_alpha(),
+                pygame.image.load("jack run L7.png").convert_alpha(), pygame.image.load("jack run L8.png").convert_alpha()]
 
-    jump_ani_R = [pygame.image.load("jack jump 1.png"), pygame.image.load("jack jump 2.png"),
-                pygame.image.load("jack jump 3.png"), pygame.image.load("jack jump 4.png"),
-                pygame.image.load("jack jump 5.png"), pygame.image.load("jack jump 6.png"),
-                pygame.image.load("jack jump 7.png"), pygame.image.load("jack jump 8.png")]
-    jump_ani_L = [pygame.image.load("jack jump L1.png"), pygame.image.load("jack jump L2.png"),
-                pygame.image.load("jack jump L3.png"), pygame.image.load("jack jump L4.png"),
-                pygame.image.load("jack jump L5.png"), pygame.image.load("jack jump L6.png"),
-                pygame.image.load("jack jump L7.png"), pygame.image.load("jack jump L8.png")]
+    jump_ani_R = [pygame.image.load("jack jump 1.png").convert_alpha(), pygame.image.load("jack jump 2.png").convert_alpha(),
+                pygame.image.load("jack jump 3.png").convert_alpha(), pygame.image.load("jack jump 4.png").convert_alpha(),
+                pygame.image.load("jack jump 5.png").convert_alpha(), pygame.image.load("jack jump 6.png").convert_alpha(),
+                pygame.image.load("jack jump 7.png").convert_alpha(), pygame.image.load("jack jump 8.png").convert_alpha()]
+    jump_ani_L = [pygame.image.load("jack jump L1.png").convert_alpha(), pygame.image.load("jack jump L2.png").convert_alpha(),
+                pygame.image.load("jack jump L3.png").convert_alpha(), pygame.image.load("jack jump L4.png").convert_alpha(),
+                pygame.image.load("jack jump L5.png").convert_alpha(), pygame.image.load("jack jump L6.png").convert_alpha(),
+                pygame.image.load("jack jump L7.png").convert_alpha(), pygame.image.load("jack jump L8.png").convert_alpha()]
 
-    elevator_ani = [pygame.image.load("elevator 1.png"), pygame.image.load("elevator 2.png"),
-                pygame.image.load("elevator 3.png"), pygame.image.load("elevator 4.png"),
-                pygame.image.load("elevator 5.png"), pygame.image.load("elevator 6.png"),
-                pygame.image.load("elevator 7.png"), pygame.image.load("elevator 7.png"), pygame.image.load("elevator 6.png"),
-                pygame.image.load("elevator 5.png"), pygame.image.load("elevator 4.png"),
-                pygame.image.load("elevator 3.png"), pygame.image.load("elevator 2.png"),
-                pygame.image.load("elevator 1.png")]
+    elevator_ani = [pygame.image.load("elevator 1.png").convert_alpha(), pygame.image.load("elevator 2.png").convert_alpha(),
+                pygame.image.load("elevator 3.png").convert_alpha(), pygame.image.load("elevator 4.png").convert_alpha(),
+                pygame.image.load("elevator 5.png").convert_alpha(), pygame.image.load("elevator 6.png").convert_alpha(),
+                pygame.image.load("elevator 7.png").convert_alpha(), pygame.image.load("elevator 7.png").convert_alpha(), pygame.image.load("elevator 6.png").convert_alpha(),
+                pygame.image.load("elevator 5.png").convert_alpha(), pygame.image.load("elevator 4.png").convert_alpha(),
+                pygame.image.load("elevator 3.png").convert_alpha(), pygame.image.load("elevator 2.png").convert_alpha(),
+                pygame.image.load("elevator 1.png").convert_alpha()]
 
     ## classes
     class Background(pygame.sprite.Sprite):
       def __init__(self):
             super().__init__()
-            self.image = pygame.image.load("Background.png")
+            self.image = pygame.image.load("Background.png").convert_alpha()
             self.rect = self.image.get_rect()
 
       def render(self):
@@ -101,7 +101,7 @@ try:
             if isinstance(self, Elevator):
                 self.image = image
             else:
-                self.image = pygame.image.load(image)
+                self.image = pygame.image.load(image).convert_alpha()
             self.rect = self.image.get_rect()
             self.rect.x, self.rect.y = x, y
         def render(self, surface):
@@ -169,11 +169,12 @@ try:
             self.pos = vec((tilemap.start_x, tilemap.start_y))
             self.vel = vec(0,0)
             self.acc = vec(0,0)
-            self.image = pygame.image.load("jack idle 1.png")
+            self.image = pygame.image.load("jack idle 1.png").convert_alpha()
             self.rect = Rect((self.pos), (30,60))
             self.on_the_ground = False
             self.fallcount = 0
             self.died = False
+            self.framecount = 0
 
         def collision_test(self, tilelist):
             if abs(self.vel.x) > 0:
@@ -275,7 +276,10 @@ try:
                     self.image = jump_ani_R[self.move_frame]
                 elif self.x_direction == "LEFT":
                     self.image = jump_ani_L[self.move_frame]
-            self.move_frame+= 1
+            self.framecount += 1
+            if self.framecount == 5:
+                self.framecount = 0
+                self.move_frame+= 1
             if self.move_frame > 7: # Return to base frame if at end of movement sequence
                 self.move_frame = 0
                 return
@@ -316,7 +320,7 @@ try:
         def game_over(self):
             if jack.died:
                 print("game over")
-                display.fill((255,0,0))
+                display.fill((204,51,0))
                 #self.root = Tk()
                 #self.root.geometry('170x200')
                 #button1 = Button(self.root, text="continue", width = 18, height = 5, command = self.restart)
@@ -341,8 +345,8 @@ try:
             pygame.quit()
             sys.exit()
 
-    def Loadify(imgname):
-        return pygame.image.load(imgname).convert_alpha()
+#    def Loadify(imgname):
+#        return pygame.image.load(imgname).convert_alpha()
 
     print("you got a class system, bitch")
 
@@ -383,7 +387,7 @@ try:
         handler.game_over()
         screen.blit(pygame.transform.scale(display, window_size), (0,0)) #scaling display to fit the screen
         pygame.display.update()
-        clock.tick(24) #number sets framerate in fps
+        clock.tick(FPS)
 
 except:
     print("you crashed bitch")
