@@ -356,7 +356,7 @@ try:
 
 
     background = Background()
-    tilemap = TileMap("level 2.csv") ## change to change levels
+    tilemap = TileMap("level 3b with rakesh.csv") ## change to change levels
     tilelist = []
     jack = Player()
     elevator = Elevator(elevator_ani, tilemap.elevator_pos_x, tilemap.elevator_pos_y)
@@ -374,8 +374,8 @@ try:
 
         background.render()
         #ground.render()
-        #tilemap.load_map("level 2.csv") ## change to change levels
-        tilemap.render("level 2")
+        #tilemap.load_map("level 3a.csv") ## change to change levels
+        tilemap.render("level 3b with rakesh.csv")
         jack.move()
         jack.render()
         for event in pygame.event.get():
