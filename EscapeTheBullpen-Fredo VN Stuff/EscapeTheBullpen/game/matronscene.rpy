@@ -6,7 +6,7 @@ label BC_gates:
     if r_companion == True:
         jump BC_gates_withr
     if r_companion == False:
-        show jack cow at right with moveinright
+        show jack cowmain at right with moveinright
         j "Oh god... here we go..."
         j "Uh... hello? "
         show matron main at left with moveinleft

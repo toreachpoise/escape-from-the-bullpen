@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/matronscene.rpy", line 42: expected 'image_name_component' not found.
-    show show rakesh main at left with moveoutleft:
-        ^
+File "game/aileascene.rpy", line 625: expected menuitem
+    show mona main
+    ^
 
 Ren'Py Version: Ren'Py 7.4.11.2266
-Wed Aug  3 11:50:58 2022
+Tue Aug  9 14:13:56 2022
