@@ -132,24 +132,28 @@ try:
             self.stage_chosen = True
             self.level = "2"
             tilemap.tiles = tilemap.load_tiles("level 2.csv")
+            jack.pos = vec(tilemap.start_x, tilemap.start_y)
             pass
         def level3a(self):
             self.root.destroy()
             self.stage_chosen = True
             self.level = "3a"
             tilemap.tiles = tilemap.load_tiles("level 3a.csv")
+            jack.pos = vec(tilemap.start_x, tilemap.start_y)
             pass
         def level3br(self):
             self.root.destroy()
             self.stage_chosen = True
             self.level = "3br"
             tilemap.tiles = tilemap.load_tiles("level 3b with rakesh.csv")
+            jack.pos = vec(tilemap.start_x, tilemap.start_y)
             pass
         def level3bn(self):
             self.root.destroy()
             self.stage_chosen = True
             self.level = "3bn"
             tilemap.tiles = tilemap.load_tiles("level 3b no rakesh.csv")
+            jack.pos = vec(tilemap.start_x, tilemap.start_y)
             pass
         def level4(self):
             pass
@@ -158,13 +162,6 @@ try:
             if jack.died:
                 print("game over")
                 display.fill((204,51,0))
-                #self.root = Tk()
-                #self.root.geometry('170x200')
-                #button1 = Button(self.root, text="continue", width = 18, height = 5, command = self.restart)
-                #button2 = Button(self.root, text="quit", width = 18, height = 5, command = self.quit)
-                #button1.pack()
-                #button2.pack()
-                #self.root.mainloop()
                 display.blit(gameover, (0,0))
                 display.blit(restart, (display_width/10, display_height/1.2))
                 pressed_keys = pygame.key.get_pressed() # Returns the current key presses
@@ -174,12 +171,23 @@ try:
             #self.root.destroy()
             jack.died = False
             jack.fallcount = 0
-            jack.pos = vec(jack.start_position.x - true_scroll[0], jack.start_position.y - true_scroll[1])
+            jack.pos = vec(tilemap.start_x, tilemap.start_y)
         def quit(self):
             #self.root.destroy()
             running = False
             pygame.quit()
             sys.exit()
+        def stageend(self, tilelist, player):
+            for tile in tilelist:
+                if isinstance(tile, Elevator) and tile.rect.colliderect(player.rect):
+                        print("stage completed")
+                        jack.kill()
+                        display.fill((0,0,255))
+                        display.blit(congratulations, (display_width/5, display_height/3))
+                        display.blit(completed1, (display_width/10, display_height/2))
+                        display.blit(completed2, (display_width/10, display_height/1.7))
+                        display.blit(completed3, (display_width/10, display_height/1.4))
+                        stage_chosen = False
     handler = Handler()
 
     class Tile(pygame.sprite.Sprite):
@@ -213,9 +221,7 @@ try:
         def render(self, surface):
             if isinstance(self, Bull):
                 self.move()
-            if -tilemap.tile_width < self.rect.x-scroll[0] < display_width:
-                if -tilemap.tile_height < self.rect.y-scroll[1] < display_height:
-                    display.blit(self.image, (self.rect.x-scroll[0], self.rect.y-scroll[1]))
+            display.blit(self.image, (self.rect.x-scroll[0], self.rect.y-scroll[1]))
 
     class TileMap():
         def __init__(self, filename):
@@ -238,7 +244,7 @@ try:
             self.tiles = self.load_tiles(self.filename)
             self.map_surface = pygame.Surface((self.map_w, self.map_h))
             self.map_surface.set_colorkey((0,0,0))
-            self.elevator_pos_x, self.elevator_pos_y = 0, 0
+            self.elevator_pos_x, self.elevator_pos_y = 300, 0
 
         def load_tiles(self, filename):
             tilelist = []
@@ -261,7 +267,7 @@ try:
                         tilelist.append(Bull('branch.png', x * self.tile_width-scroll[0], y * self.tile_height-scroll[1]))
                     elif tile == '6': ##Elevator
                         tilelist.append(Elevator(elevator_ani, x * self.tile_width-scroll[0], y * self.tile_height-scroll[1]))
-                        self.elevator_pos_x, self.elevator_pos_y = x * self.tile_width-scroll[0], (y * self.tile_height-scroll[1]) - 32
+                        self.elevator_pos_x, self.elevator_pos_y = x * self.tile_width-scroll[0], (y * self.tile_height-scroll[1])
                     x += 1
                 y += 1 #move to next row
             self.map_w, self.map_h = x * self.tile_height, y * self.tile_width
@@ -269,7 +275,9 @@ try:
 
         def render(self, filename):
             for tile in self.tiles:
-                tile.render(self.map_surface)
+                if -self.tile_width < tile.rect.x-scroll[0] < display_width:
+                    if -self.tile_height < tile.rect.y-scroll[1] < display_height:
+                        tile.render(self.map_surface)
             display.blit(self.map_surface, (0-scroll[0],0-scroll[1]))
 
         def read_csv(self, filename):
@@ -418,21 +426,6 @@ try:
             self.direction = random.randint(0,1)
             self.vel.x = random.randint(2,6)/2
 
-        def move(self):
-            if self.direction == 0:
-                self.pos.x += self.vel.x
-            if self.direction == 1:
-                self.pos.x -= self.vel.x
-            for tile in tilemap.tiles:
-                if self.rect.colliderect(tile.rect) == 1:
-                    if tile.rect.y + 15 >= self.rect.y:
-                        if self.direction == 0:
-                            self.pos.x = tile.rect.x - 32
-                            self.direction = 1
-                        if self.direction == 1:
-                            self.pos.x = tile.rect.x + 64
-                            self.direction = 0
-
 
     class Elevator(Tile):
         def __init__(self, image, x, y):
@@ -443,23 +436,13 @@ try:
             self.pos = (x, y)
 
         def render(self, map_surface):
-            #self.pos = tilemap.elevator_pos_x, tilemap.elevator_pos_y
-            self.rect.midtop = self.pos
+            self.pos = tilemap.elevator_pos_x, tilemap.elevator_pos_y
+            self.rect.topleft = self.pos
             self.move_frame += 1
             if self.move_frame > 13: # Return to base frame if at end of movement sequence
                 self.move_frame = 0
             pygame.draw.rect(display, (255,0,0), self.rect, 0)
             display.blit(self.image, self.pos)
-
-        def stageend(self, player):
-            if self.rect.colliderect(player.rect):
-                    print("stage completed")
-                    jack.kill()
-                    display.fill((0,0,255))
-                    display.blit(congratulations, (display_width/5, display_height/3))
-                    display.blit(completed1, (display_width/10, display_height/2))
-                    display.blit(completed2, (display_width/10, display_height/1.7))
-                    display.blit(completed3, (display_width/10, display_height/1.4))
 
 
 #    def Loadify(imgname):
@@ -497,8 +480,8 @@ try:
                 sys.exit()
         pygame.draw.rect(display, (0,0,255), [jack.pos.x - true_scroll[0], jack.pos.y - true_scroll[1], jack.rect.height, jack.rect.width], 0) ##representation of jack rect
         display.blit(jack.image, (jack.pos.x - true_scroll[0], jack.pos.y - true_scroll[1]))
-        #elevator.render(display)
-        elevator.stageend(jack)
+        elevator.render(display)
+        handler.stageend(tilelist, jack)
         handler.game_over()
         handler.status_update()
         handler.choose_stage()
