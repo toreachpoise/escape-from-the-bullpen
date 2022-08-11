@@ -23,7 +23,7 @@ try:
     display_height = 350
     display = pygame.Surface((display_width, display_height))
     acceleration = 5
-    jump_height = 7
+    jump_height = 10
     friction = 0.1
     topspeed = 10
     true_scroll = [0,0]
@@ -306,26 +306,27 @@ try:
                             self.pos.y = tile.rect.bottom + 60
                             print("horizontal collision")
                             if self.x_direction == "LEFT":
-                                self.pos.x = tile.rect.right
+                                self.pos.x = tile.rect.right + 5
                                 self.vel.x = 2 * acceleration
                                 self.acc.x = 0
                                 print("left bump")
                             if self.x_direction == "RIGHT":
-                                self.pos.x = tile.rect.left - 60
+                                self.pos.x = tile.rect.left - 65
                                 self.vel.x = -2 * acceleration
                                 self.acc.x = 0
                                 print("right bump")
             if abs(self.vel.y) > 0:
                 for tile in tilemap.tiles:
                     if self.rect.colliderect(tile.rect) == 1:
-                        if self.vel.y > 0:
+                        if self.vel.y > 0 and tile.rect.y >= self.rect.y - self.rect.height:
                             self.pos.y = tile.rect.y - 59
                             self.on_the_ground = True
                             self.fallcount = 0
                             self.vel.y = 0
                             self.acc.y = 0
-                        if self.vel.y < 0:
+                        if self.vel.y < 0 and abs(self.vel.x) < acceleration:
                             self.acc.y = gravity
+                            self.vel.y = 0
                             #self.pos.y = tile.rect.y + tilemap.tile_height
 
         def move(self):
@@ -355,13 +356,12 @@ try:
                     self.vel.x = -topspeed
             self.collision_test(tilelist)
             if pressed_keys[K_SPACE]:
-                for tile in tilemap.tiles:
-                    if self.rect.colliderect(tile.rect) == 1:
-                        print("jump")
-                        self.y_direction = "UP"
-                        self.pos.y -= jump_height
-                        self.on_the_ground == False
-                        self.vel.y = -(5 * jump_height)
+                if self.fallcount <= 2:
+                    print("jump")
+                    self.y_direction = "UP"
+                    self.pos.y -= jump_height
+                    self.on_the_ground == False
+                    self.vel.y = -(4 * jump_height)
             if self.vel.y > 0:
                 self.y_direction = "DOWN"
             self.vel.y += self.acc.y + acceleration
