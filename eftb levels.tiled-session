@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "level 3b with rakesh.tmx",
+    "activeFile": "platform/level 2.tmx",
     "expandedProjectPaths": [
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
@@ -14,11 +14,11 @@
             "scaleInEditor": 1
         },
         "level 1.tmx": {
-            "scale": 0.125,
+            "scale": 0.33,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 912,
-                "y": -240
+                "x": 1562.1212121212122,
+                "y": 562.1212121212122
             }
         },
         "level 1.tmx#escape from the bullpen": {
@@ -27,27 +27,27 @@
             "scaleInEditor": 1
         },
         "level 3a.tmx": {
-            "scale": 0.125,
+            "scale": 0.25,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 1624,
-                "y": -1264
+                "x": 2830,
+                "y": -590
             }
         },
         "level 3b no rakesh.tmx": {
             "scale": 0.0625,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 3840,
-                "y": -1536
+                "x": 7984,
+                "y": -1544
             }
         },
         "level 3b with rakesh.tmx": {
-            "scale": 0.0625,
+            "scale": 0.125,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 3840,
-                "y": -1024
+                "x": 7680,
+                "y": -1020
             }
         },
         "platform/escape from the bullpen.tsx": {
@@ -56,11 +56,11 @@
             "scaleInEditor": 1
         },
         "platform/level 2.tmx": {
-            "scale": 1.5,
+            "scale": 0.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 848,
-                "y": -487.3333333333333
+                "x": 425,
+                "y": -487
             }
         }
     },
@@ -71,21 +71,19 @@
     "map.lastUsedExportFilter": "CSV files (*.csv)",
     "map.lastUsedFormat": "tmx",
     "openFiles": [
-        "level 1.tmx",
+        "level 3b no rakesh.tmx",
         "platform/escape from the bullpen.tsx",
-        "platform/level 2.tmx",
-        "level 3a.tmx",
         "level 3b with rakesh.tmx",
-        "level 3b no rakesh.tmx"
+        "platform/level 2.tmx"
     ],
     "project": "eftb levels.tiled-project",
     "recentFiles": [
-        "level 1.tmx",
+        "level 3b no rakesh.tmx",
         "platform/escape from the bullpen.tsx",
+        "level 3b with rakesh.tmx",
         "platform/level 2.tmx",
         "level 3a.tmx",
-        "level 3b no rakesh.tmx",
-        "level 3b with rakesh.tmx",
+        "level 1.tmx",
         "escape from the bullpen.tsx"
     ],
     "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",
