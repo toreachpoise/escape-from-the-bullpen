@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "platform/level 2.tmx",
+    "activeFile": "level 1.tmx",
     "expandedProjectPaths": [
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
@@ -17,8 +17,8 @@
             "scale": 0.33,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 1562.1212121212122,
-                "y": 562.1212121212122
+                "x": 1565.1515151515152,
+                "y": 565.1515151515152
             }
         },
         "level 1.tmx#escape from the bullpen": {
@@ -38,16 +38,16 @@
             "scale": 0.0625,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 7992,
+                "x": 7984,
                 "y": -1544
             }
         },
         "level 3b with rakesh.tmx": {
-            "scale": 0.125,
+            "scale": 0.33,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": -164,
-                "y": -1020
+                "x": 7678.787878787879,
+                "y": -1022.7272727272727
             }
         },
         "platform/escape from the bullpen.tsx": {
@@ -59,8 +59,8 @@
             "scale": 0.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 425,
-                "y": -487
+                "x": 6144,
+                "y": -511
             }
         }
     },
@@ -74,7 +74,8 @@
         "level 3b no rakesh.tmx",
         "platform/escape from the bullpen.tsx",
         "level 3b with rakesh.tmx",
-        "platform/level 2.tmx"
+        "platform/level 2.tmx",
+        "level 1.tmx"
     ],
     "project": "eftb levels.tiled-project",
     "recentFiles": [
@@ -82,8 +83,8 @@
         "platform/escape from the bullpen.tsx",
         "level 3b with rakesh.tmx",
         "platform/level 2.tmx",
-        "level 3a.tmx",
         "level 1.tmx",
+        "level 3a.tmx",
         "escape from the bullpen.tsx"
     ],
     "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",

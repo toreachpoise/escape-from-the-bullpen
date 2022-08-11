@@ -126,6 +126,8 @@ try:
             self.root.destroy()
             self.stage_chosen = True
             self.level = "1"
+            tilemap.tiles = tilemap.load_tiles("level 1.csv")
+            jack.pos = vec(tilemap.start_x, tilemap.start_y)
             pass
         def level2(self):
             self.root.destroy()
@@ -177,17 +179,16 @@ try:
             running = False
             pygame.quit()
             sys.exit()
-        def stageend(self, tilelist, player):
-            for tile in tilelist:
-                if isinstance(tile, Elevator) and tile.rect.colliderect(player.rect):
-                        print("stage completed")
-                        jack.kill()
-                        display.fill((0,0,255))
-                        display.blit(congratulations, (display_width/5, display_height/3))
-                        display.blit(completed1, (display_width/10, display_height/2))
-                        display.blit(completed2, (display_width/10, display_height/1.7))
-                        display.blit(completed3, (display_width/10, display_height/1.4))
-                        stage_chosen = False
+        def stageend(self, tile, player):
+            if tile.rect.x < jack.rect.x and tile.rect.y < jack.rect.y:
+                jack.kill()
+                display.fill((0,0,255))
+                display.blit(congratulations, (display_width/5, display_height/3))
+                display.blit(completed1, (display_width/10, display_height/2))
+                display.blit(completed2, (display_width/10, display_height/1.7))
+                display.blit(completed3, (display_width/10, display_height/1.4))
+                self.stage_chosen = False
+                self.choose_stage()
     handler = Handler()
 
     class Tile(pygame.sprite.Sprite):
@@ -299,8 +300,7 @@ try:
             self.vel = vec(0,0)
             self.acc = vec(0,0)
             self.image = pygame.image.load("jack idle 1.png").convert_alpha()
-            self.mask = pygame.mask.from_surface(self.image)
-            self.rect = self.mask.get_rect(topleft = self.pos)
+            self.rect = self.image.get_rect(topleft = self.pos)
             self.on_the_ground = False
             self.fallcount = 0
             self.died = False
@@ -310,8 +310,8 @@ try:
             if abs(self.vel.x) > 0:
                 for tile in tilemap.tiles:
                     if self.rect.colliderect(tile.rect) == 1:
-                        if self.pos.y + 50 >= tile.rect.y:
-                            self.pos.y = tile.rect.bottom + 60
+                        if self.pos.y + 30 >= tile.rect.y:
+                            self.pos.y = tile.rect.bottom + self.rect.height
                             print("horizontal collision")
                             if self.x_direction == "LEFT":
                                 self.pos.x = tile.rect.right + 5
@@ -319,7 +319,7 @@ try:
                                 self.acc.x = 0
                                 print("left bump")
                             if self.x_direction == "RIGHT":
-                                self.pos.x = tile.rect.left - 65
+                                self.pos.x = tile.rect.left - self.rect.width
                                 self.vel.x = -2 * acceleration
                                 self.acc.x = 0
                                 print("right bump")
@@ -327,7 +327,7 @@ try:
                 for tile in tilemap.tiles:
                     if self.rect.colliderect(tile.rect) == 1:
                         if self.vel.y > 0 and tile.rect.y >= self.rect.y - self.rect.height:
-                            self.pos.y = tile.rect.y - 59
+                            self.pos.y = tile.rect.y - self.rect.height
                             self.on_the_ground = True
                             self.fallcount = 0
                             self.vel.y = 0
@@ -413,8 +413,8 @@ try:
                 self.move_frame+= 1
             if self.move_frame > 7: # Return to base frame if at end of movement sequence
                 self.move_frame = 0
-            self.mask = pygame.mask.from_surface(self.image)
-            self.rect = self.mask.get_rect(topleft = self.pos)
+            #self.mask = pygame.mask.from_surface(self.image)
+            self.rect = self.image.get_rect(topleft = self.pos)
 
     class Bull(Tile):
         def __init__(self, image, x, y):
@@ -436,7 +436,7 @@ try:
             self.pos = (x, y)
 
         def render(self, map_surface):
-            self.pos = tilemap.elevator_pos_x, tilemap.elevator_pos_y
+            self.pos = tilemap.elevator_pos_x - scroll[0], (tilemap.elevator_pos_y - 32) - scroll[1]
             self.rect.topleft = self.pos
             self.move_frame += 1
             if self.move_frame > 13: # Return to base frame if at end of movement sequence
@@ -452,7 +452,7 @@ try:
 
 
     background = Background()
-    tilemap = TileMap("level 2.csv") ## change to change levels
+    tilemap = TileMap("level 1.csv") ## change to change levels
     tilelist = []
     jack = Player()
     elevator = Elevator(elevator_ani, tilemap.elevator_pos_x, tilemap.elevator_pos_y)
@@ -470,7 +470,7 @@ try:
 
         background.render()
         #ground.render()
-        tilemap.render("level 3b with rakesh.csv")
+        tilemap.render("level 1.csv")
         jack.move()
         jack.render()
         for event in pygame.event.get():
@@ -481,7 +481,7 @@ try:
         pygame.draw.rect(display, (0,0,255), [jack.pos.x - true_scroll[0], jack.pos.y - true_scroll[1], jack.rect.height, jack.rect.width], 0) ##representation of jack rect
         display.blit(jack.image, (jack.pos.x - true_scroll[0], jack.pos.y - true_scroll[1]))
         elevator.render(display)
-        handler.stageend(tilelist, jack)
+        handler.stageend(elevator, jack)
         handler.game_over()
         handler.status_update()
         handler.choose_stage()
