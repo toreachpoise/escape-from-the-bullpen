@@ -1,4 +1,4 @@
-Wed Aug  3 12:10:05 2022
+Tue Aug  9 13:33:07 2022
 Windows-10-10.0.19041
 Ren'Py 7.4.11.2266
  
@@ -6,35 +6,18 @@ Ren'Py 7.4.11.2266
 Bootstrap to the start of init.init took 0.10s
 Early init took 0.00s
 Loader init took 0.05s
-Loading error handling took 0.03s
-Loading script took 0.35s
+Loading error handling took 0.04s
+Loading script took 0.56s
 Loading save slot metadata. took 0.05s
 Loading persistent took 0.00s
-Importing _renpysteam: ImportError('No module named _renpysteam',)
-Running init code took 0.10s
-Loading analysis data took 0.02s
-Analyze and compile ATL took 0.00s
-Index archives took 0.00s
-Dump and make backups. took 0.09s
-Cleaning cache took 0.00s
-Making clean stores took 0.00s
-Initial gc. took 0.03s
+
+File "game/aileascene.rpy", line 591: expected statement.
+    heloise main at center_left with moveinleft:
+                 ^
 DPI scale factor: 1.000000
 nvdrs: Loaded, about to disable thread optimizations.
 nvdrs: Disabled thread optimizations.
-Creating interface object took 0.91s
-Cleaning stores took 0.00s
-Init translation took 0.04s
-Build styles took 0.01s
-Load screen analysis took 0.02s
-Analyze screens took 0.00s
-Save screen analysis took 0.00s
-Prepare screens took 0.08s
-Save pyanalysis. took 0.00s
-Save bytecode. took 0.02s
-Running _start took 0.00s
-Performance test:
-Interface start took 0.11s
+Interface start took 0.46s
 
 Initializing gl2 renderer:
 primary display bounds: (0, 0, 1920, 1080)
@@ -46,41 +29,40 @@ Version: '4.6.0 NVIDIA 516.59'
 Display Info: None
 Screen sizes: virtual=(1920, 1080) physical=(1488, 837) drawable=(1488, 837)
 Maximum texture size: 4096x4096
-Screen sizes: virtual=(1920, 1080) physical=(1600, 837) drawable=(1600, 837)
-Maximum texture size: 4096x4096
 Resetting cache.
-Bootstrap to the start of init.init took 128.99s
+Bootstrap to the start of init.init took 29.54s
 Early init took 0.00s
 Loader init took 0.04s
 Loading error handling took 0.02s
-Loading script took 0.17s
+Loading script took 0.38s
 Loading save slot metadata. took 0.05s
 Loading persistent took 0.00s
 Importing _renpysteam: ImportError('No module named _renpysteam',)
-Running init code took 0.11s
+Running init code took 0.13s
 Loading analysis data took 0.02s
 Analyze and compile ATL took 0.00s
 Index archives took 0.00s
-Dump and make backups. took 0.08s
+Backing up script files to 'C:\\Users\\sever\\AppData\\Roaming/RenPy/backups\\EscapeTheBullpen':
+Dump and make backups. took 0.10s
 Cleaning cache took 0.00s
 Making clean stores took 0.00s
-Initial gc. took 0.04s
+Initial gc. took 0.03s
 DPI scale factor: 1.000000
 nvdrs: Loaded, about to disable thread optimizations.
 nvdrs: Disabled thread optimizations.
-Creating interface object took 0.30s
+Creating interface object took 0.31s
 Cleaning stores took 0.00s
 Init translation took 0.05s
 Build styles took 0.00s
-Load screen analysis took 0.02s
-Analyze screens took 0.00s
-Save screen analysis took 0.00s
+Load screen analysis took 0.01s
+Analyze screens took 0.02s
+Save screen analysis took 0.03s
 Prepare screens took 0.07s
-Save pyanalysis. took 0.00s
-Save bytecode. took 0.00s
+Save pyanalysis. took 0.03s
+Save bytecode. took 0.02s
 Running _start took 0.00s
 Performance test:
-Interface start took 0.06s
+Interface start took 0.05s
 
 Initializing gl2 renderer:
 primary display bounds: (0, 0, 1920, 1080)
@@ -90,23 +72,23 @@ Vendor: 'NVIDIA Corporation'
 Renderer: 'NVIDIA GeForce RTX 2060 SUPER/PCIe/SSE2'
 Version: '4.6.0 NVIDIA 516.59'
 Display Info: None
-Screen sizes: virtual=(1920, 1080) physical=(1600, 837) drawable=(1600, 837)
+Screen sizes: virtual=(1920, 1080) physical=(1488, 837) drawable=(1488, 837)
 Maximum texture size: 4096x4096
 Resetting cache.
-Bootstrap to the start of init.init took 141.46s
+Bootstrap to the start of init.init took 671.31s
 Early init took 0.00s
 Loader init took 0.04s
 Loading error handling took 0.02s
-Loading script took 0.40s
+Loading script took 0.20s
 Loading save slot metadata. took 0.05s
 Loading persistent took 0.00s
 Importing _renpysteam: ImportError('No module named _renpysteam',)
-Running init code took 0.11s
-Loading analysis data took 0.01s
+Running init code took 0.04s
+Loading analysis data took 0.02s
 Analyze and compile ATL took 0.00s
 Index archives took 0.00s
 Backing up script files to 'C:\\Users\\sever\\AppData\\Roaming/RenPy/backups\\EscapeTheBullpen':
-Dump and make backups. took 0.09s
+Dump and make backups. took 0.08s
 Cleaning cache took 0.00s
 Making clean stores took 0.00s
 Initial gc. took 0.04s
@@ -114,6 +96,51 @@ DPI scale factor: 1.000000
 nvdrs: Loaded, about to disable thread optimizations.
 nvdrs: Disabled thread optimizations.
 Creating interface object took 0.29s
+Cleaning stores took 0.00s
+Init translation took 0.05s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.01s
+Save screen analysis took 0.03s
+Prepare screens took 0.07s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.01s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.05s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1920, 1080)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'NVIDIA Corporation'
+Renderer: 'NVIDIA GeForce RTX 2060 SUPER/PCIe/SSE2'
+Version: '4.6.0 NVIDIA 516.59'
+Display Info: None
+Screen sizes: virtual=(1920, 1080) physical=(1488, 837) drawable=(1488, 837)
+Maximum texture size: 4096x4096
+Resetting cache.
+Bootstrap to the start of init.init took 882.29s
+Early init took 0.00s
+Loader init took 0.04s
+Loading error handling took 0.02s
+Loading script took 0.40s
+Loading save slot metadata. took 0.05s
+Loading persistent took 0.00s
+Importing _renpysteam: ImportError('No module named _renpysteam',)
+Running init code took 0.05s
+Loading analysis data took 0.01s
+Analyze and compile ATL took 0.00s
+Index archives took 0.00s
+Backing up script files to 'C:\\Users\\sever\\AppData\\Roaming/RenPy/backups\\EscapeTheBullpen':
+Dump and make backups. took 0.08s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.04s
+DPI scale factor: 1.000000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.30s
 Cleaning stores took 0.00s
 Init translation took 0.05s
 Build styles took 0.00s
@@ -135,18 +162,107 @@ Vendor: 'NVIDIA Corporation'
 Renderer: 'NVIDIA GeForce RTX 2060 SUPER/PCIe/SSE2'
 Version: '4.6.0 NVIDIA 516.59'
 Display Info: None
-Screen sizes: virtual=(1920, 1080) physical=(1600, 837) drawable=(1600, 837)
+Screen sizes: virtual=(1920, 1080) physical=(1488, 837) drawable=(1488, 837)
 Maximum texture size: 4096x4096
 Resetting cache.
-Bootstrap to the start of init.init took 181.27s
+Bootstrap to the start of init.init took 1031.34s
 Early init took 0.00s
 Loader init took 0.04s
 Loading error handling took 0.02s
-Loading script took 0.30s
+Loading script took 0.18s
 Loading save slot metadata. took 0.05s
 Loading persistent took 0.00s
 Importing _renpysteam: ImportError('No module named _renpysteam',)
-Running init code took 0.11s
+Running init code took 0.04s
+Loading analysis data took 0.02s
+Analyze and compile ATL took 0.00s
+Index archives took 0.00s
+Dump and make backups. took 0.08s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.04s
+DPI scale factor: 1.000000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.29s
+Cleaning stores took 0.00s
+Init translation took 0.05s
+Build styles took 0.00s
+Load screen analysis took 0.02s
+Analyze screens took 0.00s
+Save screen analysis took 0.00s
+Prepare screens took 0.07s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.00s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.05s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1920, 1080)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'NVIDIA Corporation'
+Renderer: 'NVIDIA GeForce RTX 2060 SUPER/PCIe/SSE2'
+Version: '4.6.0 NVIDIA 516.59'
+Display Info: None
+Screen sizes: virtual=(1920, 1080) physical=(1488, 837) drawable=(1488, 837)
+Maximum texture size: 4096x4096
+Resetting cache.
+Bootstrap to the start of init.init took 1270.99s
+Early init took 0.00s
+Loader init took 0.05s
+Loading error handling took 0.02s
+Loading script took 0.38s
+Loading save slot metadata. took 0.05s
+Loading persistent took 0.00s
+Importing _renpysteam: ImportError('No module named _renpysteam',)
+Running init code took 0.05s
+Loading analysis data took 0.02s
+Analyze and compile ATL took 0.00s
+Index archives took 0.00s
+Backing up script files to 'C:\\Users\\sever\\AppData\\Roaming/RenPy/backups\\EscapeTheBullpen':
+Dump and make backups. took 0.08s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.05s
+DPI scale factor: 1.000000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.29s
+Cleaning stores took 0.00s
+Init translation took 0.05s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.01s
+Save screen analysis took 0.03s
+Prepare screens took 0.07s
+Save pyanalysis. took 0.03s
+Save bytecode. took 0.02s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.05s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1920, 1080)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'NVIDIA Corporation'
+Renderer: 'NVIDIA GeForce RTX 2060 SUPER/PCIe/SSE2'
+Version: '4.6.0 NVIDIA 516.59'
+Display Info: None
+Screen sizes: virtual=(1920, 1080) physical=(1488, 837) drawable=(1488, 837)
+Maximum texture size: 4096x4096
+Resetting cache.
+Bootstrap to the start of init.init took 1283.60s
+Early init took 0.00s
+Loader init took 0.04s
+Loading error handling took 0.02s
+Loading script took 0.39s
+Loading save slot metadata. took 0.05s
+Loading persistent took 0.00s
+Importing _renpysteam: ImportError('No module named _renpysteam',)
+Running init code took 0.05s
 Loading analysis data took 0.02s
 Analyze and compile ATL took 0.00s
 Index archives took 0.00s
@@ -159,6 +275,863 @@ DPI scale factor: 1.000000
 nvdrs: Loaded, about to disable thread optimizations.
 nvdrs: Disabled thread optimizations.
 Creating interface object took 0.29s
+Cleaning stores took 0.00s
+Init translation took 0.05s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.01s
+Save screen analysis took 0.03s
+Prepare screens took 0.07s
+Save pyanalysis. took 0.03s
+Save bytecode. took 0.01s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.05s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1920, 1080)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'NVIDIA Corporation'
+Renderer: 'NVIDIA GeForce RTX 2060 SUPER/PCIe/SSE2'
+Version: '4.6.0 NVIDIA 516.59'
+Display Info: None
+Screen sizes: virtual=(1920, 1080) physical=(1488, 837) drawable=(1488, 837)
+Maximum texture size: 4096x4096
+Resetting cache.
+Bootstrap to the start of init.init took 1297.67s
+Early init took 0.00s
+Loader init took 0.04s
+Loading error handling took 0.02s
+Loading script took 0.40s
+Loading save slot metadata. took 0.05s
+Loading persistent took 0.00s
+Importing _renpysteam: ImportError('No module named _renpysteam',)
+Running init code took 0.05s
+Loading analysis data took 0.02s
+Analyze and compile ATL took 0.00s
+Index archives took 0.00s
+Backing up script files to 'C:\\Users\\sever\\AppData\\Roaming/RenPy/backups\\EscapeTheBullpen':
+Dump and make backups. took 0.08s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.05s
+DPI scale factor: 1.000000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.32s
+Cleaning stores took 0.00s
+Init translation took 0.05s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.01s
+Save screen analysis took 0.03s
+Prepare screens took 0.07s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.01s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.05s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1920, 1080)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'NVIDIA Corporation'
+Renderer: 'NVIDIA GeForce RTX 2060 SUPER/PCIe/SSE2'
+Version: '4.6.0 NVIDIA 516.59'
+Display Info: None
+Screen sizes: virtual=(1920, 1080) physical=(1488, 837) drawable=(1488, 837)
+Maximum texture size: 4096x4096
+Resetting cache.
+Bootstrap to the start of init.init took 1303.90s
+Early init took 0.00s
+Loader init took 0.04s
+Loading error handling took 0.02s
+Loading script took 0.18s
+Loading save slot metadata. took 0.05s
+Loading persistent took 0.00s
+Importing _renpysteam: ImportError('No module named _renpysteam',)
+Running init code took 0.04s
+Loading analysis data took 0.02s
+Analyze and compile ATL took 0.00s
+Index archives took 0.00s
+Dump and make backups. took 0.08s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.05s
+DPI scale factor: 1.000000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.29s
+Cleaning stores took 0.00s
+Init translation took 0.05s
+Build styles took 0.00s
+Load screen analysis took 0.02s
+Analyze screens took 0.00s
+Save screen analysis took 0.00s
+Prepare screens took 0.07s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.00s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.06s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1920, 1080)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'NVIDIA Corporation'
+Renderer: 'NVIDIA GeForce RTX 2060 SUPER/PCIe/SSE2'
+Version: '4.6.0 NVIDIA 516.59'
+Display Info: None
+Screen sizes: virtual=(1920, 1080) physical=(1488, 837) drawable=(1488, 837)
+Maximum texture size: 4096x4096
+Resetting cache.
+Bootstrap to the start of init.init took 1327.06s
+Early init took 0.00s
+Loader init took 0.04s
+Loading error handling took 0.02s
+Loading script took 0.41s
+Loading save slot metadata. took 0.05s
+Loading persistent took 0.00s
+Importing _renpysteam: ImportError('No module named _renpysteam',)
+Running init code took 0.05s
+Loading analysis data took 0.02s
+Analyze and compile ATL took 0.00s
+Index archives took 0.00s
+Backing up script files to 'C:\\Users\\sever\\AppData\\Roaming/RenPy/backups\\EscapeTheBullpen':
+Dump and make backups. took 0.09s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.05s
+DPI scale factor: 1.000000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.31s
+Cleaning stores took 0.00s
+Init translation took 0.05s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.01s
+Save screen analysis took 0.03s
+Prepare screens took 0.07s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.02s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.05s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1920, 1080)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'NVIDIA Corporation'
+Renderer: 'NVIDIA GeForce RTX 2060 SUPER/PCIe/SSE2'
+Version: '4.6.0 NVIDIA 516.59'
+Display Info: None
+Screen sizes: virtual=(1920, 1080) physical=(1488, 837) drawable=(1488, 837)
+Maximum texture size: 4096x4096
+Screen sizes: virtual=(1920, 1080) physical=(1488, 839) drawable=(1488, 839)
+Maximum texture size: 4096x4096
+Resetting cache.
+Bootstrap to the start of init.init took 1333.77s
+Early init took 0.00s
+Loader init took 0.04s
+Loading error handling took 0.02s
+Loading script took 0.18s
+Loading save slot metadata. took 0.05s
+Loading persistent took 0.00s
+Importing _renpysteam: ImportError('No module named _renpysteam',)
+Running init code took 0.04s
+Loading analysis data took 0.02s
+Analyze and compile ATL took 0.00s
+Index archives took 0.00s
+Dump and make backups. took 0.08s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.05s
+DPI scale factor: 1.000000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.29s
+Cleaning stores took 0.00s
+Init translation took 0.06s
+Build styles took 0.00s
+Load screen analysis took 0.02s
+Analyze screens took 0.00s
+Save screen analysis took 0.00s
+Prepare screens took 0.07s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.00s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.05s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1920, 1080)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'NVIDIA Corporation'
+Renderer: 'NVIDIA GeForce RTX 2060 SUPER/PCIe/SSE2'
+Version: '4.6.0 NVIDIA 516.59'
+Display Info: None
+Screen sizes: virtual=(1920, 1080) physical=(1488, 837) drawable=(1488, 837)
+Maximum texture size: 4096x4096
+Resetting cache.
+Bootstrap to the start of init.init took 1362.96s
+Early init took 0.00s
+Loader init took 0.04s
+Loading error handling took 0.02s
+Loading script took 0.38s
+Loading save slot metadata. took 0.05s
+Loading persistent took 0.00s
+Importing _renpysteam: ImportError('No module named _renpysteam',)
+Running init code took 0.05s
+Loading analysis data took 0.01s
+Analyze and compile ATL took 0.01s
+Index archives took 0.00s
+Backing up script files to 'C:\\Users\\sever\\AppData\\Roaming/RenPy/backups\\EscapeTheBullpen':
+Dump and make backups. took 0.09s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.05s
+DPI scale factor: 1.000000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.30s
+Cleaning stores took 0.00s
+Init translation took 0.05s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.01s
+Save screen analysis took 0.03s
+Prepare screens took 0.07s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.01s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.05s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1920, 1080)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'NVIDIA Corporation'
+Renderer: 'NVIDIA GeForce RTX 2060 SUPER/PCIe/SSE2'
+Version: '4.6.0 NVIDIA 516.59'
+Display Info: None
+Screen sizes: virtual=(1920, 1080) physical=(1488, 837) drawable=(1488, 837)
+Maximum texture size: 4096x4096
+Resetting cache.
+Bootstrap to the start of init.init took 1405.81s
+Early init took 0.00s
+Loader init took 0.04s
+Loading error handling took 0.02s
+Loading script took 0.39s
+Loading save slot metadata. took 0.05s
+Loading persistent took 0.00s
+Importing _renpysteam: ImportError('No module named _renpysteam',)
+Running init code took 0.05s
+Loading analysis data took 0.02s
+Analyze and compile ATL took 0.00s
+Index archives took 0.00s
+Backing up script files to 'C:\\Users\\sever\\AppData\\Roaming/RenPy/backups\\EscapeTheBullpen':
+Dump and make backups. took 0.08s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.05s
+DPI scale factor: 1.000000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.29s
+Cleaning stores took 0.00s
+Init translation took 0.05s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.01s
+Save screen analysis took 0.03s
+Prepare screens took 0.07s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.01s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.05s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1920, 1080)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'NVIDIA Corporation'
+Renderer: 'NVIDIA GeForce RTX 2060 SUPER/PCIe/SSE2'
+Version: '4.6.0 NVIDIA 516.59'
+Display Info: None
+Screen sizes: virtual=(1920, 1080) physical=(1488, 837) drawable=(1488, 837)
+Maximum texture size: 4096x4096
+Resetting cache.
+Bootstrap to the start of init.init took 1439.53s
+Early init took 0.00s
+Loader init took 0.04s
+Loading error handling took 0.02s
+Loading script took 0.39s
+Loading save slot metadata. took 0.05s
+Loading persistent took 0.00s
+Importing _renpysteam: ImportError('No module named _renpysteam',)
+Running init code took 0.05s
+Loading analysis data took 0.01s
+Analyze and compile ATL took 0.00s
+Index archives took 0.00s
+Backing up script files to 'C:\\Users\\sever\\AppData\\Roaming/RenPy/backups\\EscapeTheBullpen':
+Dump and make backups. took 0.09s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.05s
+DPI scale factor: 1.000000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.29s
+Cleaning stores took 0.00s
+Init translation took 0.05s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.02s
+Save screen analysis took 0.03s
+Prepare screens took 0.07s
+Save pyanalysis. took 0.03s
+Save bytecode. took 0.01s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.06s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1920, 1080)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'NVIDIA Corporation'
+Renderer: 'NVIDIA GeForce RTX 2060 SUPER/PCIe/SSE2'
+Version: '4.6.0 NVIDIA 516.59'
+Display Info: None
+Screen sizes: virtual=(1920, 1080) physical=(1488, 837) drawable=(1488, 837)
+Maximum texture size: 4096x4096
+Resetting cache.
+Bootstrap to the start of init.init took 1486.93s
+Early init took 0.00s
+Loader init took 0.04s
+Loading error handling took 0.02s
+Loading script took 0.38s
+Loading save slot metadata. took 0.05s
+Loading persistent took 0.00s
+Importing _renpysteam: ImportError('No module named _renpysteam',)
+Running init code took 0.05s
+Loading analysis data took 0.02s
+Analyze and compile ATL took 0.00s
+Index archives took 0.00s
+Backing up script files to 'C:\\Users\\sever\\AppData\\Roaming/RenPy/backups\\EscapeTheBullpen':
+Dump and make backups. took 0.08s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.05s
+DPI scale factor: 1.000000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.30s
+Cleaning stores took 0.00s
+Init translation took 0.06s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.01s
+Save screen analysis took 0.04s
+Prepare screens took 0.07s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.01s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.05s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1920, 1080)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'NVIDIA Corporation'
+Renderer: 'NVIDIA GeForce RTX 2060 SUPER/PCIe/SSE2'
+Version: '4.6.0 NVIDIA 516.59'
+Display Info: None
+Screen sizes: virtual=(1920, 1080) physical=(1488, 837) drawable=(1488, 837)
+Maximum texture size: 4096x4096
+Resetting cache.
+Bootstrap to the start of init.init took 1493.43s
+Early init took 0.00s
+Loader init took 0.05s
+Loading error handling took 0.02s
+Loading script took 0.37s
+Loading save slot metadata. took 0.05s
+Loading persistent took 0.00s
+Importing _renpysteam: ImportError('No module named _renpysteam',)
+Running init code took 0.05s
+Loading analysis data took 0.01s
+Analyze and compile ATL took 0.00s
+Index archives took 0.00s
+Backing up script files to 'C:\\Users\\sever\\AppData\\Roaming/RenPy/backups\\EscapeTheBullpen':
+Dump and make backups. took 0.09s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.05s
+DPI scale factor: 1.000000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.30s
+Cleaning stores took 0.00s
+Init translation took 0.05s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.02s
+Save screen analysis took 0.04s
+Prepare screens took 0.08s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.01s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.05s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1920, 1080)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'NVIDIA Corporation'
+Renderer: 'NVIDIA GeForce RTX 2060 SUPER/PCIe/SSE2'
+Version: '4.6.0 NVIDIA 516.59'
+Display Info: None
+Screen sizes: virtual=(1920, 1080) physical=(1488, 837) drawable=(1488, 837)
+Maximum texture size: 4096x4096
+Resetting cache.
+Bootstrap to the start of init.init took 1533.26s
+Early init took 0.00s
+Loader init took 0.04s
+Loading error handling took 0.02s
+Loading script took 0.39s
+Loading save slot metadata. took 0.05s
+Loading persistent took 0.00s
+Importing _renpysteam: ImportError('No module named _renpysteam',)
+Running init code took 0.05s
+Loading analysis data took 0.01s
+Analyze and compile ATL took 0.00s
+Index archives took 0.00s
+Backing up script files to 'C:\\Users\\sever\\AppData\\Roaming/RenPy/backups\\EscapeTheBullpen':
+Dump and make backups. took 0.09s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.05s
+DPI scale factor: 1.000000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.29s
+Cleaning stores took 0.00s
+Init translation took 0.05s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.02s
+Save screen analysis took 0.03s
+Prepare screens took 0.07s
+Save pyanalysis. took 0.03s
+Save bytecode. took 0.01s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.05s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1920, 1080)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'NVIDIA Corporation'
+Renderer: 'NVIDIA GeForce RTX 2060 SUPER/PCIe/SSE2'
+Version: '4.6.0 NVIDIA 516.59'
+Display Info: None
+Screen sizes: virtual=(1920, 1080) physical=(1488, 837) drawable=(1488, 837)
+Maximum texture size: 4096x4096
+Screen sizes: virtual=(1920, 1080) physical=(1600, 837) drawable=(1600, 837)
+Maximum texture size: 4096x4096
+Resetting cache.
+Bootstrap to the start of init.init took 1615.47s
+Early init took 0.00s
+Loader init took 0.04s
+Loading error handling took 0.02s
+Loading script took 0.38s
+Loading save slot metadata. took 0.05s
+Loading persistent took 0.00s
+Importing _renpysteam: ImportError('No module named _renpysteam',)
+Running init code took 0.05s
+Loading analysis data took 0.01s
+Analyze and compile ATL took 0.00s
+Index archives took 0.00s
+Backing up script files to 'C:\\Users\\sever\\AppData\\Roaming/RenPy/backups\\EscapeTheBullpen':
+Dump and make backups. took 0.09s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.05s
+DPI scale factor: 1.000000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.29s
+Cleaning stores took 0.00s
+Init translation took 0.05s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.01s
+Save screen analysis took 0.03s
+Prepare screens took 0.07s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.01s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.05s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1920, 1080)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'NVIDIA Corporation'
+Renderer: 'NVIDIA GeForce RTX 2060 SUPER/PCIe/SSE2'
+Version: '4.6.0 NVIDIA 516.59'
+Display Info: None
+Screen sizes: virtual=(1920, 1080) physical=(1600, 837) drawable=(1600, 837)
+Maximum texture size: 4096x4096
+Resetting cache.
+Bootstrap to the start of init.init took 1626.46s
+Early init took 0.00s
+Loader init took 0.04s
+Loading error handling took 0.02s
+Loading script took 0.37s
+Loading save slot metadata. took 0.05s
+Loading persistent took 0.00s
+Importing _renpysteam: ImportError('No module named _renpysteam',)
+Running init code took 0.05s
+Loading analysis data took 0.01s
+Analyze and compile ATL took 0.00s
+Index archives took 0.00s
+Backing up script files to 'C:\\Users\\sever\\AppData\\Roaming/RenPy/backups\\EscapeTheBullpen':
+Dump and make backups. took 0.08s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.05s
+DPI scale factor: 1.000000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.29s
+Cleaning stores took 0.00s
+Init translation took 0.05s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.01s
+Save screen analysis took 0.03s
+Prepare screens took 0.07s
+Save pyanalysis. took 0.03s
+Save bytecode. took 0.01s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.05s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1920, 1080)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'NVIDIA Corporation'
+Renderer: 'NVIDIA GeForce RTX 2060 SUPER/PCIe/SSE2'
+Version: '4.6.0 NVIDIA 516.59'
+Display Info: None
+Screen sizes: virtual=(1920, 1080) physical=(1600, 837) drawable=(1600, 837)
+Maximum texture size: 4096x4096
+Resetting cache.
+Bootstrap to the start of init.init took 1640.54s
+Early init took 0.00s
+Loader init took 0.04s
+Loading error handling took 0.02s
+Loading script took 0.37s
+Loading save slot metadata. took 0.05s
+Loading persistent took 0.00s
+Importing _renpysteam: ImportError('No module named _renpysteam',)
+Running init code took 0.05s
+Loading analysis data took 0.01s
+Analyze and compile ATL took 0.00s
+Index archives took 0.00s
+Backing up script files to 'C:\\Users\\sever\\AppData\\Roaming/RenPy/backups\\EscapeTheBullpen':
+Dump and make backups. took 0.09s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.04s
+DPI scale factor: 1.000000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.29s
+Cleaning stores took 0.00s
+Init translation took 0.05s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.01s
+Save screen analysis took 0.03s
+Prepare screens took 0.07s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.01s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.05s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1920, 1080)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'NVIDIA Corporation'
+Renderer: 'NVIDIA GeForce RTX 2060 SUPER/PCIe/SSE2'
+Version: '4.6.0 NVIDIA 516.59'
+Display Info: None
+Screen sizes: virtual=(1920, 1080) physical=(1600, 837) drawable=(1600, 837)
+Maximum texture size: 4096x4096
+Resetting cache.
+Bootstrap to the start of init.init took 1690.95s
+Early init took 0.00s
+Loader init took 0.04s
+Loading error handling took 0.02s
+Loading script took 0.38s
+Loading save slot metadata. took 0.05s
+Loading persistent took 0.00s
+Importing _renpysteam: ImportError('No module named _renpysteam',)
+Running init code took 0.05s
+Loading analysis data took 0.02s
+Analyze and compile ATL took 0.00s
+Index archives took 0.00s
+Backing up script files to 'C:\\Users\\sever\\AppData\\Roaming/RenPy/backups\\EscapeTheBullpen':
+Dump and make backups. took 0.08s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.05s
+DPI scale factor: 1.000000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.29s
+Cleaning stores took 0.00s
+Init translation took 0.05s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.01s
+Save screen analysis took 0.03s
+Prepare screens took 0.07s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.01s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.05s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1920, 1080)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'NVIDIA Corporation'
+Renderer: 'NVIDIA GeForce RTX 2060 SUPER/PCIe/SSE2'
+Version: '4.6.0 NVIDIA 516.59'
+Display Info: None
+Screen sizes: virtual=(1920, 1080) physical=(1600, 837) drawable=(1600, 837)
+Maximum texture size: 4096x4096
+Resetting cache.
+Bootstrap to the start of init.init took 1733.80s
+Early init took 0.00s
+Loader init took 0.04s
+Loading error handling took 0.02s
+Loading script took 0.38s
+Loading save slot metadata. took 0.05s
+Loading persistent took 0.00s
+Importing _renpysteam: ImportError('No module named _renpysteam',)
+Running init code took 0.05s
+Loading analysis data took 0.02s
+Analyze and compile ATL took 0.00s
+Index archives took 0.00s
+Backing up script files to 'C:\\Users\\sever\\AppData\\Roaming/RenPy/backups\\EscapeTheBullpen':
+Dump and make backups. took 0.08s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.05s
+DPI scale factor: 1.000000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.29s
+Cleaning stores took 0.00s
+Init translation took 0.05s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.01s
+Save screen analysis took 0.03s
+Prepare screens took 0.07s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.01s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.05s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1920, 1080)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'NVIDIA Corporation'
+Renderer: 'NVIDIA GeForce RTX 2060 SUPER/PCIe/SSE2'
+Version: '4.6.0 NVIDIA 516.59'
+Display Info: None
+Screen sizes: virtual=(1920, 1080) physical=(1600, 837) drawable=(1600, 837)
+Maximum texture size: 4096x4096
+Resetting cache.
+Bootstrap to the start of init.init took 1740.27s
+Early init took 0.00s
+Loader init took 0.04s
+Loading error handling took 0.02s
+Loading script took 0.38s
+Loading save slot metadata. took 0.05s
+Loading persistent took 0.00s
+Importing _renpysteam: ImportError('No module named _renpysteam',)
+Running init code took 0.05s
+Loading analysis data took 0.02s
+Analyze and compile ATL took 0.00s
+Index archives took 0.00s
+Backing up script files to 'C:\\Users\\sever\\AppData\\Roaming/RenPy/backups\\EscapeTheBullpen':
+Dump and make backups. took 0.09s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.05s
+DPI scale factor: 1.000000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.29s
+Cleaning stores took 0.00s
+Init translation took 0.05s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.01s
+Save screen analysis took 0.03s
+Prepare screens took 0.07s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.01s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.05s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1920, 1080)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'NVIDIA Corporation'
+Renderer: 'NVIDIA GeForce RTX 2060 SUPER/PCIe/SSE2'
+Version: '4.6.0 NVIDIA 516.59'
+Display Info: None
+Screen sizes: virtual=(1920, 1080) physical=(1600, 837) drawable=(1600, 837)
+Maximum texture size: 4096x4096
+Resetting cache.
+Bootstrap to the start of init.init took 1761.88s
+Early init took 0.00s
+Loader init took 0.04s
+Loading error handling took 0.02s
+Loading script took 0.38s
+Loading save slot metadata. took 0.05s
+Loading persistent took 0.00s
+Importing _renpysteam: ImportError('No module named _renpysteam',)
+Running init code took 0.05s
+Loading analysis data took 0.02s
+Analyze and compile ATL took 0.00s
+Index archives took 0.00s
+Backing up script files to 'C:\\Users\\sever\\AppData\\Roaming/RenPy/backups\\EscapeTheBullpen':
+Dump and make backups. took 0.08s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.05s
+DPI scale factor: 1.000000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.30s
+Cleaning stores took 0.00s
+Init translation took 0.05s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.01s
+Save screen analysis took 0.03s
+Prepare screens took 0.07s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.01s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.05s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1920, 1080)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'NVIDIA Corporation'
+Renderer: 'NVIDIA GeForce RTX 2060 SUPER/PCIe/SSE2'
+Version: '4.6.0 NVIDIA 516.59'
+Display Info: None
+Screen sizes: virtual=(1920, 1080) physical=(1600, 837) drawable=(1600, 837)
+Maximum texture size: 4096x4096
+Resetting cache.
+Bootstrap to the start of init.init took 1791.11s
+Early init took 0.00s
+Loader init took 0.04s
+Loading error handling took 0.02s
+Loading script took 0.38s
+Loading save slot metadata. took 0.05s
+Loading persistent took 0.00s
+Importing _renpysteam: ImportError('No module named _renpysteam',)
+Running init code took 0.05s
+Loading analysis data took 0.01s
+Analyze and compile ATL took 0.00s
+Index archives took 0.00s
+Backing up script files to 'C:\\Users\\sever\\AppData\\Roaming/RenPy/backups\\EscapeTheBullpen':
+Dump and make backups. took 0.08s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.05s
+DPI scale factor: 1.000000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.29s
+Cleaning stores took 0.00s
+Init translation took 0.05s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.01s
+Save screen analysis took 0.03s
+Prepare screens took 0.07s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.01s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.05s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1920, 1080)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'NVIDIA Corporation'
+Renderer: 'NVIDIA GeForce RTX 2060 SUPER/PCIe/SSE2'
+Version: '4.6.0 NVIDIA 516.59'
+Display Info: None
+Screen sizes: virtual=(1920, 1080) physical=(1600, 837) drawable=(1600, 837)
+Maximum texture size: 4096x4096
+Resetting cache.
+Bootstrap to the start of init.init took 1806.72s
+Early init took 0.00s
+Loader init took 0.04s
+Loading error handling took 0.02s
+Loading script took 0.39s
+Loading save slot metadata. took 0.05s
+Loading persistent took 0.00s
+Importing _renpysteam: ImportError('No module named _renpysteam',)
+Running init code took 0.05s
+Loading analysis data took 0.02s
+Analyze and compile ATL took 0.00s
+Index archives took 0.00s
+Backing up script files to 'C:\\Users\\sever\\AppData\\Roaming/RenPy/backups\\EscapeTheBullpen':
+Dump and make backups. took 0.08s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.05s
+DPI scale factor: 1.000000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.28s
 Cleaning stores took 0.00s
 Init translation took 0.05s
 Build styles took 0.00s
@@ -183,289 +1156,15 @@ Display Info: None
 Screen sizes: virtual=(1920, 1080) physical=(1600, 837) drawable=(1600, 837)
 Maximum texture size: 4096x4096
 Resetting cache.
-Bootstrap to the start of init.init took 234.71s
-Early init took 0.00s
-Loader init took 0.05s
-Loading error handling took 0.02s
-Loading script took 0.30s
-Loading save slot metadata. took 0.05s
-Loading persistent took 0.00s
-Importing _renpysteam: ImportError('No module named _renpysteam',)
-Running init code took 0.12s
-Loading analysis data took 0.02s
-Analyze and compile ATL took 0.00s
-Index archives took 0.00s
-Backing up script files to 'C:\\Users\\sever\\AppData\\Roaming/RenPy/backups\\EscapeTheBullpen':
-Dump and make backups. took 0.09s
-Cleaning cache took 0.00s
-Making clean stores took 0.00s
-Initial gc. took 0.05s
-DPI scale factor: 1.000000
-nvdrs: Loaded, about to disable thread optimizations.
-nvdrs: Disabled thread optimizations.
-Creating interface object took 0.29s
-Cleaning stores took 0.00s
-Init translation took 0.05s
-Build styles took 0.00s
-Load screen analysis took 0.00s
-Analyze screens took 0.01s
-Save screen analysis took 0.03s
-Prepare screens took 0.07s
-Save pyanalysis. took 0.00s
-Save bytecode. took 0.01s
-Running _start took 0.00s
-Performance test:
-Interface start took 0.05s
-
-Initializing gl2 renderer:
-primary display bounds: (0, 0, 1920, 1080)
-swap interval: 1 frames
-Windowed mode.
-Vendor: 'NVIDIA Corporation'
-Renderer: 'NVIDIA GeForce RTX 2060 SUPER/PCIe/SSE2'
-Version: '4.6.0 NVIDIA 516.59'
-Display Info: None
-Screen sizes: virtual=(1920, 1080) physical=(1600, 837) drawable=(1600, 837)
-Maximum texture size: 4096x4096
-Resetting cache.
-Bootstrap to the start of init.init took 262.77s
+Bootstrap to the start of init.init took 1820.83s
 Early init took 0.00s
 Loader init took 0.04s
-Loading error handling took 0.02s
-Loading script took 0.29s
-Loading save slot metadata. took 0.05s
-Loading persistent took 0.00s
-Importing _renpysteam: ImportError('No module named _renpysteam',)
-Running init code took 0.11s
-Loading analysis data took 0.02s
-Analyze and compile ATL took 0.00s
-Index archives took 0.00s
-Backing up script files to 'C:\\Users\\sever\\AppData\\Roaming/RenPy/backups\\EscapeTheBullpen':
-Dump and make backups. took 0.08s
-Cleaning cache took 0.00s
-Making clean stores took 0.00s
-Initial gc. took 0.05s
-DPI scale factor: 1.000000
-nvdrs: Loaded, about to disable thread optimizations.
-nvdrs: Disabled thread optimizations.
-Creating interface object took 0.29s
-Cleaning stores took 0.00s
-Init translation took 0.05s
-Build styles took 0.00s
-Load screen analysis took 0.00s
-Analyze screens took 0.01s
-Save screen analysis took 0.03s
-Prepare screens took 0.07s
-Save pyanalysis. took 0.00s
-Save bytecode. took 0.01s
-Running _start took 0.00s
-Performance test:
-Interface start took 0.05s
-
-Initializing gl2 renderer:
-primary display bounds: (0, 0, 1920, 1080)
-swap interval: 1 frames
-Windowed mode.
-Vendor: 'NVIDIA Corporation'
-Renderer: 'NVIDIA GeForce RTX 2060 SUPER/PCIe/SSE2'
-Version: '4.6.0 NVIDIA 516.59'
-Display Info: None
-Screen sizes: virtual=(1920, 1080) physical=(1600, 837) drawable=(1600, 837)
-Maximum texture size: 4096x4096
-Resetting cache.
-Bootstrap to the start of init.init took 319.16s
-Early init took 0.00s
-Loader init took 0.04s
-Loading error handling took 0.02s
-Loading script took 0.30s
-Loading save slot metadata. took 0.05s
-Loading persistent took 0.00s
-Importing _renpysteam: ImportError('No module named _renpysteam',)
-Running init code took 0.11s
-Loading analysis data took 0.02s
-Analyze and compile ATL took 0.00s
-Index archives took 0.00s
-Backing up script files to 'C:\\Users\\sever\\AppData\\Roaming/RenPy/backups\\EscapeTheBullpen':
-Dump and make backups. took 0.08s
-Cleaning cache took 0.00s
-Making clean stores took 0.00s
-Initial gc. took 0.05s
-DPI scale factor: 1.000000
-nvdrs: Loaded, about to disable thread optimizations.
-nvdrs: Disabled thread optimizations.
-Creating interface object took 0.30s
-Cleaning stores took 0.00s
-Init translation took 0.05s
-Build styles took 0.00s
-Load screen analysis took 0.00s
-Analyze screens took 0.01s
-Save screen analysis took 0.03s
-Prepare screens took 0.07s
-Save pyanalysis. took 0.00s
-Save bytecode. took 0.01s
-Running _start took 0.00s
-Performance test:
-Interface start took 0.05s
-
-Initializing gl2 renderer:
-primary display bounds: (0, 0, 1920, 1080)
-swap interval: 1 frames
-Windowed mode.
-Vendor: 'NVIDIA Corporation'
-Renderer: 'NVIDIA GeForce RTX 2060 SUPER/PCIe/SSE2'
-Version: '4.6.0 NVIDIA 516.59'
-Display Info: None
-Screen sizes: virtual=(1920, 1080) physical=(1600, 837) drawable=(1600, 837)
-Maximum texture size: 4096x4096
-Resetting cache.
-Bootstrap to the start of init.init took 460.36s
-Early init took 0.00s
-Loader init took 0.04s
-Loading error handling took 0.02s
-Loading script took 0.30s
-Loading save slot metadata. took 0.05s
-Loading persistent took 0.00s
-Importing _renpysteam: ImportError('No module named _renpysteam',)
-Running init code took 0.11s
-Loading analysis data took 0.02s
-Analyze and compile ATL took 0.00s
-Index archives took 0.00s
-Backing up script files to 'C:\\Users\\sever\\AppData\\Roaming/RenPy/backups\\EscapeTheBullpen':
-Dump and make backups. took 0.08s
-Cleaning cache took 0.00s
-Making clean stores took 0.00s
-Initial gc. took 0.05s
-DPI scale factor: 1.000000
-nvdrs: Loaded, about to disable thread optimizations.
-nvdrs: Disabled thread optimizations.
-Creating interface object took 0.29s
-Cleaning stores took 0.00s
-Init translation took 0.05s
-Build styles took 0.00s
-Load screen analysis took 0.00s
-Analyze screens took 0.01s
-Save screen analysis took 0.03s
-Prepare screens took 0.07s
-Save pyanalysis. took 0.00s
-Save bytecode. took 0.01s
-Running _start took 0.00s
-Performance test:
-Interface start took 0.05s
-
-Initializing gl2 renderer:
-primary display bounds: (0, 0, 1920, 1080)
-swap interval: 1 frames
-Windowed mode.
-Vendor: 'NVIDIA Corporation'
-Renderer: 'NVIDIA GeForce RTX 2060 SUPER/PCIe/SSE2'
-Version: '4.6.0 NVIDIA 516.59'
-Display Info: None
-Screen sizes: virtual=(1920, 1080) physical=(1600, 837) drawable=(1600, 837)
-Maximum texture size: 4096x4096
-Resetting cache.
-Bootstrap to the start of init.init took 469.82s
-Early init took 0.00s
-Loader init took 0.04s
-Loading error handling took 0.02s
-Loading script took 0.30s
-Loading save slot metadata. took 0.05s
-Loading persistent took 0.00s
-Importing _renpysteam: ImportError('No module named _renpysteam',)
-Running init code took 0.11s
-Loading analysis data took 0.02s
-Analyze and compile ATL took 0.00s
-Index archives took 0.00s
-Backing up script files to 'C:\\Users\\sever\\AppData\\Roaming/RenPy/backups\\EscapeTheBullpen':
-Dump and make backups. took 0.08s
-Cleaning cache took 0.00s
-Making clean stores took 0.00s
-Initial gc. took 0.05s
-DPI scale factor: 1.000000
-nvdrs: Loaded, about to disable thread optimizations.
-nvdrs: Disabled thread optimizations.
-Creating interface object took 0.29s
-Cleaning stores took 0.00s
-Init translation took 0.05s
-Build styles took 0.00s
-Load screen analysis took 0.00s
-Analyze screens took 0.01s
-Save screen analysis took 0.03s
-Prepare screens took 0.07s
-Save pyanalysis. took 0.00s
-Save bytecode. took 0.01s
-Running _start took 0.00s
-Performance test:
-Interface start took 0.05s
-
-Initializing gl2 renderer:
-primary display bounds: (0, 0, 1920, 1080)
-swap interval: 1 frames
-Windowed mode.
-Vendor: 'NVIDIA Corporation'
-Renderer: 'NVIDIA GeForce RTX 2060 SUPER/PCIe/SSE2'
-Version: '4.6.0 NVIDIA 516.59'
-Display Info: None
-Screen sizes: virtual=(1920, 1080) physical=(1600, 837) drawable=(1600, 837)
-Maximum texture size: 4096x4096
-Resetting cache.
-Bootstrap to the start of init.init took 545.99s
-Early init took 0.00s
-Loader init took 0.04s
-Loading error handling took 0.02s
-Loading script took 0.41s
-Loading save slot metadata. took 0.05s
-Loading persistent took 0.00s
-Importing _renpysteam: ImportError('No module named _renpysteam',)
-Running init code took 0.11s
-Loading analysis data took 0.01s
-Analyze and compile ATL took 0.00s
-Index archives took 0.00s
-Backing up script files to 'C:\\Users\\sever\\AppData\\Roaming/RenPy/backups\\EscapeTheBullpen':
-Dump and make backups. took 0.08s
-Cleaning cache took 0.00s
-Making clean stores took 0.00s
-Initial gc. took 0.05s
-DPI scale factor: 1.000000
-nvdrs: Loaded, about to disable thread optimizations.
-nvdrs: Disabled thread optimizations.
-Creating interface object took 0.29s
-Cleaning stores took 0.00s
-Init translation took 0.05s
-Build styles took 0.00s
-Load screen analysis took 0.00s
-Analyze screens took 0.01s
-Save screen analysis took 0.03s
-Prepare screens took 0.07s
-Save pyanalysis. took 0.00s
-Save bytecode. took 0.02s
-Running _start took 0.00s
-Performance test:
-Interface start took 0.05s
-
-Initializing gl2 renderer:
-primary display bounds: (0, 0, 1920, 1080)
-swap interval: 1 frames
-Windowed mode.
-Vendor: 'NVIDIA Corporation'
-Renderer: 'NVIDIA GeForce RTX 2060 SUPER/PCIe/SSE2'
-Version: '4.6.0 NVIDIA 516.59'
-Display Info: None
-Screen sizes: virtual=(1920, 1080) physical=(1600, 837) drawable=(1600, 837)
-Maximum texture size: 4096x4096
-Screen sizes: virtual=(1920, 1080) physical=(1920, 1017) drawable=(1920, 1017)
-Maximum texture size: 4096x4096
-Screen sizes: virtual=(1920, 1080) physical=(1600, 837) drawable=(1600, 837)
-Maximum texture size: 4096x4096
-Resetting cache.
-Bootstrap to the start of init.init took 657.06s
-Early init took 0.00s
-Loader init took 0.05s
 Loading error handling took 0.02s
 Loading script took 0.37s
 Loading save slot metadata. took 0.05s
 Loading persistent took 0.00s
 Importing _renpysteam: ImportError('No module named _renpysteam',)
-Running init code took 0.11s
+Running init code took 0.05s
 Loading analysis data took 0.02s
 Analyze and compile ATL took 0.00s
 Index archives took 0.00s
@@ -477,7 +1176,7 @@ Initial gc. took 0.05s
 DPI scale factor: 1.000000
 nvdrs: Loaded, about to disable thread optimizations.
 nvdrs: Disabled thread optimizations.
-Creating interface object took 0.30s
+Creating interface object took 0.29s
 Cleaning stores took 0.00s
 Init translation took 0.05s
 Build styles took 0.00s
@@ -502,36 +1201,252 @@ Display Info: None
 Screen sizes: virtual=(1920, 1080) physical=(1600, 837) drawable=(1600, 837)
 Maximum texture size: 4096x4096
 Resetting cache.
-Bootstrap to the start of init.init took 671.12s
+Bootstrap to the start of init.init took 1843.97s
 Early init took 0.00s
 Loader init took 0.04s
+Loading error handling took 0.02s
+Loading script took 0.37s
+Loading save slot metadata. took 0.05s
+Loading persistent took 0.00s
+Importing _renpysteam: ImportError('No module named _renpysteam',)
+Running init code took 0.05s
+Loading analysis data took 0.01s
+Analyze and compile ATL took 0.00s
+Index archives took 0.00s
+Backing up script files to 'C:\\Users\\sever\\AppData\\Roaming/RenPy/backups\\EscapeTheBullpen':
+Dump and make backups. took 0.08s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.05s
+DPI scale factor: 1.000000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.29s
+Cleaning stores took 0.00s
+Init translation took 0.05s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.01s
+Save screen analysis took 0.03s
+Prepare screens took 0.07s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.01s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.05s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1920, 1080)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'NVIDIA Corporation'
+Renderer: 'NVIDIA GeForce RTX 2060 SUPER/PCIe/SSE2'
+Version: '4.6.0 NVIDIA 516.59'
+Display Info: None
+Screen sizes: virtual=(1920, 1080) physical=(1600, 837) drawable=(1600, 837)
+Maximum texture size: 4096x4096
+Resetting cache.
+Bootstrap to the start of init.init took 1851.93s
+Early init took 0.00s
+Loader init took 0.04s
+Loading error handling took 0.02s
+Loading script took 0.39s
+Loading save slot metadata. took 0.05s
+Loading persistent took 0.00s
+Importing _renpysteam: ImportError('No module named _renpysteam',)
+Running init code took 0.05s
+Loading analysis data took 0.01s
+Analyze and compile ATL took 0.00s
+Index archives took 0.00s
+Backing up script files to 'C:\\Users\\sever\\AppData\\Roaming/RenPy/backups\\EscapeTheBullpen':
+Dump and make backups. took 0.08s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.05s
+DPI scale factor: 1.000000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.28s
+Cleaning stores took 0.00s
+Init translation took 0.05s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.01s
+Save screen analysis took 0.03s
+Prepare screens took 0.07s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.01s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.05s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1920, 1080)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'NVIDIA Corporation'
+Renderer: 'NVIDIA GeForce RTX 2060 SUPER/PCIe/SSE2'
+Version: '4.6.0 NVIDIA 516.59'
+Display Info: None
+Screen sizes: virtual=(1920, 1080) physical=(1600, 837) drawable=(1600, 837)
+Maximum texture size: 4096x4096
+Resetting cache.
+Bootstrap to the start of init.init took 1865.99s
+Early init took 0.00s
+Loader init took 0.04s
+Loading error handling took 0.02s
+Loading script took 0.39s
+Loading save slot metadata. took 0.05s
+Loading persistent took 0.00s
+Importing _renpysteam: ImportError('No module named _renpysteam',)
+Running init code took 0.05s
+Loading analysis data took 0.02s
+Analyze and compile ATL took 0.00s
+Index archives took 0.00s
+Backing up script files to 'C:\\Users\\sever\\AppData\\Roaming/RenPy/backups\\EscapeTheBullpen':
+Dump and make backups. took 0.08s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.05s
+DPI scale factor: 1.000000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.29s
+Cleaning stores took 0.00s
+Init translation took 0.05s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.01s
+Save screen analysis took 0.03s
+Prepare screens took 0.07s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.01s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.05s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1920, 1080)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'NVIDIA Corporation'
+Renderer: 'NVIDIA GeForce RTX 2060 SUPER/PCIe/SSE2'
+Version: '4.6.0 NVIDIA 516.59'
+Display Info: None
+Screen sizes: virtual=(1920, 1080) physical=(1600, 837) drawable=(1600, 837)
+Maximum texture size: 4096x4096
+Resetting cache.
+Bootstrap to the start of init.init took 1884.59s
+Early init took 0.00s
+Loader init took 0.05s
+Loading error handling took 0.02s
+Loading script took 0.38s
+Loading save slot metadata. took 0.05s
+Loading persistent took 0.00s
+Importing _renpysteam: ImportError('No module named _renpysteam',)
+Running init code took 0.05s
+Loading analysis data took 0.02s
+Analyze and compile ATL took 0.00s
+Index archives took 0.00s
+Backing up script files to 'C:\\Users\\sever\\AppData\\Roaming/RenPy/backups\\EscapeTheBullpen':
+Dump and make backups. took 0.08s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.05s
+DPI scale factor: 1.000000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.28s
+Cleaning stores took 0.00s
+Init translation took 0.05s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.01s
+Save screen analysis took 0.03s
+Prepare screens took 0.07s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.01s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.05s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1920, 1080)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'NVIDIA Corporation'
+Renderer: 'NVIDIA GeForce RTX 2060 SUPER/PCIe/SSE2'
+Version: '4.6.0 NVIDIA 516.59'
+Display Info: None
+Screen sizes: virtual=(1920, 1080) physical=(1600, 837) drawable=(1600, 837)
+Maximum texture size: 4096x4096
+Cleaning stores took 0.00s
+Init translation took 0.00s
+Build styles took 0.00s
+Load screen analysis took 0.02s
+Analyze screens took 0.00s
+Prepare screens took 0.00s
+Running _start took 0.00s
+Screen sizes: virtual=(1920, 1080) physical=(1920, 1017) drawable=(1920, 1017)
+Maximum texture size: 4096x4096
+Resetting cache.
+Bootstrap to the start of init.init took 2447.86s
+Early init took 0.00s
+Loader init took 0.04s
+Loading error handling took 0.02s
+Loading script took 0.32s
+Loading save slot metadata. took 0.05s
+Loading persistent took 0.00s
+
+File "game/aileascene.rpy", line 625: expected menuitem
+    show mona main
+    ^
+DPI scale factor: 1.000000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Interface start took 0.40s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1920, 1080)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'NVIDIA Corporation'
+Renderer: 'NVIDIA GeForce RTX 2060 SUPER/PCIe/SSE2'
+Version: '4.6.0 NVIDIA 516.59'
+Display Info: None
+Screen sizes: virtual=(1920, 1080) physical=(1920, 1017) drawable=(1920, 1017)
+Maximum texture size: 4096x4096
+Resetting cache.
+Bootstrap to the start of init.init took 2464.67s
+Early init took 0.00s
+Loader init took 0.05s
 Loading error handling took 0.02s
 Loading script took 0.41s
 Loading save slot metadata. took 0.05s
 Loading persistent took 0.00s
 Importing _renpysteam: ImportError('No module named _renpysteam',)
-Running init code took 0.12s
-Loading analysis data took 0.02s
+Running init code took 0.06s
+Loading analysis data took 0.01s
 Analyze and compile ATL took 0.00s
 Index archives took 0.00s
 Backing up script files to 'C:\\Users\\sever\\AppData\\Roaming/RenPy/backups\\EscapeTheBullpen':
 Dump and make backups. took 0.08s
 Cleaning cache took 0.00s
 Making clean stores took 0.00s
-Initial gc. took 0.05s
+Initial gc. took 0.04s
 DPI scale factor: 1.000000
 nvdrs: Loaded, about to disable thread optimizations.
 nvdrs: Disabled thread optimizations.
-Creating interface object took 0.29s
+Creating interface object took 0.30s
 Cleaning stores took 0.00s
 Init translation took 0.05s
 Build styles took 0.00s
 Load screen analysis took 0.00s
-Analyze screens took 0.01s
+Analyze screens took 0.02s
 Save screen analysis took 0.03s
 Prepare screens took 0.07s
 Save pyanalysis. took 0.03s
-Save bytecode. took 0.02s
+Save bytecode. took 0.01s
 Running _start took 0.00s
 Performance test:
 Interface start took 0.05s
@@ -544,23 +1459,19 @@ Vendor: 'NVIDIA Corporation'
 Renderer: 'NVIDIA GeForce RTX 2060 SUPER/PCIe/SSE2'
 Version: '4.6.0 NVIDIA 516.59'
 Display Info: None
-Screen sizes: virtual=(1920, 1080) physical=(1600, 837) drawable=(1600, 837)
-Maximum texture size: 4096x4096
 Screen sizes: virtual=(1920, 1080) physical=(1920, 1017) drawable=(1920, 1017)
 Maximum texture size: 4096x4096
-Screen sizes: virtual=(1920, 1080) physical=(1600, 837) drawable=(1600, 837)
-Maximum texture size: 4096x4096
 Resetting cache.
-Bootstrap to the start of init.init took 735.22s
+Bootstrap to the start of init.init took 2534.83s
 Early init took 0.00s
 Loader init took 0.04s
 Loading error handling took 0.02s
-Loading script took 0.38s
+Loading script took 0.40s
 Loading save slot metadata. took 0.05s
 Loading persistent took 0.00s
 Importing _renpysteam: ImportError('No module named _renpysteam',)
-Running init code took 0.12s
-Loading analysis data took 0.01s
+Running init code took 0.05s
+Loading analysis data took 0.02s
 Analyze and compile ATL took 0.00s
 Index archives took 0.00s
 Backing up script files to 'C:\\Users\\sever\\AppData\\Roaming/RenPy/backups\\EscapeTheBullpen':
@@ -579,7 +1490,7 @@ Load screen analysis took 0.00s
 Analyze screens took 0.01s
 Save screen analysis took 0.03s
 Prepare screens took 0.07s
-Save pyanalysis. took 0.00s
+Save pyanalysis. took 0.03s
 Save bytecode. took 0.01s
 Running _start took 0.00s
 Performance test:
@@ -593,22 +1504,18 @@ Vendor: 'NVIDIA Corporation'
 Renderer: 'NVIDIA GeForce RTX 2060 SUPER/PCIe/SSE2'
 Version: '4.6.0 NVIDIA 516.59'
 Display Info: None
-Screen sizes: virtual=(1920, 1080) physical=(1600, 837) drawable=(1600, 837)
-Maximum texture size: 4096x4096
 Screen sizes: virtual=(1920, 1080) physical=(1920, 1017) drawable=(1920, 1017)
 Maximum texture size: 4096x4096
-Screen sizes: virtual=(1920, 1080) physical=(1600, 837) drawable=(1600, 837)
-Maximum texture size: 4096x4096
 Resetting cache.
-Bootstrap to the start of init.init took 861.44s
+Bootstrap to the start of init.init took 2544.43s
 Early init took 0.00s
 Loader init took 0.04s
 Loading error handling took 0.02s
-Loading script took 0.38s
+Loading script took 0.40s
 Loading save slot metadata. took 0.05s
 Loading persistent took 0.00s
 Importing _renpysteam: ImportError('No module named _renpysteam',)
-Running init code took 0.11s
+Running init code took 0.05s
 Loading analysis data took 0.01s
 Analyze and compile ATL took 0.00s
 Index archives took 0.00s
@@ -642,232 +1549,7 @@ Vendor: 'NVIDIA Corporation'
 Renderer: 'NVIDIA GeForce RTX 2060 SUPER/PCIe/SSE2'
 Version: '4.6.0 NVIDIA 516.59'
 Display Info: None
-Screen sizes: virtual=(1920, 1080) physical=(1600, 837) drawable=(1600, 837)
-Maximum texture size: 4096x4096
-Resetting cache.
-Bootstrap to the start of init.init took 893.67s
-Early init took 0.00s
-Loader init took 0.04s
-Loading error handling took 0.02s
-Loading script took 0.38s
-Loading save slot metadata. took 0.05s
-Loading persistent took 0.00s
-Importing _renpysteam: ImportError('No module named _renpysteam',)
-Running init code took 0.11s
-Loading analysis data took 0.02s
-Analyze and compile ATL took 0.00s
-Index archives took 0.00s
-Backing up script files to 'C:\\Users\\sever\\AppData\\Roaming/RenPy/backups\\EscapeTheBullpen':
-Dump and make backups. took 0.09s
-Cleaning cache took 0.00s
-Making clean stores took 0.00s
-Initial gc. took 0.05s
-DPI scale factor: 1.000000
-nvdrs: Loaded, about to disable thread optimizations.
-nvdrs: Disabled thread optimizations.
-Creating interface object took 0.30s
-Cleaning stores took 0.00s
-Init translation took 0.05s
-Build styles took 0.00s
-Load screen analysis took 0.00s
-Analyze screens took 0.01s
-Save screen analysis took 0.03s
-Prepare screens took 0.07s
-Save pyanalysis. took 0.00s
-Save bytecode. took 0.01s
-Running _start took 0.00s
-Performance test:
-Interface start took 0.05s
-
-Initializing gl2 renderer:
-primary display bounds: (0, 0, 1920, 1080)
-swap interval: 1 frames
-Windowed mode.
-Vendor: 'NVIDIA Corporation'
-Renderer: 'NVIDIA GeForce RTX 2060 SUPER/PCIe/SSE2'
-Version: '4.6.0 NVIDIA 516.59'
-Display Info: None
-Screen sizes: virtual=(1920, 1080) physical=(1600, 837) drawable=(1600, 837)
-Maximum texture size: 4096x4096
-Resetting cache.
-Bootstrap to the start of init.init took 925.91s
-Early init took 0.00s
-Loader init took 0.04s
-Loading error handling took 0.02s
-Loading script took 0.38s
-Loading save slot metadata. took 0.05s
-Loading persistent took 0.00s
-Importing _renpysteam: ImportError('No module named _renpysteam',)
-Running init code took 0.11s
-Loading analysis data took 0.02s
-Analyze and compile ATL took 0.00s
-Index archives took 0.00s
-Backing up script files to 'C:\\Users\\sever\\AppData\\Roaming/RenPy/backups\\EscapeTheBullpen':
-Dump and make backups. took 0.08s
-Cleaning cache took 0.00s
-Making clean stores took 0.00s
-Initial gc. took 0.05s
-DPI scale factor: 1.000000
-nvdrs: Loaded, about to disable thread optimizations.
-nvdrs: Disabled thread optimizations.
-Creating interface object took 0.30s
-Cleaning stores took 0.00s
-Init translation took 0.05s
-Build styles took 0.00s
-Load screen analysis took 0.00s
-Analyze screens took 0.01s
-Save screen analysis took 0.03s
-Prepare screens took 0.07s
-Save pyanalysis. took 0.00s
-Save bytecode. took 0.01s
-Running _start took 0.00s
-Performance test:
-Interface start took 0.06s
-
-Initializing gl2 renderer:
-primary display bounds: (0, 0, 1920, 1080)
-swap interval: 1 frames
-Windowed mode.
-Vendor: 'NVIDIA Corporation'
-Renderer: 'NVIDIA GeForce RTX 2060 SUPER/PCIe/SSE2'
-Version: '4.6.0 NVIDIA 516.59'
-Display Info: None
-Screen sizes: virtual=(1920, 1080) physical=(1600, 837) drawable=(1600, 837)
-Maximum texture size: 4096x4096
-Resetting cache.
-Bootstrap to the start of init.init took 986.91s
-Early init took 0.00s
-Loader init took 0.04s
-Loading error handling took 0.02s
-Loading script took 0.38s
-Loading save slot metadata. took 0.05s
-Loading persistent took 0.00s
-Importing _renpysteam: ImportError('No module named _renpysteam',)
-Running init code took 0.11s
-Loading analysis data took 0.01s
-Analyze and compile ATL took 0.00s
-Index archives took 0.00s
-Backing up script files to 'C:\\Users\\sever\\AppData\\Roaming/RenPy/backups\\EscapeTheBullpen':
-Dump and make backups. took 0.08s
-Cleaning cache took 0.00s
-Making clean stores took 0.00s
-Initial gc. took 0.05s
-DPI scale factor: 1.000000
-nvdrs: Loaded, about to disable thread optimizations.
-nvdrs: Disabled thread optimizations.
-Creating interface object took 0.29s
-Cleaning stores took 0.00s
-Init translation took 0.05s
-Build styles took 0.00s
-Load screen analysis took 0.00s
-Analyze screens took 0.01s
-Save screen analysis took 0.03s
-Prepare screens took 0.08s
-Save pyanalysis. took 0.03s
-Save bytecode. took 0.01s
-Running _start took 0.00s
-Performance test:
-Interface start took 0.05s
-
-Initializing gl2 renderer:
-primary display bounds: (0, 0, 1920, 1080)
-swap interval: 1 frames
-Windowed mode.
-Vendor: 'NVIDIA Corporation'
-Renderer: 'NVIDIA GeForce RTX 2060 SUPER/PCIe/SSE2'
-Version: '4.6.0 NVIDIA 516.59'
-Display Info: None
-Screen sizes: virtual=(1920, 1080) physical=(1600, 837) drawable=(1600, 837)
-Maximum texture size: 4096x4096
-Resetting cache.
-Bootstrap to the start of init.init took 1014.57s
-Early init took 0.00s
-Loader init took 0.04s
-Loading error handling took 0.02s
-Loading script took 0.38s
-Loading save slot metadata. took 0.05s
-Loading persistent took 0.00s
-Importing _renpysteam: ImportError('No module named _renpysteam',)
-Running init code took 0.12s
-Loading analysis data took 0.02s
-Analyze and compile ATL took 0.00s
-Index archives took 0.00s
-Backing up script files to 'C:\\Users\\sever\\AppData\\Roaming/RenPy/backups\\EscapeTheBullpen':
-Dump and make backups. took 0.09s
-Cleaning cache took 0.00s
-Making clean stores took 0.00s
-Initial gc. took 0.05s
-DPI scale factor: 1.000000
-nvdrs: Loaded, about to disable thread optimizations.
-nvdrs: Disabled thread optimizations.
-Creating interface object took 0.29s
-Cleaning stores took 0.00s
-Init translation took 0.05s
-Build styles took 0.00s
-Load screen analysis took 0.00s
-Analyze screens took 0.01s
-Save screen analysis took 0.03s
-Prepare screens took 0.07s
-Save pyanalysis. took 0.03s
-Save bytecode. took 0.01s
-Running _start took 0.00s
-Performance test:
-Interface start took 0.05s
-
-Initializing gl2 renderer:
-primary display bounds: (0, 0, 1920, 1080)
-swap interval: 1 frames
-Windowed mode.
-Vendor: 'NVIDIA Corporation'
-Renderer: 'NVIDIA GeForce RTX 2060 SUPER/PCIe/SSE2'
-Version: '4.6.0 NVIDIA 516.59'
-Display Info: None
-Screen sizes: virtual=(1920, 1080) physical=(1600, 837) drawable=(1600, 837)
-Maximum texture size: 4096x4096
-Resetting cache.
-Bootstrap to the start of init.init took 1060.44s
-Early init took 0.00s
-Loader init took 0.04s
-Loading error handling took 0.02s
-Loading script took 0.38s
-Loading save slot metadata. took 0.05s
-Loading persistent took 0.00s
-Importing _renpysteam: ImportError('No module named _renpysteam',)
-Running init code took 0.13s
-Loading analysis data took 0.02s
-Analyze and compile ATL took 0.00s
-Index archives took 0.00s
-Backing up script files to 'C:\\Users\\sever\\AppData\\Roaming/RenPy/backups\\EscapeTheBullpen':
-Dump and make backups. took 0.09s
-Cleaning cache took 0.00s
-Making clean stores took 0.00s
-Initial gc. took 0.05s
-DPI scale factor: 1.000000
-nvdrs: Loaded, about to disable thread optimizations.
-nvdrs: Disabled thread optimizations.
-Creating interface object took 0.29s
-Cleaning stores took 0.00s
-Init translation took 0.05s
-Build styles took 0.00s
-Load screen analysis took 0.00s
-Analyze screens took 0.01s
-Save screen analysis took 0.03s
-Prepare screens took 0.07s
-Save pyanalysis. took 0.00s
-Save bytecode. took 0.01s
-Running _start took 0.00s
-Performance test:
-Interface start took 0.05s
-
-Initializing gl2 renderer:
-primary display bounds: (0, 0, 1920, 1080)
-swap interval: 1 frames
-Windowed mode.
-Vendor: 'NVIDIA Corporation'
-Renderer: 'NVIDIA GeForce RTX 2060 SUPER/PCIe/SSE2'
-Version: '4.6.0 NVIDIA 516.59'
-Display Info: None
-Screen sizes: virtual=(1920, 1080) physical=(1600, 837) drawable=(1600, 837)
+Screen sizes: virtual=(1920, 1080) physical=(1920, 1017) drawable=(1920, 1017)
 Maximum texture size: 4096x4096
 Cleaning stores took 0.00s
 Init translation took 0.00s

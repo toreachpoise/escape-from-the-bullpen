@@ -80,7 +80,7 @@ label a_section1_no_r:
     a "And who might you be?"
     j "I'm Jack. Rakesh sent me."
     if t_companion == True:
-        extend "Takeshi too, or at least we're working with hir."
+        j "Takeshi too, or at least we're working with hir."
     j "I'm here to rescue you!"
     a "Oh... that's very kind, but..."
     j "Come on, it was clear on the way in! If we hurry, we can-..."
@@ -588,7 +588,7 @@ default cow_convo_loop_1_4 = False
 
 label cow_convo:
     scene harem bg with fade
-     heloise main at center_left with moveinleft:
+    show heloise main at center_left with moveinleft:
         xzoom -1
     show mona main at left with moveinleft:
         xzoom -1
@@ -616,12 +616,13 @@ label cow_convo:
     h "What does that mean?!"
     j "Ailea says it's time to go."
     show heloise happy
-    "We're escaping?"
-    show mona scared
-    m "We're... escaping?"
+    h "We're escaping?"
+    m @ scared "We're... escaping?"
     label cow_convo_loop_1:
     if cow_convo_loop_1_2 and cow_convo_loop_1_1 == True:
         jump cow_convo_continue
+    show mona main
+    show heloise main
     menu:
         "You know about the plan?" if cow_convo_loop_1_1 == False:
             $ cow_convo_loop_1_1 = True
@@ -629,20 +630,28 @@ label cow_convo:
             show heloise main
             h "Some of us are less excited about it than others."
             m "I'm just saying... if she wants us to jump off the roof..."
-            m @ upset "Why not find a way to build a portable micro-gravity field generator?!"
+            m @ desperate "Why not find a way to build a portable micro-gravity field generator?!"
             h "What, with bedsheets?"
             menu:
                 "Don't worry... I understand the science. Ailea knows what she's doing.":
                     $ c_points += 1
                     m "Are you sure???"
-                    j @ happy "Oh, yeah, no worries."
+                    if r_companion == True:
+                        show jack happy
+                    if r_companion == False:
+                        show jack cowhappy
+                    j "Oh, yeah, no worries."
                     if parachute_reassurance == True:
                         j "She did all the calculations, what with mass and... aerodynamics... and stuff."
                         m "Did she show you her notes?"
                         j "..."
                         j "Yeah?"
-                        m "OK!!! As long as it's peer reviewed, I trust the science."
+                        m @ happy "OK!!! As long as it's peer reviewed, I trust the science."
                         h @ suspicious "Yes. So glad our new friend here {i}understands the science{/i}."
+                        if r_companion == True:
+                            show jack main
+                        if r_companion == False:
+                            show jack cowmain
                         jump cow_convo_loop_1
                     if parachute_reassurance == False:
                         j "I've heard about these things, these parachute things, they... I know they work, y'know. I've seen videos and stuff."
@@ -659,10 +668,11 @@ label cow_convo:
                         jump cow_convo_loop_1
                 "I know what you mean, but what other choice do we have?!":
                     $ c_points -= 1
+                    show mona scared
                     m "Oh God, you're right!"
                     h "Calm down, Mona..."
-                    m "It's come down to this! I have to choose between a life of misery or death itself!!!"
-                    h "Thanks a lot, Jack."
+                    m @ desperate "It's come down to this! I have to choose between a life of misery or death itself!!!"
+                    h @ upset "Thanks a lot, Jack."
                     jump cow_convo_loop_1
         "Are y'all ready to go?"if cow_convo_loop_1_2 == False:
             $ cow_convo_loop_1_2 = True
@@ -671,8 +681,9 @@ label cow_convo:
             show heloise main
             h "Mona isn't sure she wants to come..."
             m "That's not true! I know I want to go with you and Ailea..."
+            show mona sad
             m "I {i}need{/i} to, or I'll die."
-            m "But... I know what it's like out there. It's scary and people try to hurt each other, and at least here..."
+            m @ scared "But... I know what it's like out there. It's scary and people try to hurt each other, and at least here..."
             m @ desperate "At least here I know who's going to hurt me!"
             h "Mona, it'll be OK."
             h "Ailea will be there, and I'll be there..."
@@ -682,15 +693,17 @@ label cow_convo:
                 h "And hey, at least two of the people out there came in here to save us, so it can't be that bad!"
             if t_companion == True:
                 if r_companion == True:
-                    show jack cowhappy
-                if r_companion == False:
                     show jack happy
+                if r_companion == False:
+                    show jack cowhappy
                 j "And also this person Takeshi is waiting out there for us! The world is {i}full{/i} of helpful people!"
                 if r_companion == True:
-                    show jack cowmain
-                if r_companion == False:
                     show jack main
+                if r_companion == False:
+                    show jack cowmain
+            show mona main
             m "Yeah... I guess you're right."
+            show mona determined
             m "And like I said, if I stay here... I won't survive. It's time to go."
             h @ upset"Yeah, Jack! Time to go!"
             m @ upset "What the hell are we doing standing around talking?!"
@@ -974,21 +987,34 @@ label a_section4_withr:
 label a_section4_nor:
     #"Jack discusses final dealings with Ailea + Co"
     scene harem bg with fade
-    show jack main at right
-    show ailea main at center
-    show mona main at center_left:
-        xzoom -1
+    show jack cowmain at right
     show heloise main at left:
         xzoom -1
+    show mona main at center_left:
+        xzoom -1
+    show ailea main at center
     a "OK, everyone ready?"
     m @ happy "Yeah!"
     h @ happy "Been ready for a while now."
-    j @ happy "Now that I'm back in my normal clothes, yeah!"
+    j "Just... real quick..."
+    hide jack with moveoutright
+    pause 1.0
+    show jack main at right with moveinright
+    j @ happy "OK, ready!"
     m "Aww, I thought it was nice."
+    show jack embarrassed
+    pause 1.5
+    show jack main
     a "Heloise, you can take care of Mona, right?"
+    show heloise happy
     h "Of course."
+    a "Mona, you good with that?"
     show mona happy
+    m "Mmmhm!"
     a "Jack, you're with me."
+    show jack happy
+    show ailea happy
     a "Let's fucking go!"
+    pause 1.0
     #jump to level 4 - no rakesh, check for takeshi companion: y/n, plan: concert/dance
     return
