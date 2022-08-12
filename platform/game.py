@@ -70,6 +70,15 @@ try:
                 pygame.image.load("jack run L5.png").convert_alpha(), pygame.image.load("jack run L6.png").convert_alpha(),
                 pygame.image.load("jack run L7.png").convert_alpha(), pygame.image.load("jack run L8.png").convert_alpha()]
 
+    attack_ani_R = [pygame.image.load("jack attack 1.png").convert_alpha(), pygame.image.load("jack attack 2.png").convert_alpha(),
+                pygame.image.load("jack attack 3.png").convert_alpha(), pygame.image.load("jack attack 4.png").convert_alpha(),
+                pygame.image.load("jack attack 5.png").convert_alpha(), pygame.image.load("jack attack 6.png").convert_alpha(),
+                pygame.image.load("jack attack 7.png").convert_alpha(), pygame.image.load("jack attack 8.png").convert_alpha()]
+    attack_ani_L = [pygame.image.load("jack attack L1.png").convert_alpha(), pygame.image.load("jack attack L2.png").convert_alpha(),
+                pygame.image.load("jack attack L3.png").convert_alpha(), pygame.image.load("jack attack L4.png").convert_alpha(),
+                pygame.image.load("jack attack L5.png").convert_alpha(), pygame.image.load("jack attack L6.png").convert_alpha(),
+                pygame.image.load("jack attack L7.png").convert_alpha(), pygame.image.load("jack attack L8.png").convert_alpha()]
+
     jump_ani_R = [pygame.image.load("jack jump 1.png").convert_alpha(), pygame.image.load("jack jump 2.png").convert_alpha(),
                 pygame.image.load("jack jump 3.png").convert_alpha(), pygame.image.load("jack jump 4.png").convert_alpha(),
                 pygame.image.load("jack jump 5.png").convert_alpha(), pygame.image.load("jack jump 6.png").convert_alpha(),
@@ -91,27 +100,24 @@ try:
                 pygame.image.load("jack cow attack (3).png").convert_alpha(), pygame.image.load("jack cow attack (4).png").convert_alpha(),
                 pygame.image.load("jack cow attack (5).png").convert_alpha(), pygame.image.load("jack cow attack (6).png").convert_alpha(),
                 pygame.image.load("jack cow attack (7).png").convert_alpha(), pygame.image.load("jack cow attack (8).png").convert_alpha()]
-
     cow_attack_L = [pygame.image.load("jack cow attack L(1).png").convert_alpha(), pygame.image.load("jack cow attack L(2).png").convert_alpha(),
                 pygame.image.load("jack cow attack L(3).png").convert_alpha(), pygame.image.load("jack cow attack L(4).png").convert_alpha(),
                 pygame.image.load("jack cow attack L(5).png").convert_alpha(), pygame.image.load("jack cow attack L(6).png").convert_alpha(),
                 pygame.image.load("jack cow attack L(7).png").convert_alpha(), pygame.image.load("jack cow attack L(8).png").convert_alpha()]
 
-    cow_idle_R = [pygame.image.load("jack cow idle (1).png").convert_alpha(), pygame.image.load("jack cow idle (2).png").convert_alpha(),
-                pygame.image.load("jack cow idle (3).png").convert_alpha(), pygame.image.load("jack cow idle (4).png").convert_alpha(),
-                pygame.image.load("jack cow idle (5).png").convert_alpha(), pygame.image.load("jack cow idle (6).png").convert_alpha(),
-                pygame.image.load("jack cow idle (7).png").convert_alpha(), pygame.image.load("jack cow idle (8).png").convert_alpha()]
-
-    cow_idle_L = [pygame.image.load("jack cow idle L(1).png").convert_alpha(), pygame.image.load("jack cow idle L(2).png").convert_alpha(),
-                pygame.image.load("jack cow idle L(3).png").convert_alpha(), pygame.image.load("jack cow idle L(4).png").convert_alpha(),
-                pygame.image.load("jack cow idle L(5).png").convert_alpha(), pygame.image.load("jack cow idle L(6).png").convert_alpha(),
-                pygame.image.load("jack cow idle L(7).png").convert_alpha(), pygame.image.load("jack cow idle L(8).png").convert_alpha()]
+    cow_idle_R = [pygame.image.load("jack cow idle (1).png").convert_alpha(), pygame.image.load("jack cow idle (1).png").convert_alpha(),
+                pygame.image.load("jack cow idle (2).png").convert_alpha(), pygame.image.load("jack cow idle (2).png").convert_alpha(),
+                pygame.image.load("jack cow idle (3).png").convert_alpha(), pygame.image.load("jack cow idle (3).png").convert_alpha(),
+                pygame.image.load("jack cow idle (4).png").convert_alpha(), pygame.image.load("jack cow idle (4).png").convert_alpha()]
+    cow_idle_L = [pygame.image.load("jack cow idle L(1).png").convert_alpha(), pygame.image.load("jack cow idle L(1).png").convert_alpha(),
+                pygame.image.load("jack cow idle L(2).png").convert_alpha(), pygame.image.load("jack cow idle L(2).png").convert_alpha(),
+                pygame.image.load("jack cow idle L(3).png").convert_alpha(), pygame.image.load("jack cow idle L(3).png").convert_alpha(),
+                pygame.image.load("jack cow idle L(4).png").convert_alpha(), pygame.image.load("jack cow idle L(4).png").convert_alpha()]
 
     cow_jump_R = [pygame.image.load("jack cow jump (1).png").convert_alpha(), pygame.image.load("jack cow jump (2).png").convert_alpha(),
                 pygame.image.load("jack cow jump (3).png").convert_alpha(), pygame.image.load("jack cow jump (4).png").convert_alpha(),
                 pygame.image.load("jack cow jump (5).png").convert_alpha(), pygame.image.load("jack cow jump (6).png").convert_alpha(),
                 pygame.image.load("jack cow jump (7).png").convert_alpha(), pygame.image.load("jack cow jump (8).png").convert_alpha()]
-
     cow_jump_L = [pygame.image.load("jack cow jump L(1).png").convert_alpha(), pygame.image.load("jack cow jump L(2).png").convert_alpha(),
                 pygame.image.load("jack cow jump L(3).png").convert_alpha(), pygame.image.load("jack cow jump L(4).png").convert_alpha(),
                 pygame.image.load("jack cow jump L(5).png").convert_alpha(), pygame.image.load("jack cow jump L(6).png").convert_alpha(),
@@ -121,7 +127,6 @@ try:
                 pygame.image.load("jack cow run (3).png").convert_alpha(), pygame.image.load("jack cow run (4).png").convert_alpha(),
                 pygame.image.load("jack cow run (5).png").convert_alpha(), pygame.image.load("jack cow run (6).png").convert_alpha(),
                 pygame.image.load("jack cow run (7).png").convert_alpha(), pygame.image.load("jack cow run (8).png").convert_alpha()]
-
     cow_run_L = [pygame.image.load("jack cow run L(1).png").convert_alpha(), pygame.image.load("jack cow run L(2).png").convert_alpha(),
                 pygame.image.load("jack cow run L(3).png").convert_alpha(), pygame.image.load("jack cow run L(4).png").convert_alpha(),
                 pygame.image.load("jack cow run L(5).png").convert_alpha(), pygame.image.load("jack cow run L(6).png").convert_alpha(),
@@ -131,7 +136,6 @@ try:
                 pygame.image.load("jack cow run start (3).png").convert_alpha(), pygame.image.load("jack cow run start (4).png").convert_alpha(),
                 pygame.image.load("jack cow run start (5).png").convert_alpha(), pygame.image.load("jack cow run start (6).png").convert_alpha(),
                 pygame.image.load("jack cow run start (7).png").convert_alpha(), pygame.image.load("jack cow run start (8).png").convert_alpha()]
-
     cow_run_start_L = [pygame.image.load("jack cow run start L(1).png").convert_alpha(), pygame.image.load("jack cow run start L(2).png").convert_alpha(),
                 pygame.image.load("jack cow run start L(3).png").convert_alpha(), pygame.image.load("jack cow run start L(4).png").convert_alpha(),
                 pygame.image.load("jack cow run start L(5).png").convert_alpha(), pygame.image.load("jack cow run start L(6).png").convert_alpha(),
@@ -159,7 +163,7 @@ try:
         def choose_stage(self):
             if self.stage_chosen == False:
                 self.root = Tk()
-                self.root.geometry('200x283')
+                self.root.geometry('200x330')
                 button1 = Button(self.root, text = "Level 1", width = 18, height = 2, command = self.level1)
                 button2 = Button(self.root, text = "Level 2", width = 18, height = 2, command = self.level2)
                 button3a = Button(self.root, text = "Level 3a", width = 18, height = 2, command = self.level3a)
@@ -225,6 +229,14 @@ try:
             pygame.mixer.music.play(-1)
             pass
         def level4(self):
+            self.root.destroy()
+            self.stage_chosen = True
+            self.level = "4"
+            tilemap.tiles = tilemap.load_tiles("level 4.csv")
+            jack.pos = vec(tilemap.start_x, tilemap.start_y)
+            pygame.mixer.music.unload()
+            pygame.mixer.music.load("theescape.wav")
+            pygame.mixer.music.play(-1)
             pass
 
         def game_over(self):
@@ -275,10 +287,14 @@ try:
                 self.rect.x -= self.vel.x
             for tile in tilemap.tiles:
                 if isinstance(tile, Bull):
-                    pass
+                    if self.rect.colliderect(jack.rect) == 1:
+                        if jack.attacking == True:
+                            self.kill()
+                        else:
+                            jack.died = True
                 else:
                     if self.rect.colliderect(tile.rect) == 1:
-                        if tile.rect.y + 15 >= self.rect.y:
+                        if tile.rect.y >= self.rect.y:
                             if self.direction == 0:
                                 self.rect.x = tile.rect.x - 32
                                 self.direction = 1
@@ -296,7 +312,7 @@ try:
             self.tile_width = 64
             self.tile_height = 32
             self.start_x, self.start_y = 0, 0
-            self.filename = filename
+            self.filename = "level 1.csv"
             if handler.level == "1":
                 self.filename = "level 1.csv"
             elif handler.level == "2":
@@ -346,7 +362,7 @@ try:
                 if -self.tile_width < tile.rect.x-scroll[0] < display_width:
                     if -self.tile_height < tile.rect.y-scroll[1] < display_height:
                         tile.render(self.map_surface)
-            display.blit(self.map_surface, (0-scroll[0],0-scroll[1]))
+            display.blit(self.map_surface, (0,0))
 
         def read_csv(self, filename):
             map = []
@@ -370,6 +386,8 @@ try:
             self.rect = self.image.get_rect(topleft = self.pos)
             self.on_the_ground = False
             self.fallcount = 0
+            self.attacking = False
+            self.attack_frame = 0
             self.died = False
             self.framecount = 0
 
@@ -408,6 +426,9 @@ try:
             self.acc = vec(0,gravity) #downward acceleration aka gravity
             self.on_the_ground = False
             pressed_keys = pygame.key.get_pressed() # Returns the current key presses
+            if pressed_keys[K_RETURN]:
+                if self.attacking == False:
+                    self.attacking = True
             if pressed_keys[K_LEFT]: # Accelerates the player in the direction of the key press
                 self.x_direction = "LEFT"
                 self.acc.x = -acceleration
@@ -444,15 +465,31 @@ try:
             self.collision_test(tilelist)
             if self.on_the_ground == False:
                 self.fallcount += 1
-            if self.fallcount >= falltodeath:
+            if self.fallcount >= falltodeath and handler.level != "4":
                 self.died = True
                 self.vel = vec(0,0)
             self.rect.topleft = self.pos
 
 
         def render(self):
-            if self.fallcount == 0:
-                if self.vel == (0,0):
+            if self.attacking: ##attack ani
+                if self.attack_frame < 9:
+                    if self.x_direction == "RIGHT":
+                        if handler.level == "3bn" or handler.level == "4":
+                            self.image = cow_attack_R[self.move_frame]
+                        else:
+                            self.image = attack_ani_R[self.move_frame]
+                    elif self.x_direction == "LEFT":
+                        if handler.level == "3bn" or handler.level == "4":
+                            self.image = cow_attack_L[self.move_frame]
+                        else:
+                            self.image = attack_ani_L[self.move_frame]
+                    self.attack_frame += 1
+                else:
+                    self.attack_frame = 0
+                    self.attacking = False
+            else:
+                if self.vel == (0,0): ## idle ani
                     if self.x_direction == "RIGHT":
                         if handler.level == "3bn" or handler.level == "4":
                             self.image = cow_idle_R[self.move_frame]
@@ -463,43 +500,44 @@ try:
                             self.image = cow_idle_L[self.move_frame]
                         else:
                             self.image = idle_ani_L[self.move_frame]
-                if self.vel.x > 0.3:
-                    if handler.level == "3bn" or handler.level == "4":
-                        self.image = cow_run_R[self.move_frame]
-                    else:
-                        self.image = run_ani_R[self.move_frame]
-                    self.x_direction = "RIGHT"
-                if self.vel.x < -0.3:
-                    if handler.level == "3bn" or handler.level == "4":
-                        self.image = cow_run_L[self.move_frame]
-                    else:
-                        self.image = run_ani_L[self.move_frame]
-                    self.x_direction = "LEFT"
-                if 0 < abs(self.vel.x) < 2:
+                if self.fallcount < 2:
+                    if self.vel.x > 0.3: ## run
+                        if handler.level == "3bn" or handler.level == "4":
+                            self.image = cow_run_R[self.move_frame]
+                        else:
+                            self.image = run_ani_R[self.move_frame]
+                        self.x_direction = "RIGHT"
+                    if self.vel.x < -0.3:
+                        if handler.level == "3bn" or handler.level == "4":
+                            self.image = cow_run_L[self.move_frame]
+                        else:
+                            self.image = run_ani_L[self.move_frame]
+                        self.x_direction = "LEFT"
+                    if 0 < abs(self.vel.x) < 2: ##run start
+                        if self.x_direction == "RIGHT":
+                            if handler.level == "3bn" or handler.level == "4":
+                                self.image = cow_run_start_R[self.move_frame]
+                            else:
+                                self.image = run_start_ani_R[self.move_frame]
+                        if self.x_direction == "LEFT":
+                            if handler.level == "3bn" or handler.level == "4":
+                                self.image = cow_run_start_L[self.move_frame]
+                            else:
+                                self.image = run_start_ani_L[self.move_frame]
+                else: ##jump
+                    # now that there's fallcount I can implement jump start and end animations
                     if self.x_direction == "RIGHT":
                         if handler.level == "3bn" or handler.level == "4":
-                            self.image = cow_run_start_R[self.move_frame]
+                            self.image = cow_jump_R[self.move_frame]
                         else:
-                            self.image = run_start_ani_R[self.move_frame]
-                    if self.x_direction == "LEFT":
+                            self.image = jump_ani_R[self.move_frame]
+                    elif self.x_direction == "LEFT":
                         if handler.level == "3bn" or handler.level == "4":
-                            self.image = cow_run_start_L[self.move_frame]
+                            self.image = cow_jump_L[self.move_frame]
                         else:
-                            self.image = run_start_ani_L[self.move_frame]
-            else:
-                # now that there's fallcount I can implement jump start and end animations
-                if self.x_direction == "RIGHT":
-                    if handler.level == "3bn" or handler.level == "4":
-                        self.image = cow_jump_R[self.move_frame]
-                    else:
-                        self.image = jump_ani_R[self.move_frame]
-                elif self.x_direction == "LEFT":
-                    if handler.level == "3bn" or handler.level == "4":
-                        self.image = cow_jump_L[self.move_frame]
-                    else:
-                        self.image = jump_ani_L[self.move_frame]
+                            self.image = jump_ani_L[self.move_frame]
             self.framecount += 1
-            if self.framecount == 5:
+            if self.framecount == 8:
                 self.framecount = 0
                 self.move_frame+= 1
             if self.move_frame > 7: # Return to base frame if at end of movement sequence
@@ -509,11 +547,12 @@ try:
 
     class Bull(Tile):
         def __init__(self, image, x, y):
+            super().__init__(image, x, y)
             self.image = pygame.image.load(image).convert_alpha()
             self.mask = pygame.mask.from_surface(self.image)
             self.pos = vec(x,y)
             self.vel = vec(0,0)
-            self.rect = self.mask.get_rect(midtop=self.pos)
+            self.rect = self.mask.get_rect(midbottom=self.pos)
             self.direction = random.randint(0,1)
             self.vel.x = random.randint(2,6)/2
 
@@ -535,9 +574,6 @@ try:
             pygame.draw.rect(display, (255,0,0), self.rect, 0)
             display.blit(self.image, self.pos)
 
-
-#    def Loadify(imgname):
-#        return pygame.image.load(imgname).convert_alpha()
 
     print("you got a class system, bitch")
 
@@ -569,7 +605,7 @@ try:
                 running = False
                 pygame.quit()
                 sys.exit()
-        pygame.draw.rect(display, (0,0,255), [jack.pos.x - true_scroll[0], jack.pos.y - true_scroll[1], jack.rect.height, jack.rect.width], 0) ##representation of jack rect
+        #pygame.draw.rect(display, (0,0,255), [jack.pos.x - true_scroll[0], jack.pos.y - true_scroll[1], jack.rect.width, jack.rect.height], 0) ##representation of jack rect
         display.blit(jack.image, (jack.pos.x - true_scroll[0], jack.pos.y - true_scroll[1]))
         elevator.render(display)
         #handler.stageend(elevator, jack)

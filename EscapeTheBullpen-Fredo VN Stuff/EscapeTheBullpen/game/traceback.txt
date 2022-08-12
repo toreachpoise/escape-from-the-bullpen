@@ -1,0 +1,18 @@
+﻿I'm sorry, but an uncaught exception occurred.
+
+Before loading the script.
+NotADirectoryError: [WinError 267] The directory name is invalid: 'C:\\Users\\elsab\\Desktop\\escape from the bullpen\\escape-from-the-bullpen\\EscapeTheBullpen-Fredo VN Stuff\\EscapeTheBullpen\\game\\aileascene.rpy'
+
+-- Full Traceback ------------------------------------------------------------
+
+Full traceback:
+  File "C:\Program Files\renpy-8.0.0-sdk\renpy\bootstrap.py", line 274, in bootstrap
+    renpy.main.main()
+  File "C:\Program Files\renpy-8.0.0-sdk\renpy\main.py", line 396, in main
+    for fn in os.listdir(dir):
+NotADirectoryError: [WinError 267] The directory name is invalid: 'C:\\Users\\elsab\\Desktop\\escape from the bullpen\\escape-from-the-bullpen\\EscapeTheBullpen-Fredo VN Stuff\\EscapeTheBullpen\\game\\aileascene.rpy'
+
+Windows-10-10.0.19044 AMD64
+Ren'Py 8.0.0.22062402
+ 
+Fri Aug 12 12:15:33 2022
