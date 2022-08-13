@@ -32,7 +32,7 @@ label a_section1_with_r:
         xzoom-1
     m "Relax, Heloise."
     m @ happy "These must be some of those non-cow, non-bull people that Ailea was telling us about."
-    h "Is that true? Are you friends with Ailea?"
+    h @ suspicious "Is that true? Are you friends with Ailea?"
     j @ embarrassed "Uh..."
     show rakesh shrug
     r "..."
@@ -43,7 +43,7 @@ label a_section1_with_r:
     hide mona with moveoutleft
     show ailea main at left with moveinright
     r @ happy "Hello, Ailea! Long time no see."
-    a @ upset "Are you crazy?! What do you think you're doing here?! "
+    a @ surprised "Are you crazy?! What do you think you're doing here?! "
     a @ happy "And uh... who's your friend?"
     j @ happy "Ailea? I'm Jack. I've come a long way to find you."
     r "Jack's cool as a cucumber, Ailea. We're here to rescue you!"
@@ -70,7 +70,7 @@ label a_section1_no_r:
         xzoom-1
     m "Relax, Heloise."
     m @ happy "He must be one of those non-cow, non-bull people that Ailea was telling us about."
-    h "Is that true? Did Ailea send for you?"
+    h @ suspicious "Is that true? Did Ailea send for you?"
     j @ cowembarrassed "Uh..."
     show ailea main at center with moveinleft
     a "Mona, Heloise, give us a second here..."
@@ -98,6 +98,8 @@ default parachute_reassurance = False
 default a_section2_nor_loop_1_1 = False
 default a_section2_nor_loop_1_2 = False
 default a_section2_withr_loop_1_2 = False
+default asshole_ailea = False
+default parachute_doubt = False
 
 
 label a_section2:
@@ -131,11 +133,12 @@ label a_section2_withr:
             j "I can't tell how serious you are..."
             a @ irritated "I mean, do you want me to go into all the details? We used bedsheets, and wove torn pillowcases into ropes to make a harness..."
             a @ irritated "We uncoiled mattress springs and used it to maintain aerodynamic shapes. I've accounted for mass up to twice what we needed, which is useful, given your presence..."
-            a @ irritated_notes"Do you want to check my notes? Make sure I didn't get it wrong?!"
-            j "Uh..."
+            a @ upset "Do you want to check my notes? Make sure I didn't get it wrong?!"
+            j @ embarrassed "Uh..."
             a "Mmmmhm."
             jump a_section_2_withr_loop_1
         "But why can't we just walk out?":
+            $ parachute_doubt = True
             a "It'll be way harder for a big group of us to sneak out than it will be for two of you to sneak in!"
             j "A big group?"
             a "Well... is five a big group? You two, me, Heloise, Mona. I hope this isn't a problem..."
@@ -158,7 +161,7 @@ label a_section2_withr:
                 "But... your parchute plan could kill us all!":
                     a "It won't. I did the math right this time."
                     a "I think."
-                    a "Probably."
+                    a @ irritated "Probably."
                     j "..."
                 "Is it better to risk our own lives?":
                     a "Yes. As long as we all willingly take on the risk, it's better."
@@ -172,44 +175,51 @@ label a_section2_withr:
         "Hmmm... I guess parachutes will work? It'll save us from having to sneak around...":
             a @ happy "I can't believe I finally get to test this idea!"
             a "I've never been good at math, but I'm {i}sure{/i} I've done it right this time..."
-            show jack scared
+            show jack upset
             r "Ailea, you're scaring him."
             j "Only a little..."
             show jack main
-            a "OK, so we'll go two to a chute and Rakesh, you have your hoverboard..."
-            j "You mentioned being bad at math..."
-            a "No, this stuff I can do right. Two parachutes. Me, you, Mona, Heloise, Rakesh on hoverboard, right?"
+            a "OK. I've made two parachutes, so we'll have to pair up. Rakesh, you have your hoverboard..."
+            j "Wait... two parachutes... you mentioned being bad at math..."
+            a "No, this stuff I can do right."
+            a @ irritated "Two parachutes. Me, you, Mona, Heloise, Rakesh on hoverboard, right?"
             menu:
                 "Oh, so we're just rescuing everybody now?":
                     a @ happy "Everybody who expressed interest in coming!"
                     a "I wish it was more, but... I've also run out of parachute materials, so I suppose things are working out for the best."
                     menu:
                         "Leave them behind. We came for you, not a bunch of cows.":
-                            $ a_points -= 1
+                            $ asshole_ailea = True
                             a @ upset "They're coming. That's non-negotiable."
                             j "Ugh! Fine!"
                             jump alarm_withr
                         "Well... as long as they're OK with maybe dying.":
-                            $ a_points += 1
                             a "Aren't we all?"
-                            r "No."
-                            j "Yeah, not so much."
-                            a "Oh. That must be so stressful."
+                            r @ exhasperated "No."
+                            j @ upset "Yeah, not so much."
+                            a @ kind "Oh. That must be so stressful."
                             jump alarm_withr
                 "Yeah... if they're coming, you did the math right.":
                     a @ happy "Thank goodness. I was almost embarrassed."
                     menu:
                         "But... they're not coming, to be clear.":
-                            a @ upset "What?! Of course they are. Stop being absurd. Either they come, or I'm staying."
+                            $ asshole_ailea = True
+                            a @ upset "What?! Of course they are. Stop being absurd. What could you possibly do to prevent it?"
+                            j "It's too dangerous with this many people!"
+                            a "Only if we follow your plan."
+                            a @ happy "My plan is just as dangerous no matter what!"
                             menu:
                                 "Well maybe Rakesh and I just knock you out and escape!":
                                     $ a_points -= 1
-                                    r "What the hell, man!? Leave me out of this!"
+                                    r @ angry "What the hell, man!? Leave me out of this!"
                                     a "It's OK to be frustrated and scared, Jack. It's not OK to be an asshole."
                                     menu:
                                         "You're right, I'm sorry.":
                                             jump alarm_withr
                                         "Nobody but me gets it! Sometimes you have to do bad things for good reasons!":
+                                            j @ upset "Don't you get it?! We'll never make it out if we have two cows with us."
+                                            a @ upset "We're getting them out. You can come or stay."
+                                            a @ upset "That's all I have to say, now-..."
                                             jump alarm_withr
                                 "But I need you!":
                                     show ailea main
@@ -222,7 +232,7 @@ label a_section2_withr:
                         "So is it just Mona and Heloise? Anyone who wants to can come...":
                             a "Ah, that's very kind, Jack. But no."
                             a "Heloise and Mona are... bolder than the others."
-                            a @ sad "I hate to leave anyone behind, but I have to help who I can with what I have right now."
+                            a @ kind "I hate to leave anyone behind, but I have to help who I can with what I have right now."
                             jump alarm_withr
 
 label alarm_withr:
@@ -230,7 +240,7 @@ label alarm_withr:
     j "..."
     a "..."
     r "..."
-    r "I knew I missed something somewhere. My bad, everyone."
+    r @ angry "I knew I missed something somewhere. My bad, everyone."
     a "Well, looks like the decision's been made. No way out now but the roof."
     r "I'll see what I can do to jam the doors."
     hide rakesh with moveoutright
@@ -241,26 +251,55 @@ label alarm_withr:
     r "Is that better?"
     stop sound
     a "Much better, thanks, Rakesh!"
-    menu:
-        "We're trapped! I'm going to die in here!":
-            show jack scared
-            a "Hey! Snap out of it, Jack! You got this far, which means you're a badass."
-            j "Y-yeah?"
-            a "Yeah!"
-            a "So go get Mona and Heloise, and tell them we're going. Right now!"
-            j @ determined "You can count on me!"
-            jump cow_convo
-        "OK. What's next? We gotta move!":
-            show jack determined
-            show jack main
-            a "Do you know how to get parachutes ready?"
-            menu:
-                "I can try my best?":
-                    a "... I'd better do it. I need you to talk to Mona and Heloise. Get them ready to go."
+    if asshole_ailea == True or parachute_doubt == True:
+        a @ kind "OK, buddy. Time to make a decision. Come with us and attempt to escape, or stay behind here..."
+        menu:
+            "I'm staying here! You can lead the others to their deaths, but not me.":
+                a @ irritated "Well... I suppose that's your decision. I hope you don't regret it."
+                a @ kind "I have to go now, but if you ever need help, light a candle in the third room in the eastern wing."
+                menu:
+                    "I don't need your help! I'm going down swinging!":
+                        a @ irritated "OK. Then..."
+                        a "Good luck, Jack. I'm grateful for however much time that buys us."
+                        jump cow_convo_denied
+                    "OK, Ailea. Thanks.":
+                        a @ kind "Are you sure I can't convince you to come?"
+                        menu:
+                            "My mind's made up. I'm staying.":
+                                a "Then... I'll see you later, Jack."
+                                jump cow_convo_denied
+                            "Uh... Oh God! OK! I'm coming!":
+                                a @ happy "Oh, good!"
+                                a "Then go get Mona and Heloise ready to go, I'll prepare the parachutes."
+                                j @ determined "You can count on me. Thanks, Ailea."
+                                jump cow_convo
+            "I'm coming! No way am I letting the breeding center take me alive.":
+                    a @ happy "Oh, good!"
+                    a "Then go get Mona and Heloise ready to go, I'll prepare the parachutes."
+                    j @ determined "You can count on me. Thanks, Ailea."
                     jump cow_convo
-                "No! Why would I?!":
-                    a "Fair enough. Go talk to Mona and Heloise. They need to be ready as soon as possible."
-                    jump cow_convo
+    if asshole_ailea == False:
+        menu:
+            "We're trapped! I'm going to die in here!":
+                show jack scared
+                a "Hey! Snap out of it, Jack! You got this far, which means you're a badass."
+                j "Y-yeah?"
+                a "Yeah!"
+                a "So go get Mona and Heloise, and tell them we're going. Right now!"
+                j @ determined "You can count on me!"
+                jump cow_convo
+            "OK. What's next? We gotta move!":
+                show jack determined
+                show jack main
+                a "Do you know how to pack a parachute?"
+                menu:
+                    "I can... try?":
+                        a "... I'd better do it. I need you to talk to Mona and Heloise. Get them ready to go."
+                        jump cow_convo
+                    "No! Why would I?!":
+                        a "Fair enough. Go talk to Mona and Heloise. They need to be ready as soon as possible."
+                        jump cow_convo
+
 
 label a_section2_nor:
     j "Parachutes?"
@@ -274,13 +313,13 @@ label a_section2_nor:
             j "I can't tell how serious you are..."
             a @ irritated "I mean, do you want me to go into all the details? We used bedsheets, and wove torn pillowcases into ropes to make a harness..."
             a @ irritated "We uncoiled mattress springs and used it to maintain aerodynamic shapes. I've accounted for mass up to twice what we needed, which is useful, given your presence..."
-            a @ irritated_notes"Do you want to check my notes? Make sure I didn't get it wrong?!"
-            j "Uh..."
+            a @ upset "Do you want to check my notes? Make sure I didn't get it wrong?!"
+            j @ cowembarrassed "Uh..."
             a "Mmmmhm."
             jump a_section2_nor_loop_1
         "Well... I don't really have a deathwish, so why don't we just walk out the way I came in?" if a_section2_nor_loop_1_2 == False:
             a "You came in as one person dressed as a cow... I'm guessing by that swell in your tummy that you're on their fertility roster..."
-            j "Yeah, so?"
+            j @ cowsad "Yeah, so?"
             a "So of course they were going to let you in!"
             a "But what do you think will happen if you and I try leaving with two of their blue-ribbon cows?"
             j "Wait... hold on. Who said anything about two cows?!"
@@ -289,11 +328,12 @@ label a_section2_nor:
             a "It's non-negotiable. They're either coming with us, or you'll be leaving alone."
             menu:
                 "Goddammit!":
-                    $ a_points -= 1
+                    show jack cowangry
                     a "Whoa there, settle down! Why did you come this far in the first place?"
                     j "To rescue you! I need an abortion..."
                     a "And you thought... what, you think my only responsibility is to help you specifically?"
                     label a_section2_loop1:
+                    show jack cowmain
                     menu:
                         "I'm helping {i}you{/i} specifically, so yeah. You kinda owe me one." if a_section2_loop1_1 == False:
                             $ a_section2_loop1_1 = True
@@ -307,7 +347,7 @@ label a_section2_nor:
                             a "Then I have nothing else to say to you."
                             show ailea main
                             a "You can come with us when we escape, or you can stay behind."
-                            j "But I came all this way!"
+                            j @ cowsad "But I came all this way!"
                             a "Isn't that a good thing? You came a long way and did crazy shit to help me, a stranger."
                             a "All only because I could help you?"
                             jump a_section2_loop1
@@ -320,14 +360,15 @@ label a_section2_nor:
                                 "I'm not sure what my convictions are..." if a_section2_loop2_1 == False:
                                     $ a_section2_loop2_1 = True
                                     a "That's OK. Maybe take some time to think on it."
+                                    show jack cowsad
                                     j "I mean... This morning, I made a decision."
                                     j "I couldn't have this baby. I didn't want this baby. I had to get an abortion."
                                     a "Yes."
                                     j "And so I set out looking for you, and now, after everything... I ended up here."
                                     j "I didn't set out because I believed in anything except my own desires."
-                                    j "How is that any kind of conviction at all?"
+                                    j @ cowembarrassed"How is that any kind of conviction at all?"
                                     a "Whatever I might think of your motivation, it got you this far. There's some kind of power in that, don't you think?"
-                                    j "I guess so. Yeah."
+                                    j @ cowhappy "I guess so. Yeah."
                                     a "And it drove you to a place where, everything else aside, you've put yourself in danger to help me."
                                     j "Yeah..."
                                     a "But now that you're here, what do you find? I'm not the one who needs help."
@@ -335,9 +376,9 @@ label a_section2_nor:
                                     a "So now that you are {i}here{/i}, and need as much help as Heloise and Mona, what will drive you? And where will it take you?"
                                     a "You've helped in your way. That's in the past."
                                     a "Now that I'm helping in my way, what would you like me to do? Is it my responsibility to help only you? Or is my responsibility to help..."
-                                    show ailea akimbo with dissolve
+                                    show ailea kind
                                     a "... as many people as I can."
-                                    show ailea main with dissolve
+                                    show ailea main
                                     jump a_section2_loop2
                                 "Then... you're right. It's not your responsibility to help me specifically.":
                                     $ a_points += 1
@@ -354,8 +395,8 @@ label a_section2_nor:
                                     jump alarm_nor
                                 "OK, I'll speak with conviction: I don't care about grander problems. I've helped you by coming here, so now you should help me.":
                                     $ a_points -= 1
-                                    a "That's a legitimately absurd point of view."
-                                    j "Oh well? I'm sorry, but the only way any of us can get through life is if we look out for ourselves."
+                                    a @ upset "That's a legitimately absurd point of view."
+                                    j @ cowangry "Oh well? I'm sorry, but the only way any of us can get through life is if we look out for ourselves."
                                     a "OK, Jack. I don't live by that principle, so if you want, you can still join in on our escape plan."
                                     j "The parachutes?"
                                     a "Yeah. There's enough room for you, so no worries there. But if you want to just look out for yourself, that's fine too."
@@ -407,14 +448,14 @@ label alarm_nor:
     play sound "audio/alarm.mp3" volume .25
     "..."
     a @ surprised "Uh-oh... looks like somebody realized you aren't actually supposed to be here."
-    j @ scared "Oh god, is this bad?!"
+    j @ cowhorror "Oh god, is this bad?!"
     show ailea determined
     a "Nah, just give me a second..."
     hide ailea with moveoutleft
     a "Hmmm... maybe if I..."
     play sound "audio/brokenelectronics.mp3" volume.25
     a "There we go!"
-    show ailea determined at left with moveinleft
+    show ailea main at left with moveinleft
     a "There, that's better. I jammed the doors and bought us some time."
     a "Think quick, Jack. What's your plan? You coming with us, or waiting here to get caught?"
     menu:
@@ -446,6 +487,7 @@ label alarm_nor:
                     menu:
                         "But... I'm so tired of running.":
                             show jack cowsad
+                            show ailea kind
                             a "I know, kid."
                             a "I know."
                             a "Maybe there was a time when standing and fighting was the right idea..."
@@ -454,18 +496,20 @@ label alarm_nor:
                             a "But, at least for me, I know it's time to run and hide and keep living in spite of everything."
                             menu:
                                 "What if it's my time to stand and fight?":
+                                    show jack cowmain
                                     a "How do you know when it's your time?"
                                     a "What good would you be doing?"
                                     a "What could we build from there?"
-                                    j "I don't know... but maybe it's just good to fight every once in a while."
+                                    j @ cowdepressed"I don't know... but maybe it's just good to fight every once in a while."
                                     a "It's also good to protect each other, when the chance presents itself."
                                     a "If you're so willing to be violent... come with us. Protect us."
                                     menu:
-                                        "Hmmm... that feels right, actually. You can count on me.":
-                                            j ""
+                                        "Hmmm... that feels right, actually.":
+                                            j @ cowhappy "You can count on me!"
                                             a "OK, you get Heloise and Mona while I get the parachutes ready. Thanks, Jack."
                                             jump cow_convo
                                         "No. My place is here.":
+                                            show jack cowdepressed
                                             a "OK, then. Stay here and just... see what you can do. I have to go get everything ready."
                                             a "Good luck, Jack."
                                             hide ailea with moveoutleft
@@ -494,23 +538,23 @@ label alarm_nor:
                                             a "So what'll it be, Jack?"
                                             jump alarm_nor_menu_1
                         "Killing matrons and bulls is necessary violence.":
-                            a "What?!"
+                            a @ upset "What?!"
                             j "They're the ones responsible for all of this! If we want it to stop, we have to deal with them."
                             a "They're people! Every time a bull or matron dies, that's a human life snuffed out."
-                            j "So it doesn't matter that they harm the world? That they've destroyed lives?!"
+                            j @ cowangry"So it doesn't matter that they harm the world? That they've destroyed lives?!"
                             a "Of course that matters, and they're responsible for the evils they've committed..."
                             a "But why does that give you the right to do violence against them?"
-                            j "To stop them from doing violence against others."
+                            j @ cowangry "To stop them from doing violence against others."
                             a "But they're people, Jack. People aren't just tools of violence."
                             menu:
                                 "Some people become tools: cows, bulls, matrons...":
                                     a "If people are used as tools, then they've been victimized."
                                     a "Cows, bulls, matrons..."
                                     a "We've all been tortured into our roles in one way or another."
-                                    j "The only difference is, some roles get to turn around and start torturing everyone else."
+                                    j @ cowangry"The only difference is, some roles get to turn around and start torturing everyone else."
                                     a "Do you think that's a reward? Do you think being a torturer is good for you? For your soul and mind?"
                                     a "Hold them accountable, Jack, but don't lose your compassion."
-                                    j "Compassion for torturers?"
+                                    j @ cowhorror "Compassion for torturers?"
                                     a "Yes."
                                     a "Now, time's wasting. What's it going to be?"
                                     jump alarm_nor_menu_1
@@ -527,17 +571,17 @@ label alarm_nor:
                                     a "Yes, but right now they are hungry and have teeth, so... shall we?"
                                     jump alarm_nor_menu_1
                 "I don't consider that an exit.":
-                    a "Then maybe the issue is a failure of imagination."
-                    a "Quick thought experiment: what if the roof was an exit?"
+                    a @ happy "Then maybe the issue is a failure of imagination."
+                    a @ kind "Quick thought experiment: what if the roof was an exit?"
                     menu:
                         "I suppose... I would use it.":
                             label alarm_nor_loop1:
-                            a "Brilliant!"
+                            a @ happy "Brilliant!"
                             j "But..."
-                            a "Jack, quiet. The roof is an exit."
+                            a @ kind "Jack, quiet. The roof is an exit."
                             j "The roof is an exit?"
-                            a "The roof is an exit."
-                            a "Because of my ingenious parachute design."
+                            a @ happy "The roof is an exit."
+                            a @ determined "Because of my ingenious parachute design."
                             j "And you're pretty sure they'll work."
                             a "Pretty sure. You coming or staying?"
                             jump alarm_nor_menu_1
@@ -545,7 +589,7 @@ label alarm_nor:
                             a "No, but just imagine."
                             menu:
                                 "It's. Not. Going. To. Happen. How am I supposed to imagine it?!":
-                                    a "Ugh, you won't even try?"
+                                    a @ upset "Ugh, you won't even try?"
                                     menu:
                                         "We'll never make it off the roof!":
                                             a "..."
@@ -612,7 +656,7 @@ label cow_convo:
             "It was Rakesh, actually.":
                 h @ upset "OK, great. Now I know who to blame when we all get cavity searched."
     j "Not this time."
-    h "..."
+    h @ suspicious "..."
     h "What does that mean?!"
     j "Ailea says it's time to go."
     show heloise happy
@@ -631,7 +675,7 @@ label cow_convo:
             h "Some of us are less excited about it than others."
             m "I'm just saying... if she wants us to jump off the roof..."
             m @ desperate "Why not find a way to build a portable micro-gravity field generator?!"
-            h "What, with bedsheets?"
+            h @ happy "What, with bedsheets?"
             menu:
                 "Don't worry... I understand the science. Ailea knows what she's doing.":
                     $ c_points += 1
@@ -655,8 +699,8 @@ label cow_convo:
                         jump cow_convo_loop_1
                     if parachute_reassurance == False:
                         j "I've heard about these things, these parachute things, they... I know they work, y'know. I've seen videos and stuff."
-                        m "..."
-                        h "And I'm sure those videos were..."
+                        m @ scared "..."
+                        h @ suspicious "And I'm sure those videos were..."
                         j "Not faked at all!"
                         m @ scared "Ok. As long as they're not fake videos, I think..."
                         extend " I..."
@@ -688,9 +732,9 @@ label cow_convo:
             h "Mona, it'll be OK."
             h "Ailea will be there, and I'll be there..."
             if r_companion == False:
-                h "And hey, if this kid came from out there, it can't be all bad!"
+                h @ happy "And hey, if this kid came from out there, it can't be all bad!"
             if r_companion == True:
-                h "And hey, at least two of the people out there came in here to save us, so it can't be that bad!"
+                h @ happy "And hey, at least two of the people out there came in here to save us, so it can't be that bad!"
             if t_companion == True:
                 if r_companion == True:
                     show jack happy
@@ -717,38 +761,41 @@ label cow_convo:
 
 label cow_convo_denied:
     scene harem bg with fade
-    show jack cowmain at right with moveinright
+    if r_companion == False:
+        show jack cowmain at right with moveinright
+    if r_companion == True:
+        show jack main at right with moveinright
     show mona main at center_left with moveinleft:
         xzoom -1
     m "Hey, I overheard some stuff..."
     menu:
         "Don't worry about it.":
-            m "I'm not worrying."
+            m @ happy "I'm not worrying."
             show heloise main at left with moveinleft:
                 xzoom -1
             h "Mona, come on! Ailea says it's time to go!"
             m "Just a second, Heloise."
-            m "Jack, I think you're making a mistake."
+            m @ sad "Jack, I think you're making a mistake."
             menu:
                 "How would you know?":
                     m @ desperate "Because it's a mistake I would like to make."
                     j "Huh?"
-                    m "Everything in my body is screaming at me to just stay here."
-                    m "I want to do nothing and stay here with a bed I know, in a room I'm familiar with, a routine that I hate, but at least I know what to expect..."
-                    m "All of that would be easier than trusting Ailea and trusting you, even trusting Heloise..."
-                    m "But it would still be a mistake."
-                    m "Don't make easy mistakes, Jack. Please come with us."
+                    m @ sad "Everything in my body is screaming at me to just stay here."
+                    m @ sad "I want to do nothing and stay here with a bed I know, in a room I'm familiar with, a routine that I hate, but at least I know what to expect..."
+                    m @ sad "All of that would be easier than trusting Ailea and trusting you, even trusting Heloise..."
+                    m @ scared "But it would still be a mistake."
+                    m @ sad "Don't make easy mistakes, Jack. Please come with us."
                     menu:
                         "OK. You're right. I'll come.":
                             m "Yay!"
                             j "Thanks, Mona."
                         "It's... it's just too late for me. I'll hold them off as long as they can":
-                            h "Oh my {i}God{/i}, this dude."
+                            h @ upset "Oh my {i}God{/i}, this dude."
                             m @ sad "Y-you're sure?"
                             menu:
                                 "Yeah, just go. I'm done.":
                                     hide heloise with moveoutleft
-                                    m "Please don't stay here, Jack."
+                                    m @ sad "Please don't stay here, Jack."
                                     hide mona with moveoutleft
                                     menu:
                                         "(Follow them)":
@@ -756,17 +803,20 @@ label cow_convo_denied:
                                         "(Sit down and wait)":
                                             jump a_worst_ending
                                 "...":
-                                    show jack cowdepressed
+                                    if r_companion == False:
+                                        show jack cowdepressed
+                                    if r_companion == True:
+                                        show jack depressed
                                     h "I mean, listen... you came this far, right?"
                                     j "..."
-                                    h "So... is that all gonna be a waste?"
+                                    h @ upset "So... is that all gonna be a waste?"
                                     j "..."
-                                    m "Ugh!!!"
-                                    m "At least try to make it to the end!!!"
-                                    m "EVEN IF THAT END IS DYING BECAUSE SOME CRAZY LADY THINKS PARACHUTES ARE REAL!!!"
+                                    m @ upset "Ugh!!!"
+                                    m @ upset "At least try to make it to the end!!!"
+                                    m @ upset"EVEN IF THAT END IS DYING BECAUSE SOME CRAZY LADY THINKS PARACHUTES ARE REAL!!!"
                                     j "..."
-                                    j "Parachutes are real..."
-                                    m "OK, then come on, you little optimist."
+                                    j @ cowangry "Parachutes are real..."
+                                    m @ happy "OK, then come on, you little optimist."
                                     hide heloise with moveoutleft
                                     hide mona with moveoutleft
                                     menu:
@@ -844,27 +894,27 @@ label cow_convo_denied:
                                         "(Sit down and wait)":
                                             jump a_worst_ending
         "Get the hell away from me!":
-            m "Oh! Sorry..."
+            m @ desperate "Oh! Sorry..."
             show heloise main at left with moveinleft:
                 xzoom -1
-            h "Hey, what are you yelling at {i}her{/i} for, you freak?"
-            m "Ugh, calm down, Heloise. I was just trying to talk to him."
-            h "You're wasting your time."
+            h @ upset "Hey, what are you yelling at {i}her{/i} for, you freak?"
+            m @ sad "Ugh, calm down, Heloise. I was just trying to talk to him."
+            h @ upset "You're wasting your time."
             show mona determined at center_left:
                 xzoom 1
             m "Hey!!!"
             m "Ailea taught us to do what's necessary for our survival, right?"
             m "So maybe for me, for my heart..."
             m "It's necessary to try to help people..."
-            m @ determined "Even if it's a waste of time!!!"
+            m @ desperate "Even if it's a waste of time!!!"
             h "OK, fair enough."
             j "Are you two done?"
-            show mona determined at center_left:
+            show mona main at center_left:
                 xzoom -1
             m "No. Jack, I think you're making a mistake. I know heights are scary, but it'll be OK!"
             menu:
                 "Scary for you, maybe.":
-                            m "Um, OK, fair, wow."
+                            m @ scared "Um, OK, fair, wow."
                             m "But I'm still going."
                             m "Whatever it is that's keeping you here..."
                             m @ upset "GET OVER IT!!!"
@@ -883,16 +933,16 @@ label cow_convo_denied:
                                             h "I'm still watching you, kid."
                                             jump a_jack_reluctant_ending
                                 "You have no idea where I want to die.":
-                                    m "Oh... I just assumed you didn't want to die at all."
+                                    m @ scared "Oh... I just assumed you didn't want to die at all."
                                     m "My bad."
-                                    h "Well... seems like things are working out just fine, then."
+                                    h @ upset "Well... seems like things are working out just fine, then."
                                     show heloise at left:
                                         xzoom 1
                                     hide heloise with moveoutleft
                                     show mona at left with moveoutleft
-                                    m "Well... if you change your mind..."
-                                    m "Please come with us."
-                                    show mona at left:
+                                    m @ sad "Well... if you change your mind..."
+                                    m @ sad "Please come with us."
+                                    show mona sad at left:
                                         xzoom 1
                                     hide mona with moveoutleft
                                     menu:
@@ -931,7 +981,12 @@ label a_worst_ending:
 label a_jack_reluctant_ending:
     #"Jack rejoins the party, and the escape proceeds as normal."
     scene harem bg with fade
-    show jack cowmain at right
+    if r_companion == True:
+        show jack main at right
+        show rakesh main at center_right:
+            xzoom -1
+    if r_companion == False:
+        show jack cowmain at right
     show mona main at center_left:
         xzoom -1
     show heloise main at left:
@@ -940,22 +995,31 @@ label a_jack_reluctant_ending:
     m @ happy "Jack! You're coming after all!"
     j "Yeah. What's the point of staying behind to either die or live a life of torture."
     h @ happy "Suddenly reasonable. All's well that ends well."
-    j "Just... hang on a second..."
-    hide jack with moveoutright
-    show jack main at right with moveinright
-    m "Ooooh!"
-    m "If you don't want it anymore..."
-    m "Can I have your outfit?"
+    if r_companion == False:
+        j "Just... hang on a second..."
+        hide jack with moveoutright
+        show jack main at right with moveinright
+        m "Ooooh!"
+        m "If you don't want it anymore..."
+        m @ happy "Can I have your outfit?"
+        show jack embarrassed
+        pause 1.5
+        show jack main
     a "OK, enough! We gotta move."
     a "Heloise, you can take care of Mona, right?"
     h "You betcha."
     show mona happy
     a "Jack, with me."
+    if r_companion == True:
+        a "Rakesh?"
+        r @ happy "Hoverboard juiced up and ready to go!"
+    show ailea determined
+    show ailea determined
     a "Follow close, everyone! We're getting out of here!"
     m @ happy "Yay!"
     h @ happy "Finally."
     j @ happy"Let's go!"
-    #jump to level 4 - no rakesh, check for takeshi companion: y/n, plan: concert/dance
+    #jump to level 4 - check for rakesh, check for takeshi companion: y/n, plan: concert/dance
     return
 
 label a_section4_withr:
@@ -980,7 +1044,7 @@ label a_section4_withr:
     a "Jack, you're with me."
     a "Rakesh..."
     r @ happy "Hoverboard juiced up and ready to fly."
-    a "Then let's fucking go!"
+    a @ determined "Then let's fucking go!"
     #jump to level 4 - with rakesh, check for takeshi companion: y/n, plan: concert/dance
     return
 
@@ -1013,7 +1077,7 @@ label a_section4_nor:
     m "Mmmhm!"
     a "Jack, you're with me."
     show jack happy
-    show ailea happy
+    show ailea determined
     a "Let's fucking go!"
     pause 1.0
     #jump to level 4 - no rakesh, check for takeshi companion: y/n, plan: concert/dance

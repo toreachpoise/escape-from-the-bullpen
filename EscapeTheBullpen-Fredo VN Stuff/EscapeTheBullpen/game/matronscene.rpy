@@ -28,6 +28,7 @@ label BC_gates:
         show matron suspicious at left with moveinleft
         ma "What was that?"
         j "Nothing."
+        ma "Hmmmm."
         jump hospitalharem
 
 label BC_gates_withr:

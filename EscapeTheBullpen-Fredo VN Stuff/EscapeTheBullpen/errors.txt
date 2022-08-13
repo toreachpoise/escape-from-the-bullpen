@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/aileascene.rpy", line 625: expected menuitem
-    show mona main
+File "game/aileascene.rpy", line 254: Line is indented, but the preceding say statement statement does not expect a block. Please check this line's indentation.
+    if asshole_ailea == True or parachute_doubt == True:
     ^
 
 Ren'Py Version: Ren'Py 7.4.11.2266
-Tue Aug  9 14:13:56 2022
+Sat Aug 13 01:57:18 2022
