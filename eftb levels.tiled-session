@@ -17,8 +17,8 @@
             "scale": 0.33,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 1565.1515151515152,
-                "y": 565.1515151515152
+                "x": 1530.3030303030305,
+                "y": -234.84848484848476
             }
         },
         "level 1.tmx#escape from the bullpen": {
@@ -35,27 +35,27 @@
             }
         },
         "level 3b no rakesh.tmx": {
-            "scale": 0.0625,
+            "scale": 0.125,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 7984,
-                "y": -1544
+                "x": -548,
+                "y": -1948
             }
         },
         "level 3b with rakesh.tmx": {
-            "scale": 0.03125,
+            "scale": 0.125,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 7696,
-                "y": -1008
+                "x": 356,
+                "y": -1004
             }
         },
         "level 4.tmx": {
             "scale": 0.33,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 8159.09090909091,
-                "y": 1616.6666666666667
+                "x": 11775.757575757576,
+                "y": -253.030303030303
             }
         },
         "platform/escape from the bullpen.tsx": {

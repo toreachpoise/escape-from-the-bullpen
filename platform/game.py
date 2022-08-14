@@ -1,6 +1,6 @@
 ## bismillah
 
-import pygame, sys, traceback, os, csv, random
+import pygame, sys, traceback, os, csv, random # scipy.interpolate
 from pygame.locals import *
 from tkinter import *
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
@@ -17,18 +17,19 @@ try:
     pygame.display.set_icon(bullimg)
     vec = pygame.math.Vector2 #2d babey
     FPS = 60
+    animationspeed = 5 #fps of the animation will be 'FPS' divided by this number
     window_size = (1260, 630) #scaled from display
     screen = pygame.display.set_mode(window_size, 0, 32)
     display_width = 700
     display_height = 350
     display = pygame.Surface((display_width, display_height))
     acceleration = 5
-    jump_height = 10
+    jump_height = FPS / (animationspeed)
     friction = 0.1
     topspeed = 10
     true_scroll = [0,0]
     gravity = 1
-    falltodeath = 25
+    falltodeath = 3 * jump_height
     scroll = true_scroll.copy()
 
     ## text onscreen
@@ -248,26 +249,32 @@ try:
                 pressed_keys = pygame.key.get_pressed() # Returns the current key presses
                 if pressed_keys[K_r]:
                     handler.restart()
+
         def restart(self):
-            #self.root.destroy()
             jack.died = False
             jack.fallcount = 0
             jack.pos = vec(tilemap.start_x, tilemap.start_y)
+            jack.vel = vec(0,0)
+
         def quit(self):
-            #self.root.destroy()
+            self.root.destroy()
             running = False
             pygame.quit()
             sys.exit()
+
         def stageend(self, tile, player):
-            if tile.rect.x < jack.rect.x and tile.rect.y < jack.rect.y:
-                jack.kill()
-                display.fill((0,0,255))
-                display.blit(congratulations, (display_width/5, display_height/3))
-                display.blit(completed1, (display_width/10, display_height/2))
-                display.blit(completed2, (display_width/10, display_height/1.7))
-                display.blit(completed3, (display_width/10, display_height/1.4))
-                self.stage_chosen = False
-                self.choose_stage()
+            if player.rect.right >= tile.rect.x + scroll[0]:
+                print("past the marker")
+                if player.rect.bottom >= tile.rect.top - scroll[1]:
+                    print("stage complete")
+                    display.fill((0,0,255))
+                    display.blit(congratulations, (display_width/5, display_height/3))
+                    display.blit(completed1, (display_width/10, display_height/2))
+                    display.blit(completed2, (display_width/10, display_height/1.7))
+                    display.blit(completed3, (display_width/10, display_height/1.4))
+                    self.restart()
+                    self.stage_chosen = False
+                    self.choose_stage()
     handler = Handler()
 
     class Tile(pygame.sprite.Sprite):
@@ -282,30 +289,49 @@ try:
 
         def move(self):
             if self.direction == 0:
+                print("bull moving right")
                 self.rect.x += self.vel.x
             if self.direction == 1:
+                print("bull moving left")
                 self.rect.x -= self.vel.x
             for tile in tilemap.tiles:
                 if isinstance(tile, Bull):
-                    if self.rect.colliderect(jack.rect) == 1:
-                        if jack.attacking == True:
-                            self.kill()
-                        else:
-                            jack.died = True
+                    pass
                 else:
                     if self.rect.colliderect(tile.rect) == 1:
-                        if tile.rect.y >= self.rect.y:
-                            if self.direction == 0:
-                                self.rect.x = tile.rect.x - 32
-                                self.direction = 1
-                            if self.direction == 1:
-                                self.rect.x = tile.rect.x + 64
-                                self.direction = 0
+                        if self.direction == 0:
+                            print("bull hit right")
+                            self.direction = 1
+                            self.rect.right = tile.rect.left
+                        if self.direction == 1:
+                            print("bull hit left")
+                            self.direction = 0
+                            self.rect.x = tile.rect.x + 64
+            if handler.level == "3bn":
+                pass
+            else:
+                if self.rect.colliderect(jack.rect) == 1:
+                    if jack.attacking == True:
+                        print("gottem")
+                        self.alive = False
+                        self.kill()
+                    else:
+                        jack.died = True
 
         def render(self, surface):
             if isinstance(self, Bull):
-                self.move()
-            display.blit(self.image, (self.rect.x-scroll[0], self.rect.y-scroll[1]))
+                if self.alive == True:
+                    self.move()
+                    pygame.draw.rect(display, (0,0,255), [self.rect.x - scroll[0], self.rect.y - scroll[1], self.rect.width, self.rect.height], 0)
+                    display.blit(self.image, (self.rect.x-scroll[0], self.rect.y-scroll[1]))
+                else:
+                    self.kill()
+                    try:
+                        tilelist.remove(self)
+                    except:
+                        pass
+            else:
+                display.blit(self.image, (self.rect.x-scroll[0], self.rect.y-scroll[1]))
 
     class TileMap():
         def __init__(self, filename):
@@ -381,7 +407,7 @@ try:
             self.pos = vec((tilemap.start_x, tilemap.start_y))
             self.start_position = self.pos
             self.vel = vec(0,0)
-            self.acc = vec(0,0)
+            self.acc = vec(0,gravity)
             self.image = pygame.image.load("jack idle 1.png").convert_alpha()
             self.rect = self.image.get_rect(topleft = self.pos)
             self.on_the_ground = False
@@ -412,19 +438,20 @@ try:
                 for tile in tilemap.tiles:
                     if self.rect.colliderect(tile.rect) == 1:
                         if self.vel.y > 0 and tile.rect.y >= self.rect.y - self.rect.height:
-                            self.pos.y = tile.rect.y - self.rect.height
+                            self.pos.y = tile.rect.y - (self.rect.height - 1)
                             self.on_the_ground = True
                             self.fallcount = 0
                             self.vel.y = 0
                             self.acc.y = 0
                         if self.vel.y < 0 and abs(self.vel.x) < acceleration:
+                            self.on_the_ground = False
                             self.acc.y = gravity
                             self.vel.y = 0
                             #self.pos.y = tile.rect.y + tilemap.tile_height
+                    else:
+                        self.on_the_ground = False
 
         def move(self):
-            self.acc = vec(0,gravity) #downward acceleration aka gravity
-            self.on_the_ground = False
             pressed_keys = pygame.key.get_pressed() # Returns the current key presses
             if pressed_keys[K_RETURN]:
                 if self.attacking == False:
@@ -536,14 +563,19 @@ try:
                             self.image = cow_jump_L[self.move_frame]
                         else:
                             self.image = jump_ani_L[self.move_frame]
+            self.animate()
+
+        def animate(self):
             self.framecount += 1
-            if self.framecount == 8:
+            if self.framecount == animationspeed:
                 self.framecount = 0
-                self.move_frame+= 1
+                self.move_frame += 1
             if self.move_frame > 7: # Return to base frame if at end of movement sequence
                 self.move_frame = 0
-            #self.mask = pygame.mask.from_surface(self.image)
-            self.rect = self.image.get_rect(topleft = self.pos)
+            if handler.level == "3bn" or handler.level == "4":
+                display.blit(jack.image, (jack.pos.x - true_scroll[0], jack.pos.y - true_scroll[1] + 5))
+            else:
+                display.blit(jack.image, (jack.pos.x - true_scroll[0], jack.pos.y - true_scroll[1]))
 
     class Bull(Tile):
         def __init__(self, image, x, y):
@@ -555,6 +587,7 @@ try:
             self.rect = self.mask.get_rect(midbottom=self.pos)
             self.direction = random.randint(0,1)
             self.vel.x = random.randint(2,6)/2
+            self.alive = True
 
 
     class Elevator(Tile):
@@ -566,7 +599,7 @@ try:
             self.pos = (x, y)
 
         def render(self, map_surface):
-            self.pos = tilemap.elevator_pos_x - scroll[0], (tilemap.elevator_pos_y - 32) - scroll[1]
+            self.pos = tilemap.elevator_pos_x - scroll[0], (tilemap.elevator_pos_y - 22) - scroll[1]
             self.rect.topleft = self.pos
             self.move_frame += 1
             if self.move_frame > 13: # Return to base frame if at end of movement sequence
@@ -602,13 +635,10 @@ try:
         jack.render()
         for event in pygame.event.get():
             if event.type == QUIT:
-                running = False
-                pygame.quit()
-                sys.exit()
-        #pygame.draw.rect(display, (0,0,255), [jack.pos.x - true_scroll[0], jack.pos.y - true_scroll[1], jack.rect.width, jack.rect.height], 0) ##representation of jack rect
-        display.blit(jack.image, (jack.pos.x - true_scroll[0], jack.pos.y - true_scroll[1]))
+                handler.quit()
+        pygame.draw.rect(display, (0,0,255), [jack.pos.x - true_scroll[0], jack.pos.y - true_scroll[1], jack.rect.width, jack.rect.height], 0) ##representation of jack rect
         elevator.render(display)
-        #handler.stageend(elevator, jack)
+        handler.stageend(elevator, jack)
         handler.game_over()
         handler.status_update()
         handler.choose_stage()
