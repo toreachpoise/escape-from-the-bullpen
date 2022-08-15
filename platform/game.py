@@ -263,22 +263,15 @@ try:
             sys.exit()
 
         def stageend(self, tile, player):
-            if player.rect.right >= tile.rect.x + scroll[0]:
-                print("past the marker")
-                if player.rect.bottom >= tile.rect.top - scroll[1]:
+            if player.rect.right >= tile.rect.x + scroll[0] and player.rect.bottom >= tile.rect.top - scroll[1]:
                     print("stage complete")
-                    display.fill((0,0,255))
-                    display.blit(congratulations, (display_width/5, display_height/3))
-                    display.blit(completed1, (display_width/10, display_height/2))
-                    display.blit(completed2, (display_width/10, display_height/1.7))
-                    display.blit(completed3, (display_width/10, display_height/1.4))
-                    self.restart()
+                    jack.kill()
+                    jack.vel = vec(0,0)
                     self.stage_chosen = False
-                    self.choose_stage()
     handler = Handler()
 
     class Tile(pygame.sprite.Sprite):
-        def __init__(self, image, x, y):
+        def __init__(self, image, x, y, tiletype):
             pygame.sprite.Sprite.__init__(self)
             if isinstance(self, Elevator):
                 self.image = image
@@ -286,6 +279,7 @@ try:
                 self.image = pygame.image.load(image).convert_alpha()
             self.rect = self.image.get_rect()
             self.rect.x, self.rect.y = x, y
+            self.tiletype = tiletype
 
         def move(self):
             if self.direction == 0:
@@ -322,13 +316,15 @@ try:
             if isinstance(self, Bull):
                 if self.alive == True:
                     self.move()
-                    pygame.draw.rect(display, (0,0,255), [self.rect.x - scroll[0], self.rect.y - scroll[1], self.rect.width, self.rect.height], 0)
+                    #pygame.draw.rect(display, (0,0,255), [self.rect.x - scroll[0], self.rect.y - scroll[1], self.rect.width, self.rect.height], 0)
                     display.blit(self.image, (self.rect.x-scroll[0], self.rect.y-scroll[1]))
                 else:
                     self.kill()
                     try:
+                        print("removed")
                         tilelist.remove(self)
                     except:
+                        print("bull removal fail")
                         pass
             else:
                 display.blit(self.image, (self.rect.x-scroll[0], self.rect.y-scroll[1]))
@@ -364,19 +360,20 @@ try:
                 x = 0
                 for tile in row:
                     if tile == '5': ##jack tile
+                        print("resetting jack position")
                         self.start_x, self.start_y = x * self.tile_width, y * self.tile_height
                     elif tile == '0': ##cement bottom
-                        tilelist.append(Tile('cement bottom.png', x * self.tile_width-scroll[0], y * self.tile_height-scroll[1]))
+                        tilelist.append(Tile('cement bottom.png', x * self.tile_width-scroll[0], y * self.tile_height-scroll[1], "cement"))
                     elif tile == '1': ##cement top
-                        tilelist.append(Tile('cement top.png', x * self.tile_width-scroll[0], y * self.tile_height-scroll[1]))
+                        tilelist.append(Tile('cement top.png', x * self.tile_width-scroll[0], y * self.tile_height-scroll[1], "cement"))
                     elif tile == '2': ##interior
-                        tilelist.append(Tile('interior.png', x * self.tile_width-scroll[0], y * self.tile_height-scroll[1]))
+                        tilelist.append(Tile('interior.png', x * self.tile_width-scroll[0], y * self.tile_height-scroll[1], "interior"))
                     elif tile == '3': ##scaffold
-                        tilelist.append(Tile('scaffold.png', x * self.tile_width-scroll[0], y * self.tile_height-scroll[1]))
+                        tilelist.append(Tile('scaffold.png', x * self.tile_width-scroll[0], y * self.tile_height-scroll[1], "scaffold"))
                     elif tile == '4': ##bull
-                        tilelist.append(Bull('branch.png', x * self.tile_width-scroll[0], y * self.tile_height-scroll[1]))
+                        tilelist.append(Bull('branch.png', x * self.tile_width-scroll[0], y * self.tile_height-scroll[1], "bull"))
                     elif tile == '6': ##Elevator
-                        tilelist.append(Elevator(elevator_ani, x * self.tile_width-scroll[0], y * self.tile_height-scroll[1]))
+                        tilelist.append(Elevator(elevator_ani, x * self.tile_width-scroll[0], y * self.tile_height-scroll[1], "elevator"))
                         self.elevator_pos_x, self.elevator_pos_y = x * self.tile_width-scroll[0], (y * self.tile_height-scroll[1])
                     x += 1
                 y += 1 #move to next row
@@ -416,40 +413,46 @@ try:
             self.attack_frame = 0
             self.died = False
             self.framecount = 0
+            self.collidelist = 0
 
         def collision_test(self, tilelist):
             if abs(self.vel.x) > 0:
                 for tile in tilemap.tiles:
-                    if self.rect.colliderect(tile.rect) == 1:
+                    if self.rect.colliderect(tile.rect) == 1 and tile.tiletype != "bull":
+                        ## tiletype check is my lazy solution to bull tile rects not disappearing when killed =_=
                         if self.pos.y + 30 >= tile.rect.y:
                             self.pos.y = tile.rect.bottom + self.rect.height
-                            print("horizontal collision")
+                            #print("horizontal collision")
                             if self.x_direction == "LEFT":
                                 self.pos.x = tile.rect.right + 5
                                 self.vel.x = 2 * acceleration
                                 self.acc.x = 0
-                                print("left bump")
+                                #print("left bump")
                             if self.x_direction == "RIGHT":
                                 self.pos.x = tile.rect.left - self.rect.width
                                 self.vel.x = -2 * acceleration
                                 self.acc.x = 0
-                                print("right bump")
+                                #print("right bump")
             if abs(self.vel.y) > 0:
+                self.collidelist = 0
                 for tile in tilemap.tiles:
-                    if self.rect.colliderect(tile.rect) == 1:
+                    if self.rect.colliderect(tile.rect) == 1 and tile.tiletype != "bull":
                         if self.vel.y > 0 and tile.rect.y >= self.rect.y - self.rect.height:
+                            self.collidelist += 1
                             self.pos.y = tile.rect.y - (self.rect.height - 1)
                             self.on_the_ground = True
                             self.fallcount = 0
                             self.vel.y = 0
                             self.acc.y = 0
-                        if self.vel.y < 0 and abs(self.vel.x) < acceleration:
-                            self.on_the_ground = False
-                            self.acc.y = gravity
-                            self.vel.y = 0
-                            #self.pos.y = tile.rect.y + tilemap.tile_height
-                    else:
-                        self.on_the_ground = False
+                        if self.vel.y < 0 and tile.rect.top <= self.rect.top:
+                            if tile.tiletype != "scaffold":
+                                print("hit head")
+                                self.pos.y = tile.rect.bottom + self.rect.height
+                                self.vel.y = 0
+                                self.acc.y = gravity
+                if self.collidelist == 0:
+                    print("floating")
+                    self.on_the_ground = False
 
         def move(self):
             pressed_keys = pygame.key.get_pressed() # Returns the current key presses
@@ -482,7 +485,6 @@ try:
                 if self.fallcount <= 2:
                     print("jump")
                     self.y_direction = "UP"
-                    self.pos.y -= jump_height
                     self.on_the_ground == False
                     self.vel.y = -(4 * jump_height)
             if self.vel.y > 0:
@@ -496,7 +498,6 @@ try:
                 self.died = True
                 self.vel = vec(0,0)
             self.rect.topleft = self.pos
-
 
         def render(self):
             if self.attacking: ##attack ani
@@ -578,8 +579,9 @@ try:
                 display.blit(jack.image, (jack.pos.x - true_scroll[0], jack.pos.y - true_scroll[1]))
 
     class Bull(Tile):
-        def __init__(self, image, x, y):
-            super().__init__(image, x, y)
+        def __init__(self, image, x, y, tiletype):
+            super().__init__(image, x, y, tiletype)
+            self.tiletype = tiletype
             self.image = pygame.image.load(image).convert_alpha()
             self.mask = pygame.mask.from_surface(self.image)
             self.pos = vec(x,y)
@@ -589,9 +591,9 @@ try:
             self.vel.x = random.randint(2,6)/2
             self.alive = True
 
-
     class Elevator(Tile):
-        def __init__(self, image, x, y):
+        def __init__(self, image, x, y, tiletype):
+            self.tiletype = tiletype
             self.move_frame = 0
             self.image = image[self.move_frame]
             self.image.set_colorkey((0,153,51))
@@ -604,9 +606,8 @@ try:
             self.move_frame += 1
             if self.move_frame > 13: # Return to base frame if at end of movement sequence
                 self.move_frame = 0
-            pygame.draw.rect(display, (255,0,0), self.rect, 0)
+            #pygame.draw.rect(display, (255,0,0), self.rect, 0)
             display.blit(self.image, self.pos)
-
 
     print("you got a class system, bitch")
 
@@ -615,10 +616,10 @@ try:
     tilemap = TileMap("level 1.csv") ## change to change levels
     tilelist = []
     jack = Player()
-    elevator = Elevator(elevator_ani, tilemap.elevator_pos_x, tilemap.elevator_pos_y)
+    elevator = Elevator(elevator_ani, tilemap.elevator_pos_x, tilemap.elevator_pos_y, "elevator")
     #handler = Handler()
     print("sprites sprouted")
-
+    print("running ...")
 
     while running:
 
@@ -632,15 +633,15 @@ try:
         #ground.render()
         tilemap.render("level 1.csv")
         jack.move()
-        jack.render()
         for event in pygame.event.get():
             if event.type == QUIT:
                 handler.quit()
-        pygame.draw.rect(display, (0,0,255), [jack.pos.x - true_scroll[0], jack.pos.y - true_scroll[1], jack.rect.width, jack.rect.height], 0) ##representation of jack rect
+        #pygame.draw.rect(display, (0,0,255), [jack.pos.x - true_scroll[0], jack.pos.y - true_scroll[1], jack.rect.width, jack.rect.height], 0) ##representation of jack rect
         elevator.render(display)
+        jack.render()
         handler.stageend(elevator, jack)
         handler.game_over()
-        handler.status_update()
+        #handler.status_update() ##turn on to check fps
         handler.choose_stage()
         screen.blit(pygame.transform.scale(display, window_size), (0,0)) #scaling display to fit the screen
         pygame.display.update()
