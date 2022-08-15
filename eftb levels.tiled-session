@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "level 4.tmx",
+    "activeFile": "level 3b with rakesh.tmx",
     "expandedProjectPaths": [
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
@@ -46,7 +46,7 @@
             "scale": 0.125,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 356,
+                "x": -1444,
                 "y": -1004
             }
         },
@@ -91,10 +91,10 @@
     "recentFiles": [
         "level 3b no rakesh.tmx",
         "platform/escape from the bullpen.tsx",
-        "level 3b with rakesh.tmx",
-        "platform/level 2.tmx",
-        "level 1.tmx",
         "level 4.tmx",
+        "level 1.tmx",
+        "platform/level 2.tmx",
+        "level 3b with rakesh.tmx",
         "level 3a.tmx",
         "escape from the bullpen.tsx"
     ],

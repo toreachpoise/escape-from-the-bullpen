@@ -1,36 +1,39 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
-While running game code:
-  File "game/script.rpy", line 39, in script
-    r @ shrug R"..."
-Exception: Image 'rakesh shrug' does not accept attributes 'R'.
+While processing the hover_color property of style _hyperlink:
+  File "renpy/common/00start.rpy", line 83, in _init_language
+    renpy.change_language(language)
+Exception: Not a color: (34, 68, 204, 255)
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/script.rpy", line 39, in script
-    r @ shrug R"..."
-  File "renpy/ast.py", line 721, in execute
-    renpy.exports.say(who, what, *args, **kwargs)
-  File "renpy/exports.py", line 1419, in say
-    who(what, *args, **kwargs)
-  File "renpy/character.py", line 1189, in __call__
-    old_attr_state = self.handle_say_attributes(False, interact)
-  File "renpy/character.py", line 1012, in handle_say_attributes
-    if self.resolve_say_attributes(predicting, temporary_attrs):
-  File "renpy/character.py", line 957, in resolve_say_attributes
-    renpy.exports.show(show_image)
-  File "renpy/exports.py", line 742, in show
-    if not base.find_target() and renpy.config.missing_show:
-  File "renpy/display/image.py", line 409, in find_target
-    self.target = target._duplicate(a)
-  File "renpy/display/core.py", line 390, in _duplicate
-    args.extraneous()
-  File "renpy/display/core.py", line 271, in extraneous
-    " ".join(self.args),
-Exception: Image 'rakesh shrug' does not accept attributes 'R'.
+  File "C:\Program Files\renpy-8.0.0-sdk\renpy\bootstrap.py", line 274, in bootstrap
+    renpy.main.main()
+  File "C:\Program Files\renpy-8.0.0-sdk\renpy\main.py", line 660, in main
+    run(restart)
+  File "C:\Program Files\renpy-8.0.0-sdk\renpy\main.py", line 76, in run
+    renpy.translation.init_translation()
+  File "C:\Program Files\renpy-8.0.0-sdk\renpy\translation\__init__.py", line 583, in init_translation
+    renpy.store._init_language() # type: ignore
+  File "renpy/common/00start.rpy", line 83, in _init_language
+    renpy.change_language(language)
+  File "C:\Program Files\renpy-8.0.0-sdk\renpy\translation\__init__.py", line 661, in change_language
+    renpy.style.rebuild() # @UndefinedVariable
+  File "style.pyx", line 796, in renpy.style.rebuild
+    build_styles()
+  File "style.pyx", line 789, in renpy.style.build_styles
+    build_style(s)
+  File "style.pyx", line 710, in renpy.style.build_style
+    raise
+  File "style.pyx", line 707, in renpy.style.build_style
+    pfw.function(s.cache, cache_priorities, priority, v)
+  File "gen3-static/style_hover_functions.pyx", line 227, in style_hover_functions.hover_color_property
+  File "C:\Program Files\renpy-8.0.0-sdk\renpy\color.py", line 196, in __new__
+    raise Exception("Not a color: %r" % (color,))
+Exception: Not a color: (34, 68, 204, 255)
 
-Windows-10-10.0.19041
-Ren'Py 7.4.11.2266
+Windows-10-10.0.19044 AMD64
+Ren'Py 8.0.0.22062402
 EscapeTheBullpen 1.0
-Wed Aug  3 11:41:08 2022
+Mon Aug 15 10:56:50 2022
