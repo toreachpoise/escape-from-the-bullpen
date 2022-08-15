@@ -6,6 +6,7 @@ default t_companion = False
 #Scene 2
 label takeshi_garage:
 
+play music "audio/extracutscenestuff.wav"
 scene takeshi_shop_bg with fade
 show takeshi main at left with moveinleft
 show jack main at right with moveinright

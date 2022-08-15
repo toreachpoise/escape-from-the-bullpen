@@ -8,6 +8,7 @@ default rakesh_age_comment = False
 
 
 label apothecary:
+play music "audio/song3.wav"
 scene ailea_shop_bg with fade
 show jack main with moveinright
 

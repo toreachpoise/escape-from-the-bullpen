@@ -2,6 +2,7 @@
 define ma = Character("Matron", image="matron", who_color="#b585be")
 
 label BC_gates:
+    play music "audio/doctors.wav"
     scene bcgates with fade
     if r_companion == True:
         jump BC_gates_withr

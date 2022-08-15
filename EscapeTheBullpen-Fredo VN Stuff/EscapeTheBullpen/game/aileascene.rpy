@@ -14,6 +14,7 @@ transform center_left_left:
     xalign .33 yalign 1.0
 
 label hospitalharem:
+    play music "audio/song3.wav"
     scene harem bg with fade
     if r_companion == True:
         jump a_section1_with_r
@@ -631,6 +632,7 @@ default cow_convo_loop_1_3 = False
 default cow_convo_loop_1_4 = False
 
 label cow_convo:
+    play music "audio/theescape.wav"
     scene harem bg with fade
     show heloise main at center_left with moveinleft:
         xzoom -1
@@ -760,6 +762,7 @@ label cow_convo:
             jump a_section4_nor
 
 label cow_convo_denied:
+    play music "audio/theescape.wav"
     scene harem bg with fade
     if r_companion == False:
         show jack cowmain at right with moveinright
