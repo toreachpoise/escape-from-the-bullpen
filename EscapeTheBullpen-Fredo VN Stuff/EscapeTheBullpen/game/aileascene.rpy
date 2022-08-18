@@ -624,10 +624,6 @@ label cow_convo:
         xzoom -1
     show mona main at left with moveinleft:
         xzoom -1
-    if a_points > 0:
-        $ c_points += 1
-    if a_points < 0:
-        $ c_points -= 1
     if r_companion == True:
         show jack main at right with moveinright
     if r_companion == False:
@@ -666,7 +662,6 @@ label cow_convo:
             h @ happy "What, with bedsheets?"
             menu:
                 "Don't worry... I understand the science. Ailea knows what she's doing.":
-                    $ c_points += 1
                     m "Are you sure???"
                     if r_companion == True:
                         show jack happy
@@ -699,7 +694,6 @@ label cow_convo:
                         m @ happy "Yeah! OK!"
                         jump cow_convo_loop_1
                 "I know what you mean, but what other choice do we have?!":
-                    $ c_points -= 1
                     show mona scared
                     m "Oh God, you're right!"
                     h "Calm down, Mona..."
@@ -842,6 +836,11 @@ label cow_convo_denied:
                                     j "Of course I understand how it might apply to me, but that doesn't mean I think it's possible."
                                     h "OK, well. Whatever, dude. Like mona said, you have a choice to make."
                                     hide heloise with moveoutleft
+                                    menu:
+                                        "(Follow them)":
+                                            jump a_jack_reluctant_ending
+                                        "(Sit down and wait)":
+                                            jump a_worst_ending
 
                         "Well it's too late for me.":
                             h "Boohoo, too late for me, boohoo."
@@ -1009,6 +1008,7 @@ label a_jack_reluctant_ending:
     h @ happy "Finally."
     j @ happy"Let's go!"
     #jump to level 4 - check for rakesh, check for takeshi companion: y/n, plan: concert/dance
+    jump minigame
     return
 
 label a_section4_withr:
@@ -1035,6 +1035,7 @@ label a_section4_withr:
     r @ happy "Hoverboard juiced up and ready to fly."
     a @ determined "Then let's fucking go!"
     #jump to level 4 - with rakesh, check for takeshi companion: y/n, plan: concert/dance
+    jump minigame
     return
 
 label a_section4_nor:
@@ -1070,4 +1071,5 @@ label a_section4_nor:
     a "Let's fucking go!"
     pause 1.0
     #jump to level 4 - no rakesh, check for takeshi companion: y/n, plan: concert/dance
+    jump minigame
     return

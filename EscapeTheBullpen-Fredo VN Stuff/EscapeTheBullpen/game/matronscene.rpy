@@ -3,10 +3,10 @@ define ma = Character("Matron", image="matron", who_color="#b585be")
 
 label BC_gates:
     play music "audio/doctors.wav"
-    scene bcgates with fade
     if r_companion == True:
         jump BC_gates_withr
     if r_companion == False:
+        scene bcgates with fade
         show jack cowmain at right with moveinright
         j "Oh god... here we go..."
         j "Uh... hello? "
@@ -30,9 +30,10 @@ label BC_gates:
         ma "What was that?"
         j "Nothing."
         ma "Hmmmm."
-        jump hospitalharem
+        jump minigame
 
 label BC_gates_withr:
+    scene bcgates with fade
     show jack main at right with moveinright
     show rakesh main at center_right with moveinright:
             xzoom -1
@@ -55,4 +56,4 @@ label BC_gates_withr:
         xzoom -1
     hide rakesh with moveoutleft
     pause 1.0
-    jump hospitalharem
+    jump minigame

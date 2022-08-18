@@ -211,5 +211,5 @@ label end:
     if r_companion == False:
         "(Rakesh didn't trust you enough to join your party)"
     #currently jumps to Takeshi's scene, but in game it will jump to level 2
-    jump takeshi_garage
+    jump minigame
     return

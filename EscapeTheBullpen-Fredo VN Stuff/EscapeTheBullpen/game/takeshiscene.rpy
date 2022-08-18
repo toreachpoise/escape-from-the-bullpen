@@ -548,7 +548,7 @@ if t_points > 0:
         j @ happy "Nice."
         "(Takeshi will aid you in your quest!)"
         $ t_companion = True
-        jump BC_gates
+        jump minigame
     else:
         t "OK. We have a plan... all that's left is the execution. You ready?"
         j "Ready!"
@@ -556,7 +556,7 @@ if t_points > 0:
             r "Ready as I'll ever be."
         "(Takeshi will aid you in your quest!)"
         $ t_companion = True
-        jump BC_gates
+        jump minigame
 
 if t_points <= 0 and t_rejection1 == False:
     t "OK. Sounds like we have a plan..."
@@ -567,12 +567,12 @@ if t_points <= 0 and t_rejection1 == False:
             t "Glad we understand each other."
             "(Takeshi will aid you in your quest!)"
             $ t_companion = True
-            jump BC_gates
+            jump minigame
         "Oh, blow it out your asshole, Takeshi.":
            t "See? This is exactly what I mean!"
            "(Takeshi will aid you in your quest!)"
            $ t_companion = True
-           jump BC_gates
+           jump minigame
 
 if t_points <= 0 and t_rejection1 == True:
     t "But still... we've talked for a little bit now..."
@@ -581,7 +581,7 @@ if t_points <= 0 and t_rejection1 == True:
     t "I'm not going to risk it for you."
     "(Takeshi didn't trust you enough to lend hir aid.)"
     $ t_companion = False
-    jump BC_gates
+    jump minigame
 
 return
 
@@ -591,4 +591,4 @@ scene neighborhood with fade
 show jack depressed with moveinbottom
 show jack depressed at center
 "You convinced Takeshi to not help you. You won't have hir support when rescuing Ailea."
-jump BC_gates
+jump minigame

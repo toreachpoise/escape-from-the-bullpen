@@ -40,7 +40,8 @@ transform center_left_left:
 
 #Scene 1
 label start:
-    jump end_cutscene
+    #jump end_cutscene
+    #jump BC_gates
 scene black
 "You are awoken by a low buzz."
 "The black screens that tile your closet of a room light up with a notification."
