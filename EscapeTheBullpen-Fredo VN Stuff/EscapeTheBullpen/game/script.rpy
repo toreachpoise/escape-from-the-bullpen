@@ -1,9 +1,46 @@
 #Dramatis Personae
-
+#Jack
 define j = Character("Jack", image="jack", who_color="#ad3515", what_style="say_protagdialogue", who_style="protag_name")
+
+#Rakesh Def(aults/initions)
+define r = Character("Rakesh", image="rakesh", who_color="#46b5dc")
+default r_points = 0
+default r_companion = False
+default rakesh_age_comment = False
+
+#Takeshi Def(aults/initions)
+define t = Character("Takeshi", image="takeshi", who_color="#eaffc5")
+default t_points = 0
+default t_companion = False
+
+#Matron Def(aults/initions)
+define ma = Character("Matron", image="matron", who_color="#b585be")
+
+#Ailea Def(aults/initions)
+define a = Character("Ailea", image="ailea", who_color="#e5c620")
+default a_points = 0
+
+#Mona Def(aults/initions)
+define m = Character("Mona", image="mona", who_color="#aad7f2")
+
+#Heloise Def(aults/initions)
+define h = Character("Heloise", image="heloise", who_color="#a90000")
+
+#Taurus Def(aults/initions)
+define ta = Character("Taurus", image="Taurus", who_color="#cfb29d")
+
+#Custom Positions
+transform center_right:
+    xalign .80 yalign 1.0
+transform center_left:
+    xalign .25 yalign 1.0
+transform center_left_left:
+    xalign .33 yalign 1.0
+
 
 #Scene 1
 label start:
+    jump end_cutscene
 scene black
 "You are awoken by a low buzz."
 "The black screens that tile your closet of a room light up with a notification."

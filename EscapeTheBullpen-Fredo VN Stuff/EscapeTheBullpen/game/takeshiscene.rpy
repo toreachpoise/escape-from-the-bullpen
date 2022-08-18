@@ -1,9 +1,4 @@
-#Dramatis Presonae Addition
-define t = Character("Takeshi", image="takeshi", who_color="#eaffc5")
-default t_points = 0
-default t_companion = False
-
-#Scene 2
+#Takeshi Scene
 label takeshi_garage:
 
 play music "audio/extracutscenestuff.wav"
@@ -464,12 +459,16 @@ label t_plan_menu:
                             jump t_plan_menu_insert1
                 "We play it cool until we find Ailea.":
                     $ t_points += 1
-                    t "Yeah, that sounds about right. Ailea will probably be somewhere on the upper floors, with the cows."
-                    j "Ugh... I never thought I'd be walking in there on purpose."
+                    t "Yeah, that sounds about right."
+                    t "Right by the entrance, if you turn around as soon as you come in, there's access to the maintence areas."
+                    j "Really? How do you know about that?"
+                    t "I used to go back there to be alone, to draw on the walls, play with a stash of cow clothes I had hidden away..."
+                    t "Good times, in the midst of everything else..."
+                    j "And now I'm walking right into that midst. Ugh."
                     if t_points > 0:
                         t "Don't worry, my friend. This time, you'll be armed and dangerous."
                     if t_points <= 0:
-                        t "Don't worry about it. This time you'll be armed and ready for them."
+                        t "Don't worry about it. This time you'll be ready for them."
                     jump t_plan_menu
         "Let's talk about how to escape." if plan_getout == 0:
             $ plan_getout = 1

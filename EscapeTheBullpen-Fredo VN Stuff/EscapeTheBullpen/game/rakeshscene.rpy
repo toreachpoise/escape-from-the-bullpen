@@ -1,12 +1,4 @@
-## dramatis personae 1.1
-define r = Character("Rakesh", image="rakesh", who_color="#46b5dc")
-
-#Rakesh Defaults
-default r_points = 0
-default r_companion = False
-default rakesh_age_comment = False
-
-
+#Rakesh Scene
 label apothecary:
 play music "audio/song3.wav"
 scene ailea_shop_bg with fade

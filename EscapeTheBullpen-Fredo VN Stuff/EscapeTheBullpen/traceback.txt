@@ -1,39 +1,22 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
-While processing the hover_color property of style _hyperlink:
-  File "renpy/common/00start.rpy", line 83, in _init_language
-    renpy.change_language(language)
-Exception: Not a color: (34, 68, 204, 255)
+While running game code:
+  File "game/script.rpy", line 40, in script
+    jump end_cutscene
+ScriptError: could not find label 'end_cutscene'.
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "C:\Program Files\renpy-8.0.0-sdk\renpy\bootstrap.py", line 274, in bootstrap
-    renpy.main.main()
-  File "C:\Program Files\renpy-8.0.0-sdk\renpy\main.py", line 660, in main
-    run(restart)
-  File "C:\Program Files\renpy-8.0.0-sdk\renpy\main.py", line 76, in run
-    renpy.translation.init_translation()
-  File "C:\Program Files\renpy-8.0.0-sdk\renpy\translation\__init__.py", line 583, in init_translation
-    renpy.store._init_language() # type: ignore
-  File "renpy/common/00start.rpy", line 83, in _init_language
-    renpy.change_language(language)
-  File "C:\Program Files\renpy-8.0.0-sdk\renpy\translation\__init__.py", line 661, in change_language
-    renpy.style.rebuild() # @UndefinedVariable
-  File "style.pyx", line 796, in renpy.style.rebuild
-    build_styles()
-  File "style.pyx", line 789, in renpy.style.build_styles
-    build_style(s)
-  File "style.pyx", line 710, in renpy.style.build_style
-    raise
-  File "style.pyx", line 707, in renpy.style.build_style
-    pfw.function(s.cache, cache_priorities, priority, v)
-  File "gen3-static/style_hover_functions.pyx", line 227, in style_hover_functions.hover_color_property
-  File "C:\Program Files\renpy-8.0.0-sdk\renpy\color.py", line 196, in __new__
-    raise Exception("Not a color: %r" % (color,))
-Exception: Not a color: (34, 68, 204, 255)
+  File "game/script.rpy", line 40, in script
+    jump end_cutscene
+  File "C:\Users\sever\Downloads\renpy-7.4.11-sdk\renpy\ast.py", line 1974, in execute
+    rv = renpy.game.script.lookup(target)
+  File "C:\Users\sever\Downloads\renpy-7.4.11-sdk\renpy\script.py", line 927, in lookup
+    raise ScriptError("could not find label '%s'." % str(original))
+ScriptError: could not find label 'end_cutscene'.
 
 Windows-10-10.0.19044 AMD64
-Ren'Py 8.0.0.22062402
+Ren'Py 8.0.2.22081402
 EscapeTheBullpen 1.0
-Mon Aug 15 10:56:50 2022
+Wed Aug 17 22:57:47 2022

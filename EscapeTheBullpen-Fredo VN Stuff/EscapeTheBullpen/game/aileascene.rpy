@@ -1,18 +1,4 @@
-#dramatis personae vol. 4
-define a = Character("Ailea", image="ailea", who_color="#e5c620")
-default a_points = 0
-define m = Character("Mona", image="mona", who_color="#aad7f2")
-define h = Character("Heloise", image="heloise", who_color="#a90000")
-default c_points = 0
-
-
-transform center_right:
-    xalign .80 yalign 1.0
-transform center_left:
-    xalign .25 yalign 1.0
-transform center_left_left:
-    xalign .33 yalign 1.0
-
+#Ailea Scene
 label hospitalharem:
     play music "audio/song3.wav"
     scene harem bg with fade
